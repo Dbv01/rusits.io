@@ -122,7 +122,12 @@
             align-items: center;
             padding: 0 5%;
             background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.9)),
-                        url('images/hero-bg.jpg') center/cover;
+                        url('hero-bg.jpg') center/cover;
+        }
+
+        /* Если нет фоновой картинки - используем градиент */
+        .no-bg {
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%) !important;
         }
 
         .hero-content {
@@ -176,12 +181,34 @@
             width: 100%;
             height: 250px;
             overflow: hidden;
+            background: linear-gradient(45deg, #1E293B 0%, #334155 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .product-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        /* Заглушка для картинок */
+        .image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            font-size: 1rem;
+            text-align: center;
+            padding: 1rem;
         }
 
         .product-content {
@@ -404,6 +431,11 @@
             margin: 0 auto;
             padding: 0 1rem;
         }
+        
+        /* Проверка загрузки картинок */
+        .check-image {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -428,7 +460,8 @@
 
     <!-- Главная страница -->
     <section id="home" class="page active">
-        <div class="hero">
+        <!-- Проверяем наличие hero-bg.jpg -->
+        <div class="hero" id="heroSection">
             <div class="hero-content">
                 <h1 class="hero-title">Интеллектуальные Транспортные Системы</h1>
                 <p class="hero-subtitle">
@@ -499,8 +532,8 @@
             <!-- Метеостанция -->
             <div class="product-card">
                 <div class="product-image">
-                    <!-- Вставьте вашу картинку meteo.jpg в папку images -->
-                    <img src="images/meteo.jpg" alt="Метеостанция">
+                    <!-- Картинка загружается напрямую из корня -->
+                    <img src="meteo.jpg" alt="Метеостанция" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'image-placeholder\'>Метеорологические станции</div>';">
                 </div>
                 <div class="product-content">
                     <h3 class="product-title">Метеорологические станции</h3>
@@ -511,8 +544,7 @@
             <!-- Светофоры -->
             <div class="product-card">
                 <div class="product-image">
-                    <!-- Вставьте вашу картинку svetofor.jpg в папку images -->
-                    <img src="images/svetofor.jpg" alt="Светофоры">
+                    <img src="svetofor.jpg" alt="Светофоры" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'image-placeholder\'>Умные светофоры</div>';">
                 </div>
                 <div class="product-content">
                     <h3 class="product-title">Умные светофоры</h3>
@@ -523,8 +555,7 @@
             <!-- Детекторы -->
             <div class="product-card">
                 <div class="product-image">
-                    <!-- Вставьте вашу картинку immitator.jpg в папку images -->
-                    <img src="images/immitator.jpg" alt="Детекторы транспорта">
+                    <img src="immitator.jpg" alt="Детекторы транспорта" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'image-placeholder\'>Радиолокационные детекторы</div>';">
                 </div>
                 <div class="product-content">
                     <h3 class="product-title">Радиолокационные детекторы</h3>
@@ -535,8 +566,7 @@
             <!-- Проекционные переходы -->
             <div class="product-card">
                 <div class="product-image">
-                    <!-- Вставьте вашу картинку proeckt.jpg в папку images -->
-                    <img src="images/proeckt.jpg" alt="Проекционные переходы">
+                    <img src="proeckt.jpg" alt="Проекционные переходы" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'image-placeholder\'>Проекционные пешеходные переходы</div>';">
                 </div>
                 <div class="product-content">
                     <h3 class="product-title">Проекционные переходы</h3>
@@ -648,6 +678,27 @@
         // Устанавливаем текущий год
         document.getElementById('currentYear').textContent = new Date().getFullYear();
         
+        // Проверяем наличие картинок
+        function checkImages() {
+            // Проверяем hero-bg.jpg
+            const heroBg = new Image();
+            heroBg.src = 'hero-bg.jpg';
+            heroBg.onload = function() {
+                // Картинка есть, оставляем как есть
+            };
+            heroBg.onerror = function() {
+                // Картинки нет, добавляем класс для градиента
+                document.getElementById('heroSection').classList.add('no-bg');
+            };
+            
+            // Проверяем остальные картинки
+            const images = ['meteo.jpg', 'svetofor.jpg', 'immitator.jpg', 'proeckt.jpg'];
+            images.forEach(imgName => {
+                const img = new Image();
+                img.src = imgName;
+            });
+        }
+        
         // Функция переключения страниц
         function showPage(pageId) {
             // Скрываем все страницы
@@ -694,25 +745,10 @@
             navLinks.classList.toggle('active');
         }
         
-        // Если картинки не загрузились - показываем заглушку
-        document.addEventListener('DOMContentLoaded', function() {
-            const images = document.querySelectorAll('img');
-            images.forEach(img => {
-                img.onerror = function() {
-                    this.style.backgroundColor = '#1E293B';
-                    this.style.display = 'flex';
-                    this.style.alignItems = 'center';
-                    this.style.justifyContent = 'center';
-                    this.style.color = '#64748B';
-                    this.style.fontSize = '1rem';
-                    this.innerHTML = '<span>Изображение продукта</span>';
-                };
-            });
-        });
-        
-        // По умолчанию показываем главную страницу
+        // Проверяем картинки при загрузке
         window.onload = function() {
             showPage('home');
+            checkImages();
         };
     </script>
 </body>
