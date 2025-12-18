@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RUS ITS | Интеллектуальные Транспортные Системы</title>
     
-    <!-- Фавиконка для сайта (иконка во вкладке) -->
+    <!-- Фавиконка для сайта -->
     <link rel="icon" type="image/png" href="logo_navbar.png">
     
     <!-- Иконочный шрифт -->
@@ -49,7 +49,7 @@
         /* Страницы */
         .page {
             display: none;
-            padding-top: 80px; /* Отступ для фиксированной навигации */
+            padding-top: 80px;
             min-height: 100vh;
         }
 
@@ -156,6 +156,69 @@
         .nav-link:hover, .nav-link.active {
             background: var(--gradient);
             color: white;
+        }
+
+        /* Языковой переключатель */
+        .language-switcher {
+            margin-left: auto;
+            margin-right: 1rem;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--light);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .lang-btn:hover {
+            background: var(--primary);
+            transform: scale(1.05);
+        }
+
+        .lang-btn.active {
+            background: var(--gradient);
+        }
+
+        .lang-options {
+            display: none;
+            position: absolute;
+            background: var(--dark);
+            border-radius: 10px;
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .lang-options.active {
+            display: block;
+        }
+
+        .lang-option {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .lang-option:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        @media (max-width: 768px) {
+            .language-switcher {
+                order: 3;
+                margin-left: 0;
+                margin-right: 1rem;
+            }
         }
 
         /* Мобильное меню */
@@ -361,6 +424,118 @@
             }
         }
 
+        /* ПУНКТ 1: Анимации при скролле */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Улучшенные анимации для карточек */
+        .product-card, .service-item, .advantage-item, .about-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation-duration: 0.8s;
+            animation-fill-mode: both;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 212, 170, 0.2);
+        }
+
+        .service-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(45, 91, 255, 0.2);
+        }
+
+        .advantage-item:hover {
+            transform: translateY(-5px) scale(1.03);
+            border-color: var(--primary);
+        }
+
+        /* ПУНКТ 4: Фильтры в каталоге */
+        .catalog-filters {
+            padding: 2rem 5%;
+            background: var(--card-bg);
+            margin: 0 5% 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .filter-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            padding: 0.7rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .filter-btn:hover {
+            background: rgba(0, 212, 170, 0.1);
+            border-color: var(--primary);
+        }
+
+        .filter-btn.active {
+            background: var(--gradient);
+            border-color: transparent;
+        }
+
+        .search-box {
+            position: relative;
+            flex-grow: 1;
+            max-width: 400px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 3rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            color: var(--light);
+            font-size: 1rem;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+
+        @media (max-width: 768px) {
+            .catalog-filters {
+                margin: 0 1rem 1.5rem;
+                padding: 1.5rem;
+            }
+            
+            .filter-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .search-box {
+                max-width: 100%;
+            }
+        }
+
         /* Каталог страница */
         .catalog-grid {
             display: grid;
@@ -381,13 +556,7 @@
             background: var(--card-bg);
             border-radius: 15px;
             overflow: hidden;
-            transition: transform 0.3s;
             border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
         }
 
         .product-image {
@@ -404,11 +573,11 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.3s;
+            transition: transform 0.5s ease;
         }
 
         .product-card:hover .product-image img {
-            transform: scale(1.05);
+            transform: scale(1.1);
         }
 
         .image-placeholder {
@@ -433,7 +602,105 @@
             color: var(--primary);
         }
 
-        /* Контакты страница - ИСПРАВЛЕНА */
+        .product-price {
+            color: var(--light);
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin: 1rem 0;
+        }
+
+        .product-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .product-tag {
+            background: rgba(0, 212, 170, 0.1);
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+        /* ПУНКТ 8: Улучшенная навигация */
+        /* Хлебные крошки */
+        .breadcrumbs {
+            padding: 1rem 5%;
+            background: var(--card-bg);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+
+        .breadcrumbs a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .breadcrumbs a:hover {
+            color: var(--primary);
+        }
+
+        .breadcrumbs span {
+            color: var(--light);
+            font-weight: 500;
+        }
+
+        /* Кнопка "Наверх" */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(0, 212, 170, 0.3);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 212, 170, 0.4);
+        }
+
+        /* Индикатор прогресса прокрутки */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: var(--gradient);
+            z-index: 1001;
+            transition: width 0.1s;
+        }
+
+        @media (max-width: 768px) {
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
+        }
+
+        /* Контакты страница */
         .contact-section {
             padding: 4rem 5%;
         }
@@ -538,7 +805,6 @@
             padding: 2rem;
             border-radius: 15px;
             text-align: center;
-            transition: all 0.3s;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
@@ -550,7 +816,6 @@
 
         .service-item:hover {
             border-color: var(--primary);
-            transform: translateY(-5px);
         }
 
         .service-icon {
@@ -589,7 +854,7 @@
             }
         }
 
-        /* Преимущества - ИСПРАВЛЕНЫ */
+        /* Преимущества */
         .advantages {
             padding: 4rem 5%;
             text-align: center;
@@ -629,9 +894,85 @@
             }
         }
 
-        .advantage-item:hover {
-            transform: translateY(-5px);
-            border: 1px solid var(--primary);
+        /* ПУНКТ 13: Улучшенная мобильная версия */
+        /* Сенсорные жесты */
+        @media (max-width: 768px) {
+            .swipe-hint {
+                position: fixed;
+                bottom: 20px;
+                left: 0;
+                right: 0;
+                text-align: center;
+                color: var(--gray);
+                font-size: 0.8rem;
+                z-index: 998;
+                background: rgba(15, 23, 42, 0.8);
+                padding: 0.5rem;
+                backdrop-filter: blur(10px);
+            }
+            
+            /* Улучшения для мобильных форм */
+            input, textarea, select {
+                font-size: 16px !important; /* Предотвращает зум в iOS */
+            }
+            
+            /* Увеличенные зоны клика для мобильных */
+            .btn, .filter-btn, .nav-link {
+                min-height: 44px; /* Рекомендуемый размер для сенсорных устройств */
+            }
+            
+            /* Оптимизация для мобильной навигации */
+            .nav-links li {
+                margin-bottom: 0.5rem;
+            }
+            
+            .nav-link {
+                padding: 1.2rem;
+                margin-bottom: 0.5rem;
+            }
+            
+            /* Оптимизация текста для мобильных */
+            p, li {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+            
+            h1 {
+                font-size: 2rem;
+                line-height: 1.3;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+            
+            h3 {
+                font-size: 1.4rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* Дополнительные оптимизации для очень маленьких экранов */
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+            }
+            
+            .catalog-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .product-image {
+                height: 200px;
+            }
         }
 
         /* Кнопки */
@@ -757,11 +1098,26 @@
     </style>
 </head>
 <body>
+    <!-- Индикатор прогресса прокрутки -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+    
     <!-- Навигация -->
     <nav class="navbar" id="navbar">
         <a href="#" class="logo" onclick="showPage('home')">
             <span>RUS</span>ITS
         </a>
+        
+        <!-- ПУНКТ 9: Языковой переключатель -->
+        <div class="language-switcher">
+            <button class="lang-btn" id="langBtn">
+                <i class="fas fa-globe"></i>
+                <span id="currentLang">RU</span>
+            </button>
+            <div class="lang-options" id="langOptions">
+                <div class="lang-option" onclick="changeLanguage('ru')">🇷🇺 Русский</div>
+                <div class="lang-option" onclick="changeLanguage('en')">🇬🇧 English</div>
+            </div>
+        </div>
         
         <button class="mobile-menu-btn" onclick="toggleMenu()">
             <i class="fas fa-bars"></i>
@@ -775,6 +1131,11 @@
             <li><a href="#" class="nav-link" onclick="showPage('contact')">Контакты</a></li>
         </ul>
     </nav>
+    
+    <!-- Кнопка "Наверх" -->
+    <div class="back-to-top" id="backToTop" onclick="scrollToTop()">
+        <i class="fas fa-chevron-up"></i>
+    </div>
 
     <!-- Главная страница -->
     <section id="home" class="page active">
@@ -793,18 +1154,18 @@
             </div>
             
             <div class="hero-content fade-in">
-                <h1 class="hero-title">Интеллектуальные Транспортные Системы</h1>
-                <p class="hero-subtitle">Современные решения для безопасного и эффективного движения</p>
+                <h1 class="hero-title" data-lang-ru="Интеллектуальные Транспортные Системы" data-lang-en="Intelligent Transport Systems">Интеллектуальные Транспортные Системы</h1>
+                <p class="hero-subtitle" data-lang-ru="Современные решения для безопасного и эффективного движения" data-lang-en="Modern solutions for safe and efficient traffic">Современные решения для безопасного и эффективного движения</p>
                 
                 <div class="hero-buttons">
                     <a href="#" class="btn" onclick="showPage('catalog')">
-                        <i class="fas fa-box-open"></i> Наши продукты
+                        <i class="fas fa-box-open"></i> <span data-lang-ru="Наши продукты" data-lang-en="Our Products">Наши продукты</span>
                     </a>
                     <a href="#" class="btn btn-outline" onclick="showPage('services')">
-                        <i class="fas fa-cogs"></i> Наши услуги
+                        <i class="fas fa-cogs"></i> <span data-lang-ru="Наши услуги" data-lang-en="Our Services">Наши услуги</span>
                     </a>
                     <a href="#" class="btn btn-outline" onclick="showPage('contact')">
-                        <i class="fas fa-phone"></i> Связаться с нами
+                        <i class="fas fa-phone"></i> <span data-lang-ru="Связаться с нами" data-lang-en="Contact Us">Связаться с нами</span>
                     </a>
                 </div>
             </div>
@@ -817,44 +1178,41 @@
         
         <!-- Контент после картинки -->
         <div class="main-content" id="mainContent">
-            <!-- Преимущества - ИСПРАВЛЕНО -->
+            <!-- Преимущества -->
             <div class="advantages">
-                <h2 class="section-title">Наши преимущества</h2>
+                <h2 class="section-title animate-on-scroll" data-lang-ru="Наши преимущества" data-lang-en="Our Advantages">Наши преимущества</h2>
                 <div class="advantages-grid">
-                    <div class="advantage-item">
+                    <div class="advantage-item animate-on-scroll">
                         <i class="fas fa-check-circle" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
-                        <h3>15 лет опыта</h3>
-                        <p>Работаем на рынке с 2010 года, реализовали более 50 проектов</p>
+                        <h3 data-lang-ru="15 лет опыта" data-lang-en="15 Years Experience">15 лет опыта</h3>
+                        <p data-lang-ru="Работаем на рынке с 2010 года, реализовали более 50 проектов" data-lang-en="Working since 2010, completed over 50 projects">Работаем на рынке с 2010 года, реализовали более 50 проектов</p>
                     </div>
-                    <div class="advantage-item">
+                    <div class="advantage-item animate-on-scroll">
                         <i class="fas fa-medal" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
-                        <h3>Качество и надежность</h3>
-                        <p>Используем только сертифицированное оборудование и материалы</p>
+                        <h3 data-lang-ru="Качество и надежность" data-lang-en="Quality & Reliability">Качество и надежность</h3>
+                        <p data-lang-ru="Используем только сертифицированное оборудование и материалы" data-lang-en="We use only certified equipment and materials">Используем только сертифицированное оборудование и материалы</p>
                     </div>
-                    <div class="advantage-item">
+                    <div class="advantage-item animate-on-scroll">
                         <i class="fas fa-certificate" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
-                        <h3>Сертифицированные решения</h3>
-                        <p>Все наши продукты соответствуют российским и международным стандартам</p>
+                        <h3 data-lang-ru="Сертифицированные решения" data-lang-en="Certified Solutions">Сертифицированные решения</h3>
+                        <p data-lang-ru="Все наши продукты соответствуют российским и международным стандартам" data-lang-en="All our products meet Russian and international standards">Все наши продукты соответствуют российским и международным стандартам</p>
                     </div>
-                    <div class="advantage-item">
+                    <div class="advantage-item animate-on-scroll">
                         <i class="fas fa-cogs" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
-                        <h3>Индивидуальный подход</h3>
-                        <p>Разрабатываем решения под конкретные задачи каждого клиента</p>
+                        <h3 data-lang-ru="Индивидуальный подход" data-lang-en="Individual Approach">Индивидуальный подход</h3>
+                        <p data-lang-ru="Разрабатываем решения под конкретные задачи каждого клиента" data-lang-en="We develop solutions for specific tasks of each client">Разрабатываем решения под конкретные задачи каждого клиента</p>
                     </div>
                 </div>
             </div>
             
             <!-- Кратко о компании -->
             <div class="about-section">
-                <h2 class="section-title">О компании</h2>
+                <h2 class="section-title animate-on-scroll" data-lang-ru="О компании" data-lang-en="About Company">О компании</h2>
                 <div class="about-content">
-                    <div class="about-card">
-                        <p>Компания <strong>RUS ITS</strong> является лидером в области интеллектуальных транспортных систем. 
-                           Мы специализируемся на разработке, производстве и внедрении современных решений 
-                           для организации дорожного движения. Наша миссия - создавать инновационные 
-                           транспортные решения, которые делают города безопаснее, умнее и эффективнее.</p>
+                    <div class="about-card animate-on-scroll">
+                        <p data-lang-ru="Компания RUS ITS является лидером в области интеллектуальных транспортных систем. Мы специализируемся на разработке, производстве и внедрении современных решений для организации дорожного движения. Наша миссия - создавать инновационные транспортные решения, которые делают города безопаснее, умнее и эффективнее." data-lang-en="RUS ITS is a leader in intelligent transport systems. We specialize in the development, production and implementation of modern solutions for traffic management. Our mission is to create innovative transport solutions that make cities safer, smarter and more efficient.">Компания <strong>RUS ITS</strong> является лидером в области интеллектуальных транспортных систем. Мы специализируемся на разработке, производстве и внедрении современных решений для организации дорожного движения. Наша миссия - создавать инновационные транспортные решения, которые делают города безопаснее, умнее и эффективнее.</p>
                         <a href="#" class="btn" onclick="showPage('about')" style="margin-top: 1.5rem;">
-                            <i class="fas fa-info-circle"></i> Подробнее о компании
+                            <i class="fas fa-info-circle"></i> <span data-lang-ru="Подробнее о компании" data-lang-en="Learn More About Us">Подробнее о компании</span>
                         </a>
                     </div>
                 </div>
@@ -862,29 +1220,37 @@
         </div>
     </section>
 
-    <!-- О компании - ИСПРАВЛЕНО -->
+    <!-- О компании -->
     <section id="about" class="page">
+        <!-- ПУНКТ 8: Хлебные крошки -->
+        <div class="breadcrumbs">
+            <a href="#" onclick="showPage('home')">Главная</a> / 
+            <span data-lang-ru="О компании" data-lang-en="About Company">О компании</span>
+        </div>
+        
         <div class="about-section">
-            <h2 class="section-title">О компании</h2>
+            <h2 class="section-title" data-lang-ru="О компании" data-lang-en="About Company">О компании</h2>
             
             <div class="about-content">
-                <div class="about-card">
-                    <h3>RUS ITS</h3>
-                    <p>Компания RUS ITS является лидером в области интеллектуальных транспортных систем. Специализируемся на разработке, производстве и внедрении современных решений для организации дорожного движения и повышения безопасности на дорогах.</p>
+                <div class="about-card animate-on-scroll">
+                    <h3 data-lang-ru="RUS ITS" data-lang-en="RUS ITS">RUS ITS</h3>
+                    <p data-lang-ru="Компания RUS ITS является лидером в области интеллектуальных транспортных систем. Специализируемся на разработке, производстве и внедрении современных решений для организации дорожного движения и повышения безопасности на дорогах." data-lang-en="RUS ITS is a leader in intelligent transport systems. We specialize in the development, production and implementation of modern solutions for traffic management and road safety improvement.">Компания RUS ITS является лидером в области интеллектуальных транспортных систем. Специализируемся на разработке, производстве и внедрении современных решений для организации дорожного движения и повышения безопасности на дорогах.</p>
                 </div>
                 
-                <div class="about-card">
-                    <h3>Наша миссия</h3>
-                    <p>Создавать инновационные транспортные решения, которые делают города безопаснее, умнее и эффективнее. Мы стремимся улучшить качество жизни людей через современные технологии организации дорожного движения.</p>
+                <div class="about-card animate-on-scroll">
+                    <h3 data-lang-ru="Наша миссия" data-lang-en="Our Mission">Наша миссия</h3>
+                    <p data-lang-ru="Создавать инновационные транспортные решения, которые делают города безопаснее, умнее и эффективнее. Мы стремимся улучшить качество жизни людей через современные технологии организации дорожного движения." data-lang-en="To create innovative transport solutions that make cities safer, smarter and more efficient. We strive to improve people's quality of life through modern traffic management technologies.">Создавать инновационные транспортные решения, которые делают города безопаснее, умнее и эффективнее. Мы стремимся улучшить качество жизни людей через современные технологии организации дорожного движения.</p>
                 </div>
                 
-                <div class="about-card">
-                    <h3>Наши ценности</h3>
-                    <p>• Инновации и технологический прогресс<br>
-                       • Качество и надежность продукции<br>
-                       • Профессионализм команды<br>
-                       • Клиентоориентированный подход<br>
-                       • Ответственность перед обществом</p>
+                <div class="about-card animate-on-scroll">
+                    <h3 data-lang-ru="Наши ценности" data-lang-en="Our Values">Наши ценности</h3>
+                    <p>
+                        <span data-lang-ru="• Инновации и технологический прогресс" data-lang-en="• Innovation and technological progress">• Инновации и технологический прогресс</span><br>
+                        <span data-lang-ru="• Качество и надежность продукции" data-lang-en="• Quality and reliability of products">• Качество и надежность продукции</span><br>
+                        <span data-lang-ru="• Профессионализм команды" data-lang-en="• Team professionalism">• Профессионализм команды</span><br>
+                        <span data-lang-ru="• Клиентоориентированный подход" data-lang-en="• Customer-oriented approach">• Клиентоориентированный подход</span><br>
+                        <span data-lang-ru="• Ответственность перед обществом" data-lang-en="• Social responsibility">• Ответственность перед обществом</span>
+                    </p>
                 </div>
             </div>
         </div>
@@ -892,50 +1258,94 @@
 
     <!-- Каталог -->
     <section id="catalog" class="page">
-        <h2 class="section-title" style="margin-top: 1rem;">Наши продукты</h2>
+        <!-- Хлебные крошки -->
+        <div class="breadcrumbs">
+            <a href="#" onclick="showPage('home')">Главная</a> / 
+            <span data-lang-ru="Каталог" data-lang-en="Catalog">Каталог</span>
+        </div>
         
-        <div class="catalog-grid">
+        <h2 class="section-title" style="margin-top: 1rem;" data-lang-ru="Наши продукты" data-lang-en="Our Products">Наши продукты</h2>
+        
+        <!-- ПУНКТ 4: Фильтры в каталоге -->
+        <div class="catalog-filters animate-on-scroll">
+            <div class="filter-container">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="productSearch" placeholder="Поиск продуктов..." 
+                           data-lang-ru-placeholder="Поиск продуктов..." 
+                           data-lang-en-placeholder="Search products...">
+                </div>
+                
+                <button class="filter-btn active" onclick="filterProducts('all')" data-lang-ru="Все" data-lang-en="All">Все</button>
+                <button class="filter-btn" onclick="filterProducts('meteo')" data-lang-ru="Метеостанции" data-lang-en="Weather Stations">Метеостанции</button>
+                <button class="filter-btn" onclick="filterProducts('traffic')" data-lang-ru="Светофоры" data-lang-en="Traffic Lights">Светофоры</button>
+                <button class="filter-btn" onclick="filterProducts('detectors')" data-lang-ru="Детекторы" data-lang-en="Detectors">Детекторы</button>
+                <button class="filter-btn" onclick="filterProducts('crossings')" data-lang-ru="Переходы" data-lang-en="Crossings">Переходы</button>
+            </div>
+        </div>
+        
+        <div class="catalog-grid" id="catalogGrid">
             <!-- Метеостанция -->
-            <div class="product-card">
+            <div class="product-card animate-on-scroll" data-category="meteo" data-tags="метеостанция погода мониторинг">
                 <div class="product-image">
                     <img src="meteo.jpg" alt="Метеостанция" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'image-placeholder\'>Метеорологические станции</div>';">
                 </div>
                 <div class="product-content">
-                    <h3 class="product-title">Метеорологические станции</h3>
-                    <p>Автоматические дорожные метеостанции для мониторинга погодных условий. Измеряют температуру, влажность, скорость ветра и состояние дорожного покрытия.</p>
+                    <h3 class="product-title" data-lang-ru="Метеорологические станции" data-lang-en="Meteorological Stations">Метеорологические станции</h3>
+                    <p data-lang-ru="Автоматические дорожные метеостанции для мониторинга погодных условий. Измеряют температуру, влажность, скорость ветра и состояние дорожного покрытия." data-lang-en="Automatic road weather stations for monitoring weather conditions. Measure temperature, humidity, wind speed and road surface condition.">Автоматические дорожные метеостанции для мониторинга погодных условий. Измеряют температуру, влажность, скорость ветра и состояние дорожного покрытия.</p>
+                    <div class="product-tags">
+                        <span class="product-tag">Метео</span>
+                        <span class="product-tag">Мониторинг</span>
+                    </div>
+                    <div class="product-price" data-lang-ru="от 150 000 ₽" data-lang-en="from €1,500">от 150 000 ₽</div>
                 </div>
             </div>
             
             <!-- Светофоры -->
-            <div class="product-card">
+            <div class="product-card animate-on-scroll" data-category="traffic" data-tags="светофор регулирование движение">
                 <div class="product-image">
                     <img src="svetofor.jpg" alt="Светофоры" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'image-placeholder\'>Умные светофоры</div>';">
                 </div>
                 <div class="product-content">
-                    <h3 class="product-title">Умные светофоры</h3>
-                    <p>Адаптивные системы регулирования дорожного движения с искусственным интеллектом. Оптимизируют транспортные потоки и повышают безопасность.</p>
+                    <h3 class="product-title" data-lang-ru="Умные светофоры" data-lang-en="Smart Traffic Lights">Умные светофоры</h3>
+                    <p data-lang-ru="Адаптивные системы регулирования дорожного движения с искусственным интеллектом. Оптимизируют транспортные потоки и повышают безопасность." data-lang-en="Adaptive traffic management systems with artificial intelligence. Optimize traffic flows and improve safety.">Адаптивные системы регулирования дорожного движения с искусственным интеллектом. Оптимизируют транспортные потоки и повышают безопасность.</p>
+                    <div class="product-tags">
+                        <span class="product-tag">Светофоры</span>
+                        <span class="product-tag">ИИ</span>
+                    </div>
+                    <div class="product-price" data-lang-ru="от 250 000 ₽" data-lang-en="from €2,500">от 250 000 ₽</div>
                 </div>
             </div>
             
             <!-- Детекторы -->
-            <div class="product-card">
+            <div class="product-card animate-on-scroll" data-category="detectors" data-tags="детектор радар скорость">
                 <div class="product-image">
                     <img src="immitator.jpg" alt="Детекторы транспорта" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'image-placeholder\'>Радиолокационные детекторы</div>';">
                 </div>
                 <div class="product-content">
-                    <h3 class="product-title">Радиолокационные детекторы</h3>
-                    <p>Системы ПУИД и RTMS для учета интенсивности движения и контроля скорости. Точный мониторинг транспортных потоков в реальном времени.</p>
+                    <h3 class="product-title" data-lang-ru="Радиолокационные детекторы" data-lang-en="Radar Detectors">Радиолокационные детекторы</h3>
+                    <p data-lang-ru="Системы ПУИД и RTMS для учета интенсивности движения и контроля скорости. Точный мониторинг транспортных потоков в реальном времени." data-lang-en="ПУИД and RTMS systems for traffic intensity accounting and speed control. Accurate real-time traffic flow monitoring.">Системы ПУИД и RTMS для учета интенсивности движения и контроля скорости. Точный мониторинг транспортных потоков в реальном времени.</p>
+                    <div class="product-tags">
+                        <span class="product-tag">Детекторы</span>
+                        <span class="product-tag">Радар</span>
+                    </div>
+                    <div class="product-price" data-lang-ru="от 80 000 ₽" data-lang-en="from €800">от 80 000 ₽</div>
                 </div>
             </div>
             
             <!-- Проекционные переходы -->
-            <div class="product-card">
+            <div class="product-card animate-on-scroll" data-category="crossings" data-tags="переход проекция безопасность">
                 <div class="product-image">
                     <img src="proeckt.jpg" alt="Проекционные переходы" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'image-placeholder\'>Проекционные пешеходные переходы</div>';">
                 </div>
                 <div class="product-content">
-                    <h3 class="product-title">Проекционные переходы</h3>
-                    <p>Инновационные системы безопасности пешеходных переходов с проекционной разметкой и световыми сигналами. Повышают заметность переходов.</p>
+                    <h3 class="product-title" data-lang-ru="Проекционные переходы" data-lang-en="Projection Crossings">Проекционные переходы</h3>
+                    <p data-lang-ru="Инновационные системы безопасности пешеходных переходов с проекционной разметкой и световыми сигналами. Повышают заметность переходов." data-lang-en="Innovative pedestrian crossing safety systems with projection markings and light signals. Increase crossing visibility.">Инновационные системы безопасности пешеходных переходов с проекционной разметкой и световыми сигналами. Повышают заметность переходов.</p>
+                    <div class="product-tags">
+                        <span class="product-tag">Переходы</span>
+                        <span class="product-tag">Проекция</span>
+                    </div>
+                    <div class="product-price" data-lang-ru="от 120 000 ₽" data-lang-en="from €1,200">от 120 000 ₽</div>
                 </div>
             </div>
         </div>
@@ -943,71 +1353,83 @@
 
     <!-- Услуги -->
     <section id="services" class="page">
+        <!-- Хлебные крошки -->
+        <div class="breadcrumbs">
+            <a href="#" onclick="showPage('home')">Главная</a> / 
+            <span data-lang-ru="Услуги" data-lang-en="Services">Услуги</span>
+        </div>
+        
         <div class="services-section">
-            <h2 class="section-title">Наши услуги</h2>
+            <h2 class="section-title" data-lang-ru="Наши услуги" data-lang-en="Our Services">Наши услуги</h2>
             
             <div class="services-grid">
-                <div class="service-item">
+                <div class="service-item animate-on-scroll">
                     <div class="service-icon">
                         <i class="fas fa-bolt"></i>
                     </div>
-                    <h3>Электромонтажные работы</h3>
-                    <p>Полный комплекс электромонтажных работ любой сложности</p>
+                    <h3 data-lang-ru="Электромонтажные работы" data-lang-en="Electrical Installation">Электромонтажные работы</h3>
+                    <p data-lang-ru="Полный комплекс электромонтажных работ любой сложности" data-lang-en="Full range of electrical installation works of any complexity">Полный комплекс электромонтажных работ любой сложности</p>
                 </div>
                 
-                <div class="service-item">
+                <div class="service-item animate-on-scroll">
                     <div class="service-icon">
                         <i class="fas fa-cogs"></i>
                     </div>
-                    <h3>Пуско-наладочные работы</h3>
-                    <p>Настройка, калибровка и запуск систем в эксплуатацию</p>
+                    <h3 data-lang-ru="Пуско-наладочные работы" data-lang-en="Commissioning Works">Пуско-наладочные работы</h3>
+                    <p data-lang-ru="Настройка, калибровка и запуск систем в эксплуатацию" data-lang-en="Setup, calibration and launch of systems into operation">Настройка, калибровка и запуск систем в эксплуатацию</p>
                 </div>
                 
-                <div class="service-item">
+                <div class="service-item animate-on-scroll">
                     <div class="service-icon">
                         <i class="fas fa-tools"></i>
                     </div>
-                    <h3>Техническое обслуживание</h3>
-                    <p>Круглосуточная поддержка и сопровождение систем</p>
+                    <h3 data-lang-ru="Техническое обслуживание" data-lang-en="Technical Maintenance">Техническое обслуживание</h3>
+                    <p data-lang-ru="Круглосуточная поддержка и сопровождение систем" data-lang-en="24/7 support and system maintenance">Круглосуточная поддержка и сопровождение систем</p>
                 </div>
                 
-                <div class="service-item">
+                <div class="service-item animate-on-scroll">
                     <div class="service-icon">
                         <i class="fas fa-shipping-fast"></i>
                     </div>
-                    <h3>Поставка оборудования</h3>
-                    <p>Поиск и поставка специализированного оборудования "под ключ"</p>
+                    <h3 data-lang-ru="Поставка оборудования" data-lang-en="Equipment Supply">Поставка оборудования</h3>
+                    <p data-lang-ru="Поиск и поставка специализированного оборудования 'под ключ'" data-lang-en="Sourcing and supply of specialized equipment 'turnkey'">Поиск и поставка специализированного оборудования "под ключ"</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Контакты - ИСПРАВЛЕНО -->
+    <!-- Контакты -->
     <section id="contact" class="page">
+        <!-- Хлебные крошки -->
+        <div class="breadcrumbs">
+            <a href="#" onclick="showPage('home')">Главная</a> / 
+            <span data-lang-ru="Контакты" data-lang-en="Contacts">Контакты</span>
+        </div>
+        
         <div class="contact-section">
-            <h2 class="section-title">Контакты</h2>
+            <h2 class="section-title" data-lang-ru="Контакты" data-lang-en="Contacts">Контакты</h2>
             
             <div class="contact-container">
-                <div class="contact-card">
+                <div class="contact-card animate-on-scroll">
                     <div class="contact-icon">
                         <i class="fas fa-user-tie"></i>
                     </div>
                     <p style="font-size: 1.2rem; color: var(--light);">ИП Бурнаков Александр Климентьевич</p>
                 </div>
                 
-                <div class="contact-card">
+                <div class="contact-card animate-on-scroll">
                     <div class="contact-icon">
                         <i class="fas fa-envelope"></i>
                     </div>
-                    <h3>Электронная почта</h3>
+                    <h3 data-lang-ru="Электронная почта" data-lang-en="Email">Электронная почта</h3>
                     <p>Burnakov-Aleksandr@yandex.ru</p>
                 </div>
                 
-                <div class="contact-card">
+                <div class="contact-card animate-on-scroll">
                     <div class="contact-icon">
                         <i class="fas fa-phone"></i>
                     </div>
-                    <h3>Телефон</h3>
+                    <h3 data-lang-ru="Телефон" data-lang-en="Phone">Телефон</h3>
                     <p>+7 985 412 32 34</p>
                 </div>
             </div>
@@ -1018,21 +1440,153 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="copyright">
-                © <span id="currentYear"></span> RUS ITS Интеллектуальные Транспортные Системы. Все права защищены.
+                © <span id="currentYear"></span> RUS ITS <span data-lang-ru="Интеллектуальные Транспортные Системы" data-lang-en="Intelligent Transport Systems">Интеллектуальные Транспортные Системы</span>. <span data-lang-ru="Все права защищены." data-lang-en="All rights reserved.">Все права защищены.</span>
             </div>
             <ul class="footer-links">
-                <li><a href="#" class="footer-link" onclick="showPage('home')">Главная</a></li>
-                <li><a href="#" class="footer-link" onclick="showPage('about')">О компании</a></li>
-                <li><a href="#" class="footer-link" onclick="showPage('catalog')">Каталог</a></li>
-                <li><a href="#" class="footer-link" onclick="showPage('services')">Услуги</a></li>
-                <li><a href="#" class="footer-link" onclick="showPage('contact')">Контакты</a></li>
+                <li><a href="#" class="footer-link" onclick="showPage('home')" data-lang-ru="Главная" data-lang-en="Home">Главная</a></li>
+                <li><a href="#" class="footer-link" onclick="showPage('about')" data-lang-ru="О компании" data-lang-en="About">О компании</a></li>
+                <li><a href="#" class="footer-link" onclick="showPage('catalog')" data-lang-ru="Каталог" data-lang-en="Catalog">Каталог</a></li>
+                <li><a href="#" class="footer-link" onclick="showPage('services')" data-lang-ru="Услуги" data-lang-en="Services">Услуги</a></li>
+                <li><a href="#" class="footer-link" onclick="showPage('contact')" data-lang-ru="Контакты" data-lang-en="Contacts">Контакты</a></li>
             </ul>
         </div>
     </footer>
 
+    <!-- ПУНКТ 13: Подсказка для мобильных -->
+    <div class="swipe-hint" id="swipeHint" data-lang-ru="Свайпните влево/вправо для навигации" data-lang-en="Swipe left/right for navigation">
+        Свайпните влево/вправо для навигации
+    </div>
+
     <script>
         // Устанавливаем текущий год
         document.getElementById('currentYear').textContent = new Date().getFullYear();
+        
+        // Текущий язык
+        let currentLanguage = 'ru';
+        
+        // ПУНКТ 9: Функция смены языка
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            document.getElementById('currentLang').textContent = lang.toUpperCase();
+            
+            // Обновляем текст на странице
+            document.querySelectorAll('[data-lang-ru], [data-lang-en]').forEach(element => {
+                if (element.hasAttribute(`data-lang-${lang}`)) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        // Для полей ввода
+                        const placeholderAttr = `data-lang-${lang}-placeholder`;
+                        if (element.hasAttribute(placeholderAttr)) {
+                            element.placeholder = element.getAttribute(placeholderAttr);
+                        }
+                    } else if (element.hasAttribute(`data-lang-${lang}`)) {
+                        // Для обычных элементов
+                        const newText = element.getAttribute(`data-lang-${lang}`);
+                        element.textContent = newText;
+                    }
+                }
+            });
+            
+            // Обновляем заголовок страницы
+            document.title = lang === 'ru' 
+                ? 'RUS ITS | Интеллектуальные Транспортные Системы' 
+                : 'RUS ITS | Intelligent Transport Systems';
+            
+            // Закрываем меню языков
+            document.getElementById('langOptions').classList.remove('active');
+            
+            // Сохраняем выбор языка в localStorage
+            localStorage.setItem('preferredLanguage', lang);
+        }
+        
+        // ПУНКТ 4: Фильтрация продуктов
+        function filterProducts(category) {
+            const products = document.querySelectorAll('.product-card');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            
+            // Обновляем активную кнопку
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Показываем/скрываем продукты
+            products.forEach(product => {
+                if (category === 'all' || product.getAttribute('data-category') === category) {
+                    product.style.display = 'block';
+                    setTimeout(() => {
+                        product.style.opacity = '1';
+                        product.style.transform = 'translateY(0)';
+                    }, 100);
+                } else {
+                    product.style.opacity = '0';
+                    product.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        product.style.display = 'none';
+                    }, 300);
+                }
+            });
+        }
+        
+        // ПУНКТ 4: Поиск продуктов
+        document.getElementById('productSearch').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const products = document.querySelectorAll('.product-card');
+            
+            products.forEach(product => {
+                const title = product.querySelector('.product-title').textContent.toLowerCase();
+                const description = product.querySelector('p').textContent.toLowerCase();
+                const tags = product.getAttribute('data-tags').toLowerCase();
+                
+                if (title.includes(searchTerm) || description.includes(searchTerm) || tags.includes(searchTerm)) {
+                    product.style.display = 'block';
+                    setTimeout(() => {
+                        product.style.opacity = '1';
+                        product.style.transform = 'translateY(0)';
+                    }, 100);
+                } else {
+                    product.style.opacity = '0';
+                    product.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        product.style.display = 'none';
+                    }, 300);
+                }
+            });
+        });
+        
+        // ПУНКТ 1: Анимация при скролле
+        function checkScroll() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            const windowHeight = window.innerHeight;
+            
+            elements.forEach(element => {
+                const position = element.getBoundingClientRect().top;
+                
+                if (position < windowHeight - 100) {
+                    element.classList.add('visible');
+                }
+            });
+            
+            // ПУНКТ 8: Показать/скрыть кнопку "Наверх"
+            const backToTop = document.getElementById('backToTop');
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+            
+            // ПУНКТ 8: Индикатор прогресса
+            const scrollProgress = document.getElementById('scrollProgress');
+            const windowScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (windowScroll / height) * 100;
+            scrollProgress.style.width = scrolled + '%';
+        }
+        
+        // ПУНКТ 8: Прокрутка наверх
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
         
         // Функция для скролла к контенту
         function scrollToContent() {
@@ -1066,6 +1620,9 @@
             }
             
             lastScrollTop = scrollTop;
+            
+            // Проверяем анимации
+            checkScroll();
         });
         
         // Функция переключения страниц
@@ -1100,6 +1657,9 @@
                 // Для других страниц показываем навигацию
                 navbar.classList.remove('hidden');
             }
+            
+            // Обновляем анимации
+            setTimeout(checkScroll, 100);
             
             return false;
         }
@@ -1145,18 +1705,63 @@
             isMenuOpen = false;
         }
         
-        // Закрытие меню при клике на ссылку (для мобильных)
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                if (window.innerWidth <= 768) {
-                    closeMobileMenu();
-                }
-            });
+        // ПУНКТ 13: Свайп для мобильных
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
         });
         
-        // Автоматически прячем навигацию на главной при загрузке (только для десктопа)
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+        
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const swipeDistance = touchEndX - touchStartX;
+            
+            if (Math.abs(swipeDistance) > swipeThreshold) {
+                const pages = ['home', 'about', 'catalog', 'services', 'contact'];
+                const currentPage = document.querySelector('.page.active').id;
+                const currentIndex = pages.indexOf(currentPage);
+                
+                if (swipeDistance > 0 && currentIndex > 0) {
+                    // Свайп вправо - предыдущая страница
+                    showPage(pages[currentIndex - 1]);
+                } else if (swipeDistance < 0 && currentIndex < pages.length - 1) {
+                    // Свайп влево - следующая страница
+                    showPage(pages[currentIndex + 1]);
+                }
+                
+                // Показываем подсказку
+                const swipeHint = document.getElementById('swipeHint');
+                swipeHint.style.display = 'block';
+                setTimeout(() => {
+                    swipeHint.style.display = 'none';
+                }, 3000);
+            }
+        }
+        
+        // Языковое меню
+        document.getElementById('langBtn').addEventListener('click', function(e) {
+            e.stopPropagation();
+            document.getElementById('langOptions').classList.toggle('active');
+        });
+        
+        // Закрытие языкового меню при клике вне его
+        document.addEventListener('click', function() {
+            document.getElementById('langOptions').classList.remove('active');
+        });
+        
+        // Автоматически прячем навигацию на главной при загрузке
         window.onload = function() {
             showPage('home');
+            
+            // Загружаем сохраненный язык
+            const savedLang = localStorage.getItem('preferredLanguage') || 'ru';
+            changeLanguage(savedLang);
             
             if (window.innerWidth > 768) {
                 setTimeout(() => {
@@ -1169,6 +1774,14 @@
             
             // Проверяем картинки
             checkImages();
+            
+            // Инициализируем анимации
+            checkScroll();
+            
+            // Скрываем подсказку через 5 секунд
+            setTimeout(() => {
+                document.getElementById('swipeHint').style.display = 'none';
+            }, 5000);
         };
         
         // Проверяем наличие картинок
@@ -1188,13 +1801,18 @@
                 image.src = img.name;
                 image.onerror = function() {
                     console.log(`Картинка ${img.name} не найдена`);
-                    // Для фавиконки создаем запасной вариант
-                    if (img.type === 'favicon') {
-                        console.log('Используется стандартная фавиконка');
-                    }
                 };
             });
         }
+        
+        // Закрытие меню при клике на ссылку
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    closeMobileMenu();
+                }
+            });
+        });
     </script>
 </body>
 </html>
