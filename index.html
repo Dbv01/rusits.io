@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RUS ITS | Интеллектуальные Транспортные Системы</title>
     
+    <!-- Фавиконка для сайта (иконка во вкладке) -->
+    <link rel="icon" type="image/png" href="logo_navbar.png">
+    
     <!-- Иконочный шрифт -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -1176,7 +1179,8 @@
                 {name: 'meteo.jpg', type: 'product'},
                 {name: 'svetofor.jpg', type: 'product'},
                 {name: 'immitator.jpg', type: 'product'},
-                {name: 'proeckt.jpg', type: 'product'}
+                {name: 'proeckt.jpg', type: 'product'},
+                {name: 'logo_navbar.png', type: 'favicon'}
             ];
             
             images.forEach(img => {
@@ -1184,6 +1188,10 @@
                 image.src = img.name;
                 image.onerror = function() {
                     console.log(`Картинка ${img.name} не найдена`);
+                    // Для фавиконки создаем запасной вариант
+                    if (img.type === 'favicon') {
+                        console.log('Используется стандартная фавиконка');
+                    }
                 };
             });
         }
