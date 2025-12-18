@@ -3,18 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="RUS ITS - современные интеллектуальные транспортные системы для умных городов">
-    <meta name="robots" content="noindex, nofollow">
     <title>RUS ITS | Интеллектуальные Транспортные Системы</title>
     
-    <!-- Подключаем иконочный шрифт -->
+    <!-- Иконочный шрифт -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* Сброс и базовые стили */
+        /* Общие стили */
         * {
             margin: 0;
             padding: 0;
@@ -25,15 +23,12 @@
             --primary: #00D4AA;
             --primary-dark: #00B894;
             --secondary: #1E2A3A;
-            --accent: #6366F1;
+            --accent: #2D5BFF;
             --light: #FFFFFF;
             --dark: #0F172A;
             --gray: #64748B;
-            --light-gray: #F1F5F9;
-            --card-bg: rgba(255, 255, 255, 0.03);
-            --gradient: linear-gradient(135deg, #00D4AA 0%, #6366F1 100%);
-            --shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --gradient: linear-gradient(135deg, #00D4AA 0%, #2D5BFF 100%);
         }
 
         html {
@@ -45,10 +40,26 @@
             background-color: var(--dark);
             color: var(--light);
             line-height: 1.7;
-            overflow-x: hidden;
         }
 
-        /* Современная навигация */
+        /* Страницы (скрыты по умолчанию) */
+        .page {
+            display: none;
+            padding-top: 80px;
+            min-height: calc(100vh - 160px);
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Навигация */
         .navbar {
             position: fixed;
             top: 0;
@@ -61,54 +72,23 @@
             background: rgba(15, 23, 42, 0.95);
             backdrop-filter: blur(20px);
             z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            transition: var(--transition);
-        }
-
-        .navbar.scrolled {
-            padding: 0.8rem 5%;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .logo {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
             font-size: 1.8rem;
             font-weight: 800;
             color: var(--light);
             text-decoration: none;
-            transition: var(--transition);
         }
 
         .logo span {
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .logo-img {
-            height: 45px;
-            width: auto;
-            transition: var(--transition);
-            border-radius: 8px;
-        }
-
-        /* Если нет логотипа, показываем текст */
-        .logo-fallback {
-            display: none;
-            font-size: 1.8rem;
-            font-weight: 800;
-        }
-
-        .logo-img:not([src*=".png"]):not([src*=".jpg"]):not([src*=".svg"]) + .logo-fallback {
-            display: block;
+            color: var(--primary);
         }
 
         .nav-links {
             display: flex;
-            gap: 2.5rem;
+            gap: 2rem;
             list-style: none;
         }
 
@@ -116,44 +96,14 @@
             color: var(--light);
             text-decoration: none;
             font-weight: 500;
-            font-size: 1rem;
-            position: relative;
-            padding: 0.5rem 0;
-            transition: var(--transition);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s;
         }
 
-        .nav-link:hover {
-            color: var(--primary);
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--gradient);
-            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        .cta-nav {
+        .nav-link:hover, .nav-link.active {
             background: var(--gradient);
             color: white;
-            padding: 0.8rem 1.8rem;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: var(--transition);
-            box-shadow: 0 4px 15px rgba(0, 212, 170, 0.3);
-        }
-
-        .cta-nav:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 212, 170, 0.4);
         }
 
         .mobile-menu-btn {
@@ -163,55 +113,27 @@
             color: var(--light);
             font-size: 1.5rem;
             cursor: pointer;
-            transition: var(--transition);
         }
 
-        /* Герой секция */
+        /* Главная страница */
         .hero {
-            min-height: 100vh;
+            min-height: 70vh;
             display: flex;
             align-items: center;
             padding: 0 5%;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: linear-gradient(45deg, #0F172A 0%, #1E293B 100%);
-        }
-
-        /* Если нет фоновой картинки, используем градиент */
-        .hero-bg::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(0, 212, 170, 0.1) 0%, transparent 50%),
-                linear-gradient(45deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.9) 100%);
+            background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.9)),
+                        url('images/hero-bg.jpg') center/cover;
         }
 
         .hero-content {
             max-width: 800px;
-            position: relative;
-            z-index: 2;
         }
 
         .hero-title {
-            font-size: 3.8rem;
+            font-size: 3.5rem;
             font-weight: 800;
-            line-height: 1.1;
             margin-bottom: 1.5rem;
-            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+            background: linear-gradient(90deg, var(--primary), var(--accent));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -224,398 +146,211 @@
         }
 
         .hero-subtitle {
-            font-size: 1.3rem;
-            color: var(--light-gray);
-            margin-bottom: 2.5rem;
-            max-width: 600px;
-            opacity: 0.9;
-        }
-
-        .hero-stats {
-            display: flex;
-            gap: 3rem;
-            margin-top: 3rem;
-        }
-
-        @media (max-width: 768px) {
-            .hero-stats {
-                flex-direction: column;
-                gap: 1.5rem;
-            }
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            display: block;
-        }
-
-        .stat-text {
-            color: var(--gray);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Кнопка CTA */
-        .cta-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 1rem;
-            background: var(--gradient);
-            color: white;
-            padding: 1.2rem 2.8rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: var(--transition);
-            box-shadow: 0 10px 30px rgba(0, 212, 170, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.7s;
-        }
-
-        .cta-button:hover::before {
-            left: 100%;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0, 212, 170, 0.4);
-        }
-
-        /* Секции */
-        .section {
-            padding: 6rem 5%;
-            position: relative;
-        }
-
-        @media (max-width: 768px) {
-            .section {
-                padding: 4rem 5%;
-            }
-        }
-
-        .section-title {
-            font-size: 2.8rem;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 1rem;
-            position: relative;
-        }
-
-        @media (max-width: 768px) {
-            .section-title {
-                font-size: 2.2rem;
-            }
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: var(--gray);
             font-size: 1.2rem;
-            margin-bottom: 4rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+            color: var(--gray);
+            margin-bottom: 2.5rem;
         }
 
-        /* О компании */
-        .about-grid {
+        /* Каталог страница */
+        .catalog-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.5rem;
-            margin-top: 3rem;
-        }
-
-        .about-card {
-            background: var(--card-bg);
-            padding: 2.5rem;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .about-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: var(--gradient);
-        }
-
-        .about-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(0, 212, 170, 0.2);
-            box-shadow: var(--shadow);
-        }
-
-        .card-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        /* Продукты */
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem;
-            margin-top: 3rem;
+            gap: 2rem;
+            padding: 2rem 5%;
         }
 
         .product-card {
             background: var(--card-bg);
-            border-radius: 20px;
+            border-radius: 15px;
             overflow: hidden;
-            transition: var(--transition);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            position: relative;
+            transition: transform 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .product-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(0, 212, 170, 0.2);
-            box-shadow: var(--shadow);
+            transform: translateY(-5px);
+            border-color: var(--primary);
         }
 
         .product-image {
             width: 100%;
             height: 250px;
             overflow: hidden;
-            background: linear-gradient(45deg, #1E293B 0%, #334155 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .product-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.6s ease;
-        }
-
-        .product-card:hover .product-image img {
-            transform: scale(1.05);
-        }
-
-        /* Заглушка для отсутствующей картинки */
-        .image-placeholder {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gray);
-            font-size: 1.1rem;
-            text-align: center;
-            padding: 2rem;
-            background: linear-gradient(45deg, rgba(30, 41, 59, 0.8) 0%, rgba(51, 65, 85, 0.8) 100%);
         }
 
         .product-content {
-            padding: 2rem;
+            padding: 1.5rem;
         }
 
         .product-title {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             margin-bottom: 1rem;
-            color: var(--light);
-            font-weight: 600;
+            color: var(--primary);
         }
 
-        .product-badge {
-            display: inline-block;
-            background: var(--gradient);
-            color: white;
-            padding: 0.3rem 1rem;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
+        /* Контакты страница */
+        .contact-section {
+            padding: 4rem 5%;
         }
 
-        /* Услуги */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .service-card {
-            background: var(--card-bg);
-            padding: 2.5rem 2rem;
-            border-radius: 15px;
-            text-align: center;
-            transition: var(--transition);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .service-card:hover {
-            background: rgba(255, 255, 255, 0.05);
-            transform: translateY(-8px);
-            border-color: rgba(0, 212, 170, 0.2);
-        }
-
-        .service-icon {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        /* Контакты */
         .contact-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 4rem;
-            max-width: 1200px;
+            max-width: 600px;
             margin: 0 auto;
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .contact-card {
-            background: var(--card-bg);
-            padding: 2.5rem;
-            border-radius: 15px;
-            border-left: 4px solid var(--primary);
-            transition: var(--transition);
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .contact-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent);
-            box-shadow: var(--shadow);
+        .contact-card:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
         }
 
         .contact-icon {
             font-size: 2rem;
-            margin-bottom: 1.5rem;
             color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* О компании страница */
+        .about-section {
+            padding: 4rem 5%;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--primary);
+        }
+
+        /* Услуги страница */
+        .services-section {
+            padding: 4rem 5%;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .service-item {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .service-item:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Заголовки */
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--light);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--gradient);
         }
 
         /* Футер */
         .footer {
             background: #0A0A0A;
-            padding: 4rem 5% 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 3rem 5% 1.5rem;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        .footer-logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-        }
-
-        .footer-logo span {
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links a {
-            color: var(--gray);
-            text-decoration: none;
-            transition: var(--transition);
-            display: block;
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links a:hover {
-            color: var(--primary);
-            transform: translateX(5px);
-        }
-
         .copyright {
-            text-align: center;
-            padding-top: 3rem;
-            margin-top: 3rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
             color: var(--gray);
             font-size: 0.9rem;
         }
 
-        .social-links {
+        .footer-links {
             display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem;
+            gap: 1.5rem;
+            list-style: none;
         }
 
-        .social-link {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 50%;
-            color: var(--light);
+        .footer-link {
+            color: var(--gray);
             text-decoration: none;
-            transition: var(--transition);
+            transition: color 0.3s;
         }
 
-        .social-link:hover {
-            background: var(--gradient);
-            transform: translateY(-3px);
+        .footer-link:hover {
+            color: var(--primary);
         }
 
         /* Адаптивность */
-        @media (max-width: 992px) {
+        @media (max-width: 768px) {
             .nav-links {
                 position: fixed;
                 top: 70px;
                 left: 0;
                 width: 100%;
                 background: rgba(15, 23, 42, 0.98);
-                backdrop-filter: blur(20px);
                 flex-direction: column;
-                padding: 2rem;
+                padding: 1rem;
                 transform: translateY(-100%);
                 opacity: 0;
                 visibility: hidden;
-                transition: var(--transition);
+                transition: all 0.3s;
             }
             
             .nav-links.active {
@@ -627,252 +362,237 @@
             .mobile-menu-btn {
                 display: block;
             }
-        }
-
-        /* Анимации */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
             }
         }
 
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
+        /* Кнопки */
+        .btn {
+            display: inline-block;
+            background: var(--gradient);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s;
+            border: none;
+            cursor: pointer;
         }
 
-        .fade-in {
-            animation: fadeInUp 0.8s ease forwards;
-            opacity: 0;
+        .btn:hover {
+            transform: translateY(-2px);
         }
 
-        .delay-1 { animation-delay: 0.2s; }
-        .delay-2 { animation-delay: 0.4s; }
-        .delay-3 { animation-delay: 0.6s; }
-
-        .float {
-            animation: float 6s ease-in-out infinite;
+        /* Текст */
+        p {
+            margin-bottom: 1rem;
+            color: var(--gray);
         }
 
-        /* Убираем favicon ошибку */
-        link[rel="icon"] {
-            display: none;
+        h1, h2, h3, h4 {
+            margin-bottom: 1rem;
+            color: var(--light);
+        }
+
+        /* Утилиты */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
         }
     </style>
 </head>
 <body>
     <!-- Навигация -->
     <nav class="navbar">
-        <a href="#home" class="logo">
-            <div class="logo-fallback">RUS ITS</div>
+        <a href="#" class="logo" onclick="showPage('home')">
+            <span>RUS</span>ITS
         </a>
         
-        <ul class="nav-links" id="navLinks">
-            <li><a href="#home" class="nav-link">Главная</a></li>
-            <li><a href="#about" class="nav-link">О компании</a></li>
-            <li><a href="#products" class="nav-link">Продукты</a></li>
-            <li><a href="#services" class="nav-link">Услуги</a></li>
-            <li><a href="#contact" class="nav-link">Контакты</a></li>
-            <li><a href="#contact" class="nav-link cta-nav">Связаться</a></li>
-        </ul>
-        
-        <button class="mobile-menu-btn" id="mobileMenuBtn">
+        <button class="mobile-menu-btn" onclick="toggleMenu()">
             <i class="fas fa-bars"></i>
         </button>
+        
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#" class="nav-link active" onclick="showPage('home')">Главная</a></li>
+            <li><a href="#" class="nav-link" onclick="showPage('about')">О компании</a></li>
+            <li><a href="#" class="nav-link" onclick="showPage('catalog')">Каталог</a></li>
+            <li><a href="#" class="nav-link" onclick="showPage('services')">Услуги</a></li>
+            <li><a href="#" class="nav-link" onclick="showPage('contact')">Контакты</a></li>
+        </ul>
     </nav>
 
-    <!-- Герой секция -->
-    <section id="home" class="hero">
-        <div class="hero-bg"></div>
+    <!-- Главная страница -->
+    <section id="home" class="page active">
+        <div class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">Интеллектуальные Транспортные Системы</h1>
+                <p class="hero-subtitle">
+                    Проектируем, производим и внедряем современные решения для безопасности 
+                    и эффективности дорожного движения
+                </p>
+                <a href="#" class="btn" onclick="showPage('catalog')">Смотреть продукты</a>
+            </div>
+        </div>
         
-        <div class="hero-content fade-in">
-            <h1 class="hero-title">Интеллектуальные Транспортные Системы</h1>
-            <p class="hero-subtitle">
-                Мы проектируем будущее городской мобильности. Современные решения для безопасности, 
-                эффективности и экологичности транспортной инфраструктуры.
-            </p>
-            <a href="#products" class="cta-button">
-                <span>Изучить продукты</span>
-                <i class="fas fa-arrow-right"></i>
-            </a>
-            
-            <div class="hero-stats fade-in delay-1">
-                <div class="stat-item">
-                    <span class="stat-number">50+</span>
-                    <span class="stat-text">Завершенных проектов</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">15</span>
-                    <span class="stat-text">Лет опыта</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">100%</span>
-                    <span class="stat-text">Гарантия качества</span>
+        <div class="container">
+            <div style="padding: 4rem 0; text-align: center;">
+                <h2 style="margin-bottom: 3rem;">Наши преимущества</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                    <div>
+                        <i class="fas fa-check-circle" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                        <h3>15 лет опыта</h3>
+                        <p>Работаем на рынке с 2010 года</p>
+                    </div>
+                    <div>
+                        <i class="fas fa-medal" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                        <h3>50+ проектов</h3>
+                        <p>Успешно реализованных решений</p>
+                    </div>
+                    <div>
+                        <i class="fas fa-headset" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                        <h3>Поддержка 24/7</h3>
+                        <p>Круглосуточная техническая поддержка</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- О компании -->
-    <section id="about" class="section">
-        <h2 class="section-title fade-in">О компании</h2>
-        <p class="section-subtitle fade-in delay-1">
-            Лидер в области интеллектуальных транспортных систем с 2010 года
-        </p>
-        
-        <div class="about-grid">
-            <div class="about-card fade-in">
-                <div class="card-icon">
-                    <i class="fas fa-bullseye"></i>
-                </div>
-                <h3>Наша миссия</h3>
-                <p>Создавать инновационные решения, которые делают города безопаснее, умнее и экологичнее.</p>
-            </div>
+    <section id="about" class="page">
+        <div class="about-section">
+            <h2 class="section-title">О компании</h2>
             
-            <div class="about-card fade-in delay-1">
-                <div class="card-icon">
-                    <i class="fas fa-eye"></i>
+            <div class="about-content">
+                <div class="about-card">
+                    <h3>Наша история</h3>
+                    <p>Компания RUS ITS была основана в 2010 году и с тех пор является лидером в области интеллектуальных транспортных систем. Мы специализируемся на разработке, производстве и внедрении современных решений для организации дорожного движения.</p>
                 </div>
-                <h3>Наше видение</h3>
-                <p>Стать ведущим поставщиком ИТС в России и СНГ, внедряя передовые мировые технологии.</p>
-            </div>
-            
-            <div class="about-card fade-in delay-2">
-                <div class="card-icon">
-                    <i class="fas fa-handshake"></i>
+                
+                <div class="about-card">
+                    <h3>Наша миссия</h3>
+                    <p>Создавать инновационные транспортные решения, которые делают города безопаснее, умнее и экологичнее. Мы стремимся улучшить качество жизни людей через современные технологии.</p>
                 </div>
-                <h3>Наши ценности</h3>
-                <p>Инновации, качество, надежность и партнерский подход к каждому клиенту.</p>
+                
+                <div class="about-card">
+                    <h3>Наши ценности</h3>
+                    <p>• Инновации и технологический прогресс<br>
+                       • Качество и надежность продукции<br>
+                       • Профессионализм команды<br>
+                       • Клиентоориентированный подход<br>
+                       • Социальная ответственность</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Продукты -->
-    <section id="products" class="section" style="background: rgba(15, 23, 42, 0.7);">
-        <h2 class="section-title fade-in">Наши продукты</h2>
-        <p class="section-subtitle fade-in delay-1">
-            Современное оборудование для интеллектуальных транспортных систем
-        </p>
+    <!-- Каталог -->
+    <section id="catalog" class="page">
+        <h2 class="section-title" style="margin-top: 2rem;">Наши продукты</h2>
         
-        <div class="products-grid">
-            <!-- Продукт 1: Метеостанция -->
-            <div class="product-card fade-in">
+        <div class="catalog-grid">
+            <!-- Метеостанция -->
+            <div class="product-card">
                 <div class="product-image">
-                    <div class="image-placeholder">
-                        Метеорологические станции для мониторинга погодных условий
-                    </div>
+                    <!-- Вставьте вашу картинку meteo.jpg в папку images -->
+                    <img src="images/meteo.jpg" alt="Метеостанция">
                 </div>
                 <div class="product-content">
-                    <span class="product-badge">НОВИНКА</span>
-                    <h3 class="product-title">Дорожные метеостанции</h3>
-                    <p>Автоматические системы мониторинга погодных условий с высокой точностью измерений.</p>
+                    <h3 class="product-title">Метеорологические станции</h3>
+                    <p>Автоматические дорожные метеостанции для мониторинга погодных условий. Измеряют температуру, влажность, скорость ветра и состояние дорожного покрытия.</p>
                 </div>
             </div>
             
-            <!-- Продукт 2: Светофоры -->
-            <div class="product-card fade-in delay-1">
+            <!-- Светофоры -->
+            <div class="product-card">
                 <div class="product-image">
-                    <div class="image-placeholder">
-                        Интеллектуальные системы адаптивного управления трафиком
-                    </div>
+                    <!-- Вставьте вашу картинку svetofor.jpg в папку images -->
+                    <img src="images/svetofor.jpg" alt="Светофоры">
                 </div>
                 <div class="product-content">
-                    <span class="product-badge">АДАПТИВНЫЕ</span>
                     <h3 class="product-title">Умные светофоры</h3>
-                    <p>Системы адаптивного управления трафиком с искусственным интеллектом.</p>
+                    <p>Адаптивные системы регулирования дорожного движения с искусственным интеллектом. Оптимизируют транспортные потоки и повышают безопасность.</p>
                 </div>
             </div>
             
-            <!-- Продукт 3: Детекторы -->
-            <div class="product-card fade-in delay-2">
+            <!-- Детекторы -->
+            <div class="product-card">
                 <div class="product-image">
-                    <div class="image-placeholder">
-                        Радиолокационные системы для точного учета транспортных потоков
-                    </div>
+                    <!-- Вставьте вашу картинку immitator.jpg в папку images -->
+                    <img src="images/immitator.jpg" alt="Детекторы транспорта">
                 </div>
                 <div class="product-content">
-                    <span class="product-badge">ТОЧНОСТЬ 99%</span>
-                    <h3 class="product-title">Детекторы транспорта</h3>
-                    <p>Радиолокационные системы ПУИД и RTMS для точного учета транспортных потоков.</p>
+                    <h3 class="product-title">Радиолокационные детекторы</h3>
+                    <p>Системы ПУИД и RTMS для учета интенсивности движения и контроля скорости. Точный мониторинг транспортных потоков в реальном времени.</p>
                 </div>
             </div>
             
-            <!-- Продукт 4: Проекционные переходы -->
-            <div class="product-card fade-in delay-3">
+            <!-- Проекционные переходы -->
+            <div class="product-card">
                 <div class="product-image">
-                    <div class="image-placeholder">
-                        Системы безопасности с проекционной разметкой для пешеходных переходов
-                    </div>
+                    <!-- Вставьте вашу картинку proeckt.jpg в папку images -->
+                    <img src="images/proeckt.jpg" alt="Проекционные переходы">
                 </div>
                 <div class="product-content">
-                    <span class="product-badge">ИННОВАЦИЯ</span>
                     <h3 class="product-title">Проекционные переходы</h3>
-                    <p>Системы безопасности с проекционной разметкой для повышения заметности.</p>
+                    <p>Инновационные системы безопасности пешеходных переходов с проекционной разметкой и световыми сигналами. Повышают заметность переходов.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Услуги -->
-    <section id="services" class="section">
-        <h2 class="section-title fade-in">Наши услуги</h2>
-        <p class="section-subtitle fade-in delay-1">
-            Полный комплекс услуг от проектирования до обслуживания
-        </p>
-        
-        <div class="services-grid">
-            <div class="service-card fade-in">
-                <div class="service-icon">
-                    <i class="fas fa-bolt"></i>
-                </div>
-                <h3>Электромонтажные работы</h3>
-                <p>Профессиональный монтаж и подключение оборудования любой сложности.</p>
-            </div>
+    <section id="services" class="page">
+        <div class="services-section">
+            <h2 class="section-title">Наши услуги</h2>
             
-            <div class="service-card fade-in delay-1">
-                <div class="service-icon">
-                    <i class="fas fa-cogs"></i>
+            <div class="services-grid">
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Электромонтажные работы</h3>
+                    <p>Полный комплекс электромонтажных работ любой сложности</p>
                 </div>
-                <h3>Пуско-наладочные работы</h3>
-                <p>Настройка, калибровка и запуск систем в эксплуатацию.</p>
-            </div>
-            
-            <div class="service-card fade-in delay-2">
-                <div class="service-icon">
-                    <i class="fas fa-tools"></i>
+                
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Пуско-наладочные работы</h3>
+                    <p>Настройка, калибровка и запуск систем в эксплуатацию</p>
                 </div>
-                <h3>Техническое обслуживание</h3>
-                <p>Круглосуточная поддержка и профилактическое обслуживание.</p>
-            </div>
-            
-            <div class="service-card fade-in delay-3">
-                <div class="service-icon">
-                    <i class="fas fa-shipping-fast"></i>
+                
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Техническое обслуживание</h3>
+                    <p>Круглосуточная поддержка и сопровождение систем</p>
                 </div>
-                <h3>Поставка оборудования</h3>
-                <p>Поиск и поставка специализированного оборудования "под ключ".</p>
+                
+                <div class="service-item">
+                    <div class="service-icon">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <h3>Поставка оборудования</h3>
+                    <p>Поиск и поставка специализированного оборудования "под ключ"</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Контакты -->
-    <section id="contact" class="section" style="background: rgba(15, 23, 42, 0.9);">
-        <h2 class="section-title fade-in">Контакты</h2>
-        <p class="section-subtitle fade-in delay-1">
-            Свяжитесь с нами для обсуждения вашего проекта
-        </p>
-        
-        <div class="contact-container">
-            <div class="contact-info fade-in">
+    <section id="contact" class="page">
+        <div class="contact-section">
+            <h2 class="section-title">Контакты</h2>
+            
+            <div class="contact-container">
                 <div class="contact-card">
                     <div class="contact-icon">
                         <i class="fas fa-building"></i>
@@ -896,6 +616,14 @@
                     <h3>Телефон</h3>
                     <p>+7 985 412 32 34</p>
                 </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Режим работы</h3>
+                    <p>Пн-Пт: 9:00 - 18:00<br>Сб-Вс: выходные</p>
+                </div>
             </div>
         </div>
     </section>
@@ -903,117 +631,88 @@
     <!-- Футер -->
     <footer class="footer">
         <div class="footer-content">
-            <div class="fade-in">
-                <div class="footer-logo">
-                    <span>RUS</span>ITS
-                </div>
-                <p>Современные решения для интеллектуальных транспортных систем. Делаем города умнее и безопаснее.</p>
-                <div class="social-links">
-                    <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-vk"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
-                </div>
+            <div class="copyright">
+                © <span id="currentYear"></span> RUS ITS Интеллектуальные Транспортные Системы. Все права защищены.
             </div>
-            
-            <div class="fade-in delay-1">
-                <h4>Навигация</h4>
-                <ul class="footer-links">
-                    <li><a href="#home">Главная</a></li>
-                    <li><a href="#about">О компании</a></li>
-                    <li><a href="#products">Продукты</a></li>
-                    <li><a href="#services">Услуги</a></li>
-                    <li><a href="#contact">Контакты</a></li>
-                </ul>
-            </div>
-            
-            <div class="fade-in delay-2">
-                <h4>Услуги</h4>
-                <ul class="footer-links">
-                    <li><a href="#services">Электромонтажные работы</a></li>
-                    <li><a href="#services">Пуско-наладочные работы</a></li>
-                    <li><a href="#services">Техническое обслуживание</a></li>
-                    <li><a href="#services">Поставка оборудования</a></li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="copyright fade-in">
-            <p>© <span id="current-year">2025</span> RUS ITS Интеллектуальные Транспортные Системы. Все права защищены.</p>
+            <ul class="footer-links">
+                <li><a href="#" class="footer-link" onclick="showPage('home')">Главная</a></li>
+                <li><a href="#" class="footer-link" onclick="showPage('about')">О компании</a></li>
+                <li><a href="#" class="footer-link" onclick="showPage('catalog')">Каталог</a></li>
+                <li><a href="#" class="footer-link" onclick="showPage('services')">Услуги</a></li>
+                <li><a href="#" class="footer-link" onclick="showPage('contact')">Контакты</a></li>
+            </ul>
         </div>
     </footer>
 
     <script>
         // Устанавливаем текущий год
-        document.getElementById('current-year').textContent = new Date().getFullYear();
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        
+        // Функция переключения страниц
+        function showPage(pageId) {
+            // Скрываем все страницы
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Убираем активный класс со всех ссылок
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Показываем выбранную страницу
+            document.getElementById(pageId).classList.add('active');
+            
+            // Активируем соответствующую ссылку
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if (link.textContent === getPageName(pageId)) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Закрываем мобильное меню если оно открыто
+            document.getElementById('navLinks').classList.remove('active');
+            
+            return false;
+        }
+        
+        // Получаем название страницы для ссылки
+        function getPageName(pageId) {
+            const pages = {
+                'home': 'Главная',
+                'about': 'О компании',
+                'catalog': 'Каталог',
+                'services': 'Услуги',
+                'contact': 'Контакты'
+            };
+            return pages[pageId] || 'Главная';
+        }
         
         // Мобильное меню
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const navLinks = document.getElementById('navLinks');
-        
-        mobileMenuBtn.addEventListener('click', () => {
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
             navLinks.classList.toggle('active');
-            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
-                ? '<i class="fas fa-times"></i>' 
-                : '<i class="fas fa-bars"></i>';
-        });
+        }
         
-        // Закрытие меню при клике на ссылку
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+        // Если картинки не загрузились - показываем заглушку
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                img.onerror = function() {
+                    this.style.backgroundColor = '#1E293B';
+                    this.style.display = 'flex';
+                    this.style.alignItems = 'center';
+                    this.style.justifyContent = 'center';
+                    this.style.color = '#64748B';
+                    this.style.fontSize = '1rem';
+                    this.innerHTML = '<span>Изображение продукта</span>';
+                };
             });
         });
         
-        // Липкая навигация
-        window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('.navbar');
-            navbar.classList.toggle('scrolled', window.scrollY > 50);
-        });
-        
-        // Анимация при скролле
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in');
-                }
-            });
-        }, observerOptions);
-        
-        // Наблюдаем за элементами для анимации
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-        
-        // Плавный скролл
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-        
-        // Убираем ошибку рекламного блокировщика
+        // По умолчанию показываем главную страницу
         window.onload = function() {
-            // Удаляем все потенциально проблемные элементы
-            const problematicElements = document.querySelectorAll('[class*="ad"], [id*="ad"], [style*="display: none"]');
-            problematicElements.forEach(el => el.remove());
+            showPage('home');
         };
     </script>
 </body>
