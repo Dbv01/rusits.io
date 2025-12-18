@@ -43,9 +43,10 @@
             overflow-x: hidden;
         }
 
-        /* Страницы (скрыты по умолчанию) */
+        /* Страницы */
         .page {
             display: none;
+            padding-top: 80px; /* Отступ для фиксированной навигации */
             min-height: 100vh;
         }
 
@@ -53,7 +54,7 @@
             display: block;
         }
 
-        /* Навигация */
+        /* Навигация - ИСПРАВЛЕНА */
         .navbar {
             position: fixed;
             top: 0;
@@ -62,12 +63,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.2rem 5%;
-            background: rgba(15, 23, 42, 0.95);
+            padding: 1rem 5%;
+            background: rgba(15, 23, 42, 0.98);
             backdrop-filter: blur(20px);
             z-index: 1000;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s;
+            height: 70px;
         }
 
         .navbar.hidden {
@@ -75,8 +77,8 @@
         }
 
         .navbar.scrolled {
-            padding: 0.8rem 5%;
-            background: rgba(15, 23, 42, 0.98);
+            padding: 0.7rem 5%;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
         }
 
         .logo {
@@ -84,6 +86,7 @@
             font-weight: 800;
             color: var(--light);
             text-decoration: none;
+            z-index: 1001;
         }
 
         .logo span {
@@ -92,8 +95,49 @@
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 1.5rem;
             list-style: none;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: rgba(15, 23, 42, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 2rem;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+                z-index: 1000;
+                height: calc(100vh - 70px);
+                overflow-y: auto;
+                gap: 0;
+            }
+            
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            .nav-links li {
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+            
+            .nav-link {
+                display: block;
+                width: 100%;
+                padding: 1rem;
+                text-align: center;
+                border-radius: 8px;
+                background: rgba(255, 255, 255, 0.05);
+            }
         }
 
         .nav-link {
@@ -103,6 +147,7 @@
             padding: 0.5rem 1rem;
             border-radius: 5px;
             transition: all 0.3s;
+            font-size: 1rem;
         }
 
         .nav-link:hover, .nav-link.active {
@@ -110,6 +155,7 @@
             color: white;
         }
 
+        /* Мобильное меню - бургер */
         .mobile-menu-btn {
             display: none;
             background: none;
@@ -117,9 +163,21 @@
             color: var(--light);
             font-size: 1.5rem;
             cursor: pointer;
+            transition: all 0.3s;
+            z-index: 1001;
         }
 
-        /* ГЛАВНАЯ СТРАНИЦА - ПОЛНОЭКРАННАЯ КАРТИНКА */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-links {
+                display: flex;
+            }
+        }
+
+        /* ГЛАВНАЯ СТРАНИЦА - ИСПРАВЛЕНА */
         .fullscreen-hero {
             position: relative;
             width: 100%;
@@ -136,11 +194,36 @@
             z-index: 1;
         }
 
+        /* Разные картинки для десктопа и мобильных */
         .hero-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
             object-position: center;
+        }
+
+        /* Для десктопа */
+        .desktop-hero {
+            display: block;
+        }
+
+        /* Для мобильных */
+        .mobile-hero {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .desktop-hero {
+                display: none;
+            }
+            
+            .mobile-hero {
+                display: block;
+            }
+            
+            .fullscreen-hero {
+                height: 100vh;
+            }
         }
 
         .hero-overlay {
@@ -179,13 +262,14 @@
 
         @media (max-width: 768px) {
             .hero-title {
-                font-size: 2.8rem;
+                font-size: 2.5rem;
+                margin-bottom: 1rem;
             }
         }
 
         @media (max-width: 480px) {
             .hero-title {
-                font-size: 2.2rem;
+                font-size: 2rem;
             }
         }
 
@@ -200,6 +284,7 @@
         @media (max-width: 768px) {
             .hero-subtitle {
                 font-size: 1.3rem;
+                margin-bottom: 2rem;
             }
         }
 
@@ -210,6 +295,19 @@
             justify-content: center;
             flex-wrap: wrap;
             margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            .hero-buttons .btn {
+                width: 100%;
+                max-width: 280px;
+            }
         }
 
         /* Стрелка для скролла вниз */
@@ -245,18 +343,38 @@
             }
         }
 
+        @media (max-width: 768px) {
+            .scroll-down i {
+                font-size: 2rem;
+            }
+        }
+
         /* Контент после главной картинки */
         .main-content {
             padding: 5rem 5%;
             background: var(--dark);
         }
 
-        /* Каталог страница */
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 3rem 5%;
+            }
+        }
+
+        /* Каталог страница - ИСПРАВЛЕНА */
         .catalog-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             padding: 2rem 5%;
+        }
+
+        @media (max-width: 768px) {
+            .catalog-grid {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+                gap: 1.5rem;
+            }
         }
 
         .product-card {
@@ -316,9 +434,15 @@
             color: var(--primary);
         }
 
-        /* Контакты страница */
+        /* Контакты страница - ИСПРАВЛЕНА */
         .contact-section {
             padding: 4rem 5%;
+        }
+
+        @media (max-width: 768px) {
+            .contact-section {
+                padding: 2rem 5%;
+            }
         }
 
         .contact-container {
@@ -328,6 +452,12 @@
             padding: 3rem;
             border-radius: 15px;
             border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .contact-container {
+                padding: 1.5rem;
+            }
         }
 
         .contact-card {
@@ -348,9 +478,15 @@
             margin-bottom: 1rem;
         }
 
-        /* О компании страница */
+        /* О компании страница - ИСПРАВЛЕНА */
         .about-section {
             padding: 4rem 5%;
+        }
+
+        @media (max-width: 768px) {
+            .about-section {
+                padding: 2rem 5%;
+            }
         }
 
         .about-content {
@@ -366,9 +502,21 @@
             border-left: 4px solid var(--primary);
         }
 
-        /* Услуги страница */
+        @media (max-width: 768px) {
+            .about-card {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Услуги страница - ИСПРАВЛЕНА */
         .services-section {
             padding: 4rem 5%;
+        }
+
+        @media (max-width: 768px) {
+            .services-section {
+                padding: 2rem 5%;
+            }
         }
 
         .services-grid {
@@ -379,6 +527,13 @@
             margin: 0 auto;
         }
 
+        @media (max-width: 768px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
         .service-item {
             background: var(--card-bg);
             padding: 2rem;
@@ -386,6 +541,12 @@
             text-align: center;
             transition: all 0.3s;
             border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .service-item {
+                padding: 1.5rem;
+            }
         }
 
         .service-item:hover {
@@ -399,7 +560,7 @@
             margin-bottom: 1rem;
         }
 
-        /* Заголовки */
+        /* Заголовки - ИСПРАВЛЕНЫ */
         .section-title {
             font-size: 2.5rem;
             text-align: center;
@@ -407,6 +568,7 @@
             color: var(--light);
             position: relative;
             padding-bottom: 1rem;
+            margin-top: 1rem;
         }
 
         .section-title::after {
@@ -420,10 +582,24 @@
             background: var(--gradient);
         }
 
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+                padding-top: 1rem;
+            }
+        }
+
         /* Преимущества */
         .advantages {
             padding: 4rem 5%;
             text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .advantages {
+                padding: 3rem 5%;
+            }
         }
 
         .advantages-grid {
@@ -434,11 +610,24 @@
             margin: 0 auto;
         }
 
+        @media (max-width: 768px) {
+            .advantages-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
         .advantage-item {
             padding: 2rem;
             background: var(--card-bg);
             border-radius: 15px;
             transition: all 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            .advantage-item {
+                padding: 1.5rem;
+            }
         }
 
         .advantage-item:hover {
@@ -486,6 +675,13 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
+        @media (max-width: 768px) {
+            .footer {
+                padding: 2rem 5% 1rem;
+                margin-top: 3rem;
+            }
+        }
+
         .footer-content {
             display: flex;
             justify-content: space-between;
@@ -494,6 +690,14 @@
             gap: 2rem;
             max-width: 1200px;
             margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.5rem;
+            }
         }
 
         .copyright {
@@ -507,57 +711,23 @@
             list-style: none;
         }
 
+        @media (max-width: 768px) {
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+        }
+
         .footer-link {
             color: var(--gray);
             text-decoration: none;
             transition: color 0.3s;
+            font-size: 0.9rem;
         }
 
         .footer-link:hover {
             color: var(--primary);
-        }
-
-        /* Адаптивность */
-        @media (max-width: 768px) {
-            .nav-links {
-                position: fixed;
-                top: 70px;
-                left: 0;
-                width: 100%;
-                background: rgba(15, 23, 42, 0.98);
-                flex-direction: column;
-                padding: 1rem;
-                transform: translateY(-100%);
-                opacity: 0;
-                visibility: hidden;
-                transition: all 0.3s;
-            }
-            
-            .nav-links.active {
-                transform: translateY(0);
-                opacity: 1;
-                visibility: visible;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .footer-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .hero-buttons .btn {
-                width: 100%;
-                max-width: 300px;
-                margin-bottom: 1rem;
-            }
         }
 
         /* Текст */
@@ -571,13 +741,6 @@
             color: var(--light);
         }
 
-        /* Утилиты */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-        
         /* Анимация загрузки */
         .fade-in {
             animation: fadeIn 1s ease;
@@ -586,6 +749,11 @@
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
+        }
+
+        /* Убираем скролл при открытом меню на мобильных */
+        body.menu-open {
+            overflow: hidden;
         }
     </style>
 </head>
@@ -614,8 +782,14 @@
         <!-- Полноэкранная картинка -->
         <div class="fullscreen-hero">
             <div class="hero-image-container">
-                <img src="hometitleimg.jpg" alt="Интеллектуальные Транспортные Системы" class="hero-image" 
+                <!-- Для десктопа -->
+                <img src="hometitleimg.jpg" alt="Интеллектуальные Транспортные Системы" class="hero-image desktop-hero" 
                      onerror="this.onerror=null; this.src='https://placehold.co/1920x1080/0F172A/00D4AA?text=RUS+ITS+Интеллектуальные+Транспортные+Системы';">
+                
+                <!-- Для мобильных -->
+                <img src="hometitleimgmobile.jpg" alt="Интеллектуальные Транспортные Системы" class="hero-image mobile-hero" 
+                     onerror="this.onerror=null; this.src='https://placehold.co/768x1024/0F172A/00D4AA?text=RUS+ITS';">
+                
                 <div class="hero-overlay"></div>
             </div>
             
@@ -719,7 +893,7 @@
 
     <!-- Каталог -->
     <section id="catalog" class="page">
-        <h2 class="section-title" style="margin-top: 2rem;">Наши продукты</h2>
+        <h2 class="section-title" style="margin-top: 1rem;">Наши продукты</h2>
         
         <div class="catalog-grid">
             <!-- Метеостанция -->
@@ -883,13 +1057,15 @@
         window.addEventListener('scroll', function() {
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             
-            // Прячем/показываем навигацию при скролле
-            if (scrollTop > lastScrollTop && scrollTop > 100) {
-                // Скролл вниз - прячем навигацию
-                navbar.classList.add('hidden');
-            } else {
-                // Скролл вверх - показываем навигацию
-                navbar.classList.remove('hidden');
+            // Прячем/показываем навигацию при скролле (только для десктопа)
+            if (window.innerWidth > 768) {
+                if (scrollTop > lastScrollTop && scrollTop > 100) {
+                    // Скролл вниз - прячем навигацию
+                    navbar.classList.add('hidden');
+                } else {
+                    // Скролл вверх - показываем навигацию
+                    navbar.classList.remove('hidden');
+                }
             }
             
             // Добавляем класс при скролле
@@ -925,7 +1101,7 @@
             });
             
             // Закрываем мобильное меню если оно открыто
-            document.getElementById('navLinks').classList.remove('active');
+            closeMobileMenu();
             
             // Если переходим на главную - прокручиваем вверх
             if (pageId === 'home') {
@@ -951,30 +1127,79 @@
         }
         
         // Мобильное меню
+        let isMenuOpen = false;
+        
         function toggleMenu() {
             const navLinks = document.getElementById('navLinks');
-            navLinks.classList.toggle('active');
+            const body = document.body;
+            const menuBtn = document.querySelector('.mobile-menu-btn i');
+            
+            if (!isMenuOpen) {
+                navLinks.classList.add('active');
+                body.classList.add('menu-open');
+                menuBtn.className = 'fas fa-times';
+                isMenuOpen = true;
+            } else {
+                closeMobileMenu();
+            }
         }
         
-        // Автоматически прячем навигацию на главной при загрузке
+        function closeMobileMenu() {
+            const navLinks = document.getElementById('navLinks');
+            const body = document.body;
+            const menuBtn = document.querySelector('.mobile-menu-btn i');
+            
+            navLinks.classList.remove('active');
+            body.classList.remove('menu-open');
+            menuBtn.className = 'fas fa-bars';
+            isMenuOpen = false;
+        }
+        
+        // Закрытие меню при клике на ссылку (для мобильных)
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    closeMobileMenu();
+                }
+            });
+        });
+        
+        // Автоматически прячем навигацию на главной при загрузке (только для десктопа)
         window.onload = function() {
             showPage('home');
             
-            // Прячем навигацию через 2 секунды на главной
-            setTimeout(() => {
-                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                if (scrollTop < 100) {
-                    navbar.classList.add('hidden');
-                }
-            }, 2000);
+            if (window.innerWidth > 768) {
+                setTimeout(() => {
+                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    if (scrollTop < 100) {
+                        navbar.classList.add('hidden');
+                    }
+                }, 2000);
+            }
             
-            // Проверяем картинку hometitleimg.jpg
-            const img = new Image();
-            img.src = 'hometitleimg.jpg';
-            img.onerror = function() {
-                console.log('Картинка hometitleimg.jpg не найдена, используется заглушка');
-            };
+            // Проверяем картинки
+            checkImages();
         };
+        
+        // Проверяем наличие картинок
+        function checkImages() {
+            const images = [
+                {name: 'hometitleimg.jpg', type: 'desktop'},
+                {name: 'hometitleimgmobile.jpg', type: 'mobile'},
+                {name: 'meteo.jpg', type: 'product'},
+                {name: 'svetofor.jpg', type: 'product'},
+                {name: 'immitator.jpg', type: 'product'},
+                {name: 'proeckt.jpg', type: 'product'}
+            ];
+            
+            images.forEach(img => {
+                const image = new Image();
+                image.src = img.name;
+                image.onerror = function() {
+                    console.log(`Картинка ${img.name} не найдена`);
+                };
+            });
+        }
     </script>
 </body>
 </html>
