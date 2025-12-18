@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="RUS ITS - современные интеллектуальные транспортные системы для умных городов">
+    <meta name="robots" content="noindex, nofollow">
     <title>RUS ITS | Интеллектуальные Транспортные Системы</title>
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     
     <!-- Подключаем иконочный шрифт -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -92,6 +92,18 @@
             height: 45px;
             width: auto;
             transition: var(--transition);
+            border-radius: 8px;
+        }
+
+        /* Если нет логотипа, показываем текст */
+        .logo-fallback {
+            display: none;
+            font-size: 1.8rem;
+            font-weight: 800;
+        }
+
+        .logo-img:not([src*=".png"]):not([src*=".jpg"]):not([src*=".svg"]) + .logo-fallback {
+            display: block;
         }
 
         .nav-links {
@@ -171,8 +183,10 @@
             width: 100%;
             height: 100%;
             z-index: -1;
+            background: linear-gradient(45deg, #0F172A 0%, #1E293B 100%);
         }
 
+        /* Если нет фоновой картинки, используем градиент */
         .hero-bg::before {
             content: '';
             position: absolute;
@@ -180,14 +194,10 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.7) 100%);
-        }
-
-        .hero-bg img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: brightness(0.7);
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 212, 170, 0.1) 0%, transparent 50%),
+                linear-gradient(45deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.9) 100%);
         }
 
         .hero-content {
@@ -207,6 +217,12 @@
             color: transparent;
         }
 
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+        }
+
         .hero-subtitle {
             font-size: 1.3rem;
             color: var(--light-gray);
@@ -219,6 +235,13 @@
             display: flex;
             gap: 3rem;
             margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
         }
 
         .stat-item {
@@ -286,12 +309,24 @@
             position: relative;
         }
 
+        @media (max-width: 768px) {
+            .section {
+                padding: 4rem 5%;
+            }
+        }
+
         .section-title {
             font-size: 2.8rem;
             font-weight: 700;
             text-align: center;
             margin-bottom: 1rem;
             position: relative;
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2.2rem;
+            }
         }
 
         .section-subtitle {
@@ -374,6 +409,10 @@
             width: 100%;
             height: 250px;
             overflow: hidden;
+            background: linear-gradient(45deg, #1E293B 0%, #334155 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .product-image img {
@@ -385,6 +424,20 @@
 
         .product-card:hover .product-image img {
             transform: scale(1.05);
+        }
+
+        /* Заглушка для отсутствующей картинки */
+        .image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            font-size: 1.1rem;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(45deg, rgba(30, 41, 59, 0.8) 0%, rgba(51, 65, 85, 0.8) 100%);
         }
 
         .product-content {
@@ -550,10 +603,6 @@
 
         /* Адаптивность */
         @media (max-width: 992px) {
-            .hero-title {
-                font-size: 3rem;
-            }
-            
             .nav-links {
                 position: fixed;
                 top: 70px;
@@ -577,25 +626,6 @@
             
             .mobile-menu-btn {
                 display: block;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.5rem;
-            }
-            
-            .section-title {
-                font-size: 2.2rem;
-            }
-            
-            .section {
-                padding: 4rem 5%;
-            }
-            
-            .hero-stats {
-                flex-direction: column;
-                gap: 1.5rem;
             }
         }
 
@@ -632,15 +662,18 @@
         .float {
             animation: float 6s ease-in-out infinite;
         }
+
+        /* Убираем favicon ошибку */
+        link[rel="icon"] {
+            display: none;
+        }
     </style>
 </head>
 <body>
     <!-- Навигация -->
     <nav class="navbar">
         <a href="#home" class="logo">
-            <!-- Логотип - убедитесь что файл logo.png лежит в папке images -->
-            <img src="images/logo.png" alt="RUS ITS" class="logo-img">
-            <span>RUS</span>ITS
+            <div class="logo-fallback">RUS ITS</div>
         </a>
         
         <ul class="nav-links" id="navLinks">
@@ -659,10 +692,7 @@
 
     <!-- Герой секция -->
     <section id="home" class="hero">
-        <div class="hero-bg">
-            <!-- Фон героя - убедитесь что файл hero-bg.jpg лежит в папке images -->
-            <img src="images/hero-bg.jpg" alt="Фон">
-        </div>
+        <div class="hero-bg"></div>
         
         <div class="hero-content fade-in">
             <h1 class="hero-title">Интеллектуальные Транспортные Системы</h1>
@@ -737,8 +767,9 @@
             <!-- Продукт 1: Метеостанция -->
             <div class="product-card fade-in">
                 <div class="product-image">
-                    <!-- Убедитесь что файл meteo.jpg лежит в папке images -->
-                    <img src="images/meteo.jpg" alt="Метеорологическая станция">
+                    <div class="image-placeholder">
+                        Метеорологические станции для мониторинга погодных условий
+                    </div>
                 </div>
                 <div class="product-content">
                     <span class="product-badge">НОВИНКА</span>
@@ -750,12 +781,13 @@
             <!-- Продукт 2: Светофоры -->
             <div class="product-card fade-in delay-1">
                 <div class="product-image">
-                    <!-- Убедитесь что файл svetofor.jpg лежит в папке images -->
-                    <img src="images/svetofor.jpg" alt="Умные светофоры">
+                    <div class="image-placeholder">
+                        Интеллектуальные системы адаптивного управления трафиком
+                    </div>
                 </div>
                 <div class="product-content">
                     <span class="product-badge">АДАПТИВНЫЕ</span>
-                    <h3 class="product-title">Интеллектуальные светофоры</h3>
+                    <h3 class="product-title">Умные светофоры</h3>
                     <p>Системы адаптивного управления трафиком с искусственным интеллектом.</p>
                 </div>
             </div>
@@ -763,8 +795,9 @@
             <!-- Продукт 3: Детекторы -->
             <div class="product-card fade-in delay-2">
                 <div class="product-image">
-                    <!-- Убедитесь что файл immitator.jpg лежит в папке images -->
-                    <img src="images/immitator.jpg" alt="Радиолокационные детекторы">
+                    <div class="image-placeholder">
+                        Радиолокационные системы для точного учета транспортных потоков
+                    </div>
                 </div>
                 <div class="product-content">
                     <span class="product-badge">ТОЧНОСТЬ 99%</span>
@@ -776,8 +809,9 @@
             <!-- Продукт 4: Проекционные переходы -->
             <div class="product-card fade-in delay-3">
                 <div class="product-image">
-                    <!-- Убедитесь что файл proeckt.jpg лежит в папке images -->
-                    <img src="images/proeckt.jpg" alt="Проекционные пешеходные переходы">
+                    <div class="image-placeholder">
+                        Системы безопасности с проекционной разметкой для пешеходных переходов
+                    </div>
                 </div>
                 <div class="product-content">
                     <span class="product-badge">ИННОВАЦИЯ</span>
@@ -905,11 +939,14 @@
         </div>
         
         <div class="copyright fade-in">
-            <p>© 2025 RUS ITS Интеллектуальные Транспортные Системы. Все права защищены.</p>
+            <p>© <span id="current-year">2025</span> RUS ITS Интеллектуальные Транспортные Системы. Все права защищены.</p>
         </div>
     </footer>
 
     <script>
+        // Устанавливаем текущий год
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
         // Мобильное меню
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const navLinks = document.getElementById('navLinks');
@@ -972,13 +1009,12 @@
             });
         });
         
-        // Обновляем год в футере
-        document.addEventListener('DOMContentLoaded', () => {
-            const yearSpan = document.querySelector('.copyright p');
-            if (yearSpan) {
-                yearSpan.innerHTML = yearSpan.innerHTML.replace('2025', new Date().getFullYear());
-            }
-        });
+        // Убираем ошибку рекламного блокировщика
+        window.onload = function() {
+            // Удаляем все потенциально проблемные элементы
+            const problematicElements = document.querySelectorAll('[class*="ad"], [id*="ad"], [style*="display: none"]');
+            problematicElements.forEach(el => el.remove());
+        };
     </script>
 </body>
 </html>
