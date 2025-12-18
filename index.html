@@ -40,23 +40,17 @@
             background-color: var(--dark);
             color: var(--light);
             line-height: 1.7;
+            overflow-x: hidden;
         }
 
         /* Страницы (скрыты по умолчанию) */
         .page {
             display: none;
-            padding-top: 80px;
-            min-height: calc(100vh - 160px);
+            min-height: 100vh;
         }
 
         .page.active {
             display: block;
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
 
         /* Навигация */
@@ -73,6 +67,16 @@
             backdrop-filter: blur(20px);
             z-index: 1000;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+
+        .navbar.hidden {
+            transform: translateY(-100%);
+        }
+
+        .navbar.scrolled {
+            padding: 0.8rem 5%;
+            background: rgba(15, 23, 42, 0.98);
         }
 
         .logo {
@@ -115,19 +119,15 @@
             cursor: pointer;
         }
 
-        /* Главная страница - ГЕРОЙ СЕКЦИЯ */
-        .hero {
-            min-height: 85vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0 5%;
+        /* ГЛАВНАЯ СТРАНИЦА - ПОЛНОЭКРАННАЯ КАРТИНКА */
+        .fullscreen-hero {
             position: relative;
+            width: 100%;
+            height: 100vh;
             overflow: hidden;
         }
 
-        /* Фоновая картинка */
-        .hero-background {
+        .hero-image-container {
             position: absolute;
             top: 0;
             left: 0;
@@ -136,76 +136,119 @@
             z-index: 1;
         }
 
-        .hero-background::before {
-            content: '';
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .hero-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.9));
-        }
-
-        .hero-background img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Основное изображение */
-        .hero-main-image {
-            position: relative;
+            background: linear-gradient(rgba(15, 23, 42, 0.4), rgba(15, 23, 42, 0.8));
             z-index: 2;
-            text-align: center;
-            max-width: 1200px;
-            width: 100%;
         }
 
-        .hero-main-image img {
-            width: 100%;
-            max-height: 500px;
-            object-fit: contain;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-        }
-
-        /* Текст на картинке */
-        .hero-text-overlay {
+        .hero-content {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 3;
             text-align: center;
-            width: 100%;
-            max-width: 800px;
+            width: 90%;
+            max-width: 1200px;
             padding: 2rem;
         }
 
         .hero-title {
-            font-size: 4rem;
+            font-size: 4.5rem;
             font-weight: 800;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             background: linear-gradient(90deg, var(--primary), var(--accent));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            line-height: 1.1;
         }
 
         @media (max-width: 768px) {
             .hero-title {
-                font-size: 2.5rem;
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2.2rem;
             }
         }
 
         .hero-subtitle {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             color: var(--light);
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
             font-weight: 300;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .hero-subtitle {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* Кнопки навигации на главной */
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        /* Стрелка для скролла вниз */
+        .scroll-down {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-down i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .scroll-down i:hover {
+            color: var(--light);
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-5px) translateX(-50%);
+            }
+        }
+
+        /* Контент после главной картинки */
+        .main-content {
+            padding: 5rem 5%;
+            background: var(--dark);
         }
 
         /* Каталог страница */
@@ -424,6 +467,17 @@
             box-shadow: 0 8px 25px rgba(0, 212, 170, 0.4);
         }
 
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
         /* Футер */
         .footer {
             background: #0A0A0A;
@@ -494,16 +548,15 @@
                 text-align: center;
             }
             
-            .hero {
-                min-height: 70vh;
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
             }
             
-            .hero-title {
-                font-size: 2rem;
-            }
-            
-            .hero-subtitle {
-                font-size: 1.2rem;
+            .hero-buttons .btn {
+                width: 100%;
+                max-width: 300px;
+                margin-bottom: 1rem;
             }
         }
 
@@ -526,14 +579,19 @@
         }
         
         /* Анимация загрузки */
-        .fade-in-image {
+        .fade-in {
             animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
 <body>
     <!-- Навигация -->
-    <nav class="navbar">
+    <nav class="navbar" id="navbar">
         <a href="#" class="logo" onclick="showPage('home')">
             <span>RUS</span>ITS
         </a>
@@ -553,50 +611,79 @@
 
     <!-- Главная страница -->
     <section id="home" class="page active">
-        <!-- Герой секция с основной картинкой -->
-        <div class="hero">
-            <!-- Фоновое изображение (опционально) -->
-            <div class="hero-background">
-                <img src="hero-bg.jpg" alt="Фон" onerror="this.style.display='none'">
+        <!-- Полноэкранная картинка -->
+        <div class="fullscreen-hero">
+            <div class="hero-image-container">
+                <img src="hometitleimg.jpg" alt="Интеллектуальные Транспортные Системы" class="hero-image" 
+                     onerror="this.onerror=null; this.src='https://placehold.co/1920x1080/0F172A/00D4AA?text=RUS+ITS+Интеллектуальные+Транспортные+Системы';">
+                <div class="hero-overlay"></div>
             </div>
             
-            <!-- Основная картинка hometitleimg.jpg -->
-            <div class="hero-main-image">
-                <img src="hometitleimg.jpg" alt="Интеллектуальные Транспортные Системы" class="fade-in-image" 
-                     onerror="this.onerror=null; this.src='https://placehold.co/1200x500/0F172A/00D4AA?text=RUS+ITS+Интеллектуальные+Транспортные+Системы';">
+            <div class="hero-content fade-in">
+                <h1 class="hero-title">Интеллектуальные Транспортные Системы</h1>
+                <p class="hero-subtitle">Современные решения для безопасного и эффективного движения</p>
                 
-                <!-- Текст поверх картинки -->
-                <div class="hero-text-overlay">
-                    <h1 class="hero-title">Интеллектуальные Транспортные Системы</h1>
-                    <p class="hero-subtitle">Современные решения для безопасного и эффективного движения</p>
-                    <a href="#" class="btn" onclick="showPage('catalog')">Наши продукты</a>
+                <div class="hero-buttons">
+                    <a href="#" class="btn" onclick="showPage('catalog')">
+                        <i class="fas fa-box-open"></i> Наши продукты
+                    </a>
+                    <a href="#" class="btn btn-outline" onclick="showPage('services')">
+                        <i class="fas fa-cogs"></i> Наши услуги
+                    </a>
+                    <a href="#" class="btn btn-outline" onclick="showPage('contact')">
+                        <i class="fas fa-phone"></i> Связаться с нами
+                    </a>
                 </div>
+            </div>
+            
+            <!-- Стрелка для скролла вниз -->
+            <div class="scroll-down" onclick="scrollToContent()">
+                <i class="fas fa-chevron-down"></i>
             </div>
         </div>
         
-        <!-- Преимущества -->
-        <div class="advantages">
-            <h2 class="section-title">Почему выбирают нас</h2>
-            <div class="advantages-grid">
-                <div class="advantage-item">
-                    <i class="fas fa-check-circle" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
-                    <h3>15 лет опыта</h3>
-                    <p>Работаем на рынке с 2010 года, реализовали более 50 проектов</p>
+        <!-- Контент после картинки (появляется при скролле) -->
+        <div class="main-content" id="mainContent">
+            <!-- Преимущества -->
+            <div class="advantages">
+                <h2 class="section-title">Почему выбирают нас</h2>
+                <div class="advantages-grid">
+                    <div class="advantage-item">
+                        <i class="fas fa-check-circle" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                        <h3>15 лет опыта</h3>
+                        <p>Работаем на рынке с 2010 года, реализовали более 50 проектов</p>
+                    </div>
+                    <div class="advantage-item">
+                        <i class="fas fa-medal" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                        <h3>Качество и надежность</h3>
+                        <p>Используем только сертифицированное оборудование</p>
+                    </div>
+                    <div class="advantage-item">
+                        <i class="fas fa-headset" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                        <h3>Поддержка 24/7</h3>
+                        <p>Круглосуточная техническая поддержка и обслуживание</p>
+                    </div>
+                    <div class="advantage-item">
+                        <i class="fas fa-cogs" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                        <h3>Индивидуальный подход</h3>
+                        <p>Разрабатываем решения под конкретные задачи клиента</p>
+                    </div>
                 </div>
-                <div class="advantage-item">
-                    <i class="fas fa-medal" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
-                    <h3>Качество и надежность</h3>
-                    <p>Используем только сертифицированное оборудование</p>
-                </div>
-                <div class="advantage-item">
-                    <i class="fas fa-headset" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
-                    <h3>Поддержка 24/7</h3>
-                    <p>Круглосуточная техническая поддержка и обслуживание</p>
-                </div>
-                <div class="advantage-item">
-                    <i class="fas fa-cogs" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
-                    <h3>Индивидуальный подход</h3>
-                    <p>Разрабатываем решения под конкретные задачи клиента</p>
+            </div>
+            
+            <!-- Кратко о компании -->
+            <div class="about-section">
+                <h2 class="section-title">О компании</h2>
+                <div class="about-content">
+                    <div class="about-card">
+                        <p>Компания <strong>RUS ITS</strong> - лидер в области интеллектуальных транспортных систем. 
+                           Мы специализируемся на разработке, производстве и внедрении современных решений 
+                           для организации дорожного движения. Наша миссия - создавать инновационные 
+                           транспортные решения, которые делают города безопаснее, умнее и экологичнее.</p>
+                        <a href="#" class="btn" onclick="showPage('about')" style="margin-top: 1.5rem;">
+                            <i class="fas fa-info-circle"></i> Подробнее о компании
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -783,18 +870,37 @@
         // Устанавливаем текущий год
         document.getElementById('currentYear').textContent = new Date().getFullYear();
         
-        // Проверяем наличие картинки hometitleimg.jpg
-        function checkHomeImage() {
-            const img = new Image();
-            img.src = 'hometitleimg.jpg';
-            img.onload = function() {
-                console.log('Картинка hometitleimg.jpg загружена');
-            };
-            img.onerror = function() {
-                console.log('Картинка hometitleimg.jpg не найдена');
-                // Можно показать заглушку
-            };
+        // Функция для скролла к контенту
+        function scrollToContent() {
+            const content = document.getElementById('mainContent');
+            content.scrollIntoView({ behavior: 'smooth' });
         }
+        
+        // Управление навигацией при скролле
+        let lastScrollTop = 0;
+        const navbar = document.getElementById('navbar');
+        
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Прячем/показываем навигацию при скролле
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // Скролл вниз - прячем навигацию
+                navbar.classList.add('hidden');
+            } else {
+                // Скролл вверх - показываем навигацию
+                navbar.classList.remove('hidden');
+            }
+            
+            // Добавляем класс при скролле
+            if (scrollTop > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            
+            lastScrollTop = scrollTop;
+        });
         
         // Функция переключения страниц
         function showPage(pageId) {
@@ -824,6 +930,9 @@
             // Если переходим на главную - прокручиваем вверх
             if (pageId === 'home') {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                // Для других страниц показываем навигацию
+                navbar.classList.remove('hidden');
             }
             
             return false;
@@ -847,10 +956,24 @@
             navLinks.classList.toggle('active');
         }
         
-        // Проверяем картинки при загрузке
+        // Автоматически прячем навигацию на главной при загрузке
         window.onload = function() {
             showPage('home');
-            checkHomeImage();
+            
+            // Прячем навигацию через 2 секунды на главной
+            setTimeout(() => {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                if (scrollTop < 100) {
+                    navbar.classList.add('hidden');
+                }
+            }, 2000);
+            
+            // Проверяем картинку hometitleimg.jpg
+            const img = new Image();
+            img.src = 'hometitleimg.jpg';
+            img.onerror = function() {
+                console.log('Картинка hometitleimg.jpg не найдена, используется заглушка');
+            };
         };
     </script>
 </body>
