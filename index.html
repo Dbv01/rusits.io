@@ -54,7 +54,7 @@
             display: block;
         }
 
-        /* Навигация - ИСПРАВЛЕНА */
+        /* Навигация */
         .navbar {
             position: fixed;
             top: 0;
@@ -155,7 +155,7 @@
             color: white;
         }
 
-        /* Мобильное меню - бургер */
+        /* Мобильное меню */
         .mobile-menu-btn {
             display: none;
             background: none;
@@ -177,7 +177,7 @@
             }
         }
 
-        /* ГЛАВНАЯ СТРАНИЦА - ИСПРАВЛЕНА */
+        /* ГЛАВНАЯ СТРАНИЦА */
         .fullscreen-hero {
             position: relative;
             width: 100%;
@@ -194,7 +194,6 @@
             z-index: 1;
         }
 
-        /* Разные картинки для десктопа и мобильных */
         .hero-image {
             width: 100%;
             height: 100%;
@@ -202,12 +201,10 @@
             object-position: center;
         }
 
-        /* Для десктопа */
         .desktop-hero {
             display: block;
         }
 
-        /* Для мобильных */
         .mobile-hero {
             display: none;
         }
@@ -361,7 +358,7 @@
             }
         }
 
-        /* Каталог страница - ИСПРАВЛЕНА */
+        /* Каталог страница */
         .catalog-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -411,7 +408,6 @@
             transform: scale(1.05);
         }
 
-        /* Заглушка для картинок */
         .image-placeholder {
             width: 100%;
             height: 100%;
@@ -478,7 +474,7 @@
             margin-bottom: 1rem;
         }
 
-        /* О компании страница - ИСПРАВЛЕНА */
+        /* О компании страница */
         .about-section {
             padding: 4rem 5%;
         }
@@ -508,7 +504,7 @@
             }
         }
 
-        /* Услуги страница - ИСПРАВЛЕНА */
+        /* Услуги страница */
         .services-section {
             padding: 4rem 5%;
         }
@@ -560,7 +556,7 @@
             margin-bottom: 1rem;
         }
 
-        /* Заголовки - ИСПРАВЛЕНЫ */
+        /* Заголовки */
         .section-title {
             font-size: 2.5rem;
             text-align: center;
@@ -590,7 +586,7 @@
             }
         }
 
-        /* Преимущества */
+        /* Преимущества - ИСПРАВЛЕНЫ */
         .advantages {
             padding: 4rem 5%;
             text-align: center;
@@ -816,11 +812,11 @@
             </div>
         </div>
         
-        <!-- Контент после картинки (появляется при скролле) -->
+        <!-- Контент после картинки -->
         <div class="main-content" id="mainContent">
-            <!-- Преимущества -->
+            <!-- Преимущества - ИСПРАВЛЕНО -->
             <div class="advantages">
-                <h2 class="section-title">Почему выбирают нас</h2>
+                <h2 class="section-title">Наши преимущества</h2>
                 <div class="advantages-grid">
                     <div class="advantage-item">
                         <i class="fas fa-check-circle" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
@@ -830,17 +826,17 @@
                     <div class="advantage-item">
                         <i class="fas fa-medal" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
                         <h3>Качество и надежность</h3>
-                        <p>Используем только сертифицированное оборудование</p>
+                        <p>Используем только сертифицированное оборудование и материалы</p>
                     </div>
                     <div class="advantage-item">
-                        <i class="fas fa-headset" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
-                        <h3>Поддержка 24/7</h3>
-                        <p>Круглосуточная техническая поддержка и обслуживание</p>
+                        <i class="fas fa-certificate" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                        <h3>Сертифицированные решения</h3>
+                        <p>Все наши продукты соответствуют российским и международным стандартам</p>
                     </div>
                     <div class="advantage-item">
                         <i class="fas fa-cogs" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
                         <h3>Индивидуальный подход</h3>
-                        <p>Разрабатываем решения под конкретные задачи клиента</p>
+                        <p>Разрабатываем решения под конкретные задачи каждого клиента</p>
                     </div>
                 </div>
             </div>
@@ -850,10 +846,10 @@
                 <h2 class="section-title">О компании</h2>
                 <div class="about-content">
                     <div class="about-card">
-                        <p>Компания <strong>RUS ITS</strong> - лидер в области интеллектуальных транспортных систем. 
+                        <p>Компания <strong>RUS ITS</strong> является лидером в области интеллектуальных транспортных систем. 
                            Мы специализируемся на разработке, производстве и внедрении современных решений 
                            для организации дорожного движения. Наша миссия - создавать инновационные 
-                           транспортные решения, которые делают города безопаснее, умнее и экологичнее.</p>
+                           транспортные решения, которые делают города безопаснее, умнее и эффективнее.</p>
                         <a href="#" class="btn" onclick="showPage('about')" style="margin-top: 1.5rem;">
                             <i class="fas fa-info-circle"></i> Подробнее о компании
                         </a>
@@ -863,20 +859,20 @@
         </div>
     </section>
 
-    <!-- О компании -->
+    <!-- О компании - ИСПРАВЛЕНО -->
     <section id="about" class="page">
         <div class="about-section">
             <h2 class="section-title">О компании</h2>
             
             <div class="about-content">
                 <div class="about-card">
-                    <h3>Наша история</h3>
-                    <p>Компания RUS ITS была основана в 2010 году и с тех пор является лидером в области интеллектуальных транспортных систем. Мы специализируемся на разработке, производстве и внедрении современных решений для организации дорожного движения.</p>
+                    <h3>RUS ITS</h3>
+                    <p>Компания RUS ITS является лидером в области интеллектуальных транспортных систем. Специализируемся на разработке, производстве и внедрении современных решений для организации дорожного движения и повышения безопасности на дорогах.</p>
                 </div>
                 
                 <div class="about-card">
                     <h3>Наша миссия</h3>
-                    <p>Создавать инновационные транспортные решения, которые делают города безопаснее, умнее и экологичнее. Мы стремимся улучшить качество жизни людей через современные технологии.</p>
+                    <p>Создавать инновационные транспортные решения, которые делают города безопаснее, умнее и эффективнее. Мы стремимся улучшить качество жизни людей через современные технологии организации дорожного движения.</p>
                 </div>
                 
                 <div class="about-card">
@@ -885,7 +881,7 @@
                        • Качество и надежность продукции<br>
                        • Профессионализм команды<br>
                        • Клиентоориентированный подход<br>
-                       • Социальная ответственность</p>
+                       • Ответственность перед обществом</p>
                 </div>
             </div>
         </div>
@@ -983,7 +979,7 @@
         </div>
     </section>
 
-    <!-- Контакты -->
+    <!-- Контакты - ИСПРАВЛЕНО -->
     <section id="contact" class="page">
         <div class="contact-section">
             <h2 class="section-title">Контакты</h2>
@@ -991,10 +987,9 @@
             <div class="contact-container">
                 <div class="contact-card">
                     <div class="contact-icon">
-                        <i class="fas fa-building"></i>
+                        <i class="fas fa-user-tie"></i>
                     </div>
-                    <h3>Наша компания</h3>
-                    <p>ИП Бурнаков Александр Климентьевич</p>
+                    <p style="font-size: 1.2rem; color: var(--light);">ИП Бурнаков Александр Климентьевич</p>
                 </div>
                 
                 <div class="contact-card">
@@ -1011,14 +1006,6 @@
                     </div>
                     <h3>Телефон</h3>
                     <p>+7 985 412 32 34</p>
-                </div>
-                
-                <div class="contact-card">
-                    <div class="contact-icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <h3>Режим работы</h3>
-                    <p>Пн-Пт: 9:00 - 18:00<br>Сб-Вс: выходные</p>
                 </div>
             </div>
         </div>
