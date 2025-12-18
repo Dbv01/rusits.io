@@ -29,7 +29,6 @@
             --gray: #64748B;
             --card-bg: rgba(255, 255, 255, 0.05);
             --gradient: linear-gradient(135deg, #00D4AA 0%, #2D5BFF 100%);
-            --gradient-light: linear-gradient(135deg, rgba(0, 212, 170, 0.1) 0%, rgba(45, 91, 255, 0.1) 100%);
         }
 
         html {
@@ -47,7 +46,7 @@
         /* Страницы */
         .page {
             display: none;
-            padding-top: 80px;
+            padding-top: 80px; /* Отступ для фиксированной навигации */
             min-height: 100vh;
         }
 
@@ -431,13 +430,9 @@
             color: var(--primary);
         }
 
-        /* КОНТАКТЫ - СОВРЕМЕННЫЙ ДИЗАЙН */
+        /* Контакты страница - ИСПРАВЛЕНА */
         .contact-section {
             padding: 4rem 5%;
-            min-height: calc(100vh - 80px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         @media (max-width: 768px) {
@@ -447,239 +442,36 @@
         }
 
         .contact-container {
-            max-width: 900px;
-            width: 100%;
-            margin: 0 auto;
-        }
-
-        .contact-header {
-            text-align: center;
-            margin-bottom: 4rem;
-            position: relative;
-        }
-
-        .contact-header::after {
-            content: '';
-            position: absolute;
-            bottom: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: var(--gradient);
-            border-radius: 2px;
-        }
-
-        .contact-title {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        @media (max-width: 768px) {
-            .contact-title {
-                font-size: 2.5rem;
-            }
-        }
-
-        .contact-subtitle {
-            font-size: 1.2rem;
-            color: var(--gray);
             max-width: 600px;
             margin: 0 auto;
-        }
-
-        /* Контактные карточки в одну строку */
-        .contact-cards-row {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin-bottom: 4rem;
-        }
-
-        @media (max-width: 768px) {
-            .contact-cards-row {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-        }
-
-        .contact-card-modern {
-            background: var(--gradient-light);
-            border-radius: 20px;
-            padding: 2.5rem;
-            text-align: center;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            overflow: hidden;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 250px;
-        }
-
-        .contact-card-modern::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.7s;
-        }
-
-        .contact-card-modern:hover::before {
-            left: 100%;
-        }
-
-        .contact-card-modern:hover {
-            transform: translateY(-10px);
-            border-color: var(--primary);
-            box-shadow: 0 20px 40px rgba(0, 212, 170, 0.15);
-        }
-
-        .contact-card-icon {
-            width: 80px;
-            height: 80px;
-            background: var(--gradient);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem;
-            font-size: 2rem;
-            color: white;
-            box-shadow: 0 10px 20px rgba(0, 212, 170, 0.3);
-            transition: transform 0.3s;
-        }
-
-        .contact-card-modern:hover .contact-card-icon {
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        .contact-card-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--light);
-        }
-
-        .contact-card-content {
-            font-size: 1.1rem;
-            color: var(--gray);
-            line-height: 1.6;
-        }
-
-        /* Блок с основными данными */
-        .contact-info-main {
             background: var(--card-bg);
-            border-radius: 20px;
             padding: 3rem;
-            text-align: center;
+            border-radius: 15px;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            overflow: hidden;
-            margin-top: 2rem;
         }
 
-        .contact-info-main::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--gradient);
+        @media (max-width: 768px) {
+            .contact-container {
+                padding: 1.5rem;
+            }
         }
 
-        .contact-ip {
-            font-size: 2rem;
-            font-weight: 700;
+        .contact-card {
             margin-bottom: 2rem;
-            color: var(--light);
-            position: relative;
-            display: inline-block;
-            padding-bottom: 1rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .contact-ip::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
-            background: var(--gradient);
-            border-radius: 2px;
+        .contact-card:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
         }
 
-        .contact-details {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .contact-detail-item {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 10px;
-            transition: all 0.3s;
-        }
-
-        .contact-detail-item:hover {
-            background: rgba(255, 255, 255, 0.05);
-            transform: translateX(5px);
-        }
-
-        .contact-detail-icon {
+        .contact-icon {
+            font-size: 2rem;
             color: var(--primary);
-            font-size: 1.2rem;
-            min-width: 30px;
-        }
-
-        .contact-detail-text {
-            font-size: 1.1rem;
-            color: var(--light);
-        }
-
-        /* Призыв к действию */
-        .contact-cta {
-            text-align: center;
-            margin-top: 4rem;
-            padding: 3rem;
-            background: var(--gradient-light);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .contact-cta-title {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            color: var(--light);
-        }
-
-        .contact-cta-text {
-            font-size: 1.1rem;
-            color: var(--gray);
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+            margin-bottom: 1rem;
         }
 
         /* О компании страница */
@@ -794,7 +586,7 @@
             }
         }
 
-        /* Преимущества */
+        /* Преимущества - ИСПРАВЛЕНЫ */
         .advantages {
             padding: 4rem 5%;
             text-align: center;
@@ -1022,7 +814,7 @@
         
         <!-- Контент после картинки -->
         <div class="main-content" id="mainContent">
-            <!-- Преимущества -->
+            <!-- Преимущества - ИСПРАВЛЕНО -->
             <div class="advantages">
                 <h2 class="section-title">Наши преимущества</h2>
                 <div class="advantages-grid">
@@ -1067,7 +859,7 @@
         </div>
     </section>
 
-    <!-- О компании -->
+    <!-- О компании - ИСПРАВЛЕНО -->
     <section id="about" class="page">
         <div class="about-section">
             <h2 class="section-title">О компании</h2>
@@ -1187,71 +979,33 @@
         </div>
     </section>
 
-    <!-- КОНТАКТЫ - ОБНОВЛЕННЫЙ ДИЗАЙН -->
+    <!-- Контакты - ИСПРАВЛЕНО -->
     <section id="contact" class="page">
         <div class="contact-section">
+            <h2 class="section-title">Контакты</h2>
+            
             <div class="contact-container">
-                <!-- Заголовок -->
-                <div class="contact-header">
-                    <h1 class="contact-title">Свяжитесь с нами</h1>
-                    <p class="contact-subtitle">Мы готовы обсудить ваш проект и предложить оптимальные решения</p>
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <p style="font-size: 1.2rem; color: var(--light);">ИП Бурнаков Александр Климентьевич</p>
                 </div>
                 
-                <!-- Три карточки в ряд -->
-                <div class="contact-cards-row">
-                    <div class="contact-card-modern">
-                        <div class="contact-card-icon">
-                            <i class="fas fa-user-tie"></i>
-                        </div>
-                        <h3 class="contact-card-title">Юридическое лицо</h3>
-                        <p class="contact-card-content">ИП Бурнаков Александр Климентьевич</p>
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
                     </div>
-                    
-                    <div class="contact-card-modern">
-                        <div class="contact-card-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <h3 class="contact-card-title">Электронная почта</h3>
-                        <p class="contact-card-content">Burnakov-Aleksandr@yandex.ru</p>
-                    </div>
-                    
-                    <div class="contact-card-modern">
-                        <div class="contact-card-icon">
-                            <i class="fas fa-phone"></i>
-                        </div>
-                        <h3 class="contact-card-title">Телефон</h3>
-                        <p class="contact-card-content">+7 985 412 32 34</p>
-                    </div>
+                    <h3>Электронная почта</h3>
+                    <p>Burnakov-Aleksandr@yandex.ru</p>
                 </div>
                 
-                <!-- Основная информация -->
-                <div class="contact-info-main">
-                    <h2 class="contact-ip">ИП Бурнаков Александр Климентьевич</h2>
-                    
-                    <div class="contact-details">
-                        <div class="contact-detail-item">
-                            <div class="contact-detail-icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div class="contact-detail-text">Burnakov-Aleksandr@yandex.ru</div>
-                        </div>
-                        
-                        <div class="contact-detail-item">
-                            <div class="contact-detail-icon">
-                                <i class="fas fa-phone"></i>
-                            </div>
-                            <div class="contact-detail-text">+7 985 412 32 34</div>
-                        </div>
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
                     </div>
-                </div>
-                
-                <!-- Призыв к действию -->
-                <div class="contact-cta">
-                    <h3 class="contact-cta-title">Готовы обсудить проект?</h3>
-                    <p class="contact-cta-text">Оставьте заявку или свяжитесь с нами любым удобным способом. Мы ответим в ближайшее время и предложим оптимальное решение для ваших задач.</p>
-                    <a href="mailto:Burnakov-Aleksandr@yandex.ru" class="btn">
-                        <i class="fas fa-paper-plane"></i> Написать на почту
-                    </a>
+                    <h3>Телефон</h3>
+                    <p>+7 985 412 32 34</p>
                 </div>
             </div>
         </div>
