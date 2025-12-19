@@ -701,7 +701,7 @@
             }
         }
 
-        /* Контакты страница - ОБНОВЛЕННАЯ */
+        /* Контакты страница - БЕЗОПАСНАЯ ФОРМА */
         .contact-section {
             padding: 4rem 5%;
         }
@@ -771,7 +771,7 @@
             margin-bottom: 1rem;
         }
 
-        /* Форма заявки - УЛУЧШЕННАЯ */
+        /* Форма заявки - БЕЗОПАСНАЯ */
         .form-group {
             margin-bottom: 1.5rem;
         }
@@ -797,7 +797,6 @@
             transition: all 0.3s;
         }
 
-        /* УЛУЧШЕННЫЙ SELECT - ТЕМНЫЙ ТЕКСТ */
         .form-group select {
             -webkit-appearance: none;
             -moz-appearance: none;
@@ -1570,7 +1569,7 @@
         </div>
     </section>
 
-    <!-- Контакты с ФОРМОЙ -->
+    <!-- Контакты с БЕЗОПАСНОЙ ФОРМОЙ -->
     <section id="contact" class="page">
         <!-- Хлебные крошки -->
         <div class="breadcrumbs">
@@ -1608,89 +1607,80 @@
                     </div>
                 </div>
                 
-                <!-- Правая колонка - форма заявки -->
+                <!-- Правая колонка - БЕЗОПАСНАЯ форма -->
                 <div class="contact-form-container animate-on-scroll">
                     <h3 style="margin-bottom: 1.5rem; color: var(--primary);" data-lang-ru="Отправить заявку" data-lang-en="Submit Request">Отправить заявку</h3>
                     
+                    <div id="formInstructions" style="background: rgba(0, 212, 170, 0.1); border-left: 4px solid var(--primary); padding: 1rem; margin-bottom: 1.5rem; border-radius: 5px;">
+                        <p style="color: var(--light); margin-bottom: 0.5rem;"><i class="fas fa-info-circle"></i> <strong>Как это работает:</strong></p>
+                        <p style="font-size: 0.9rem; margin-bottom: 0;">1. Заполните форму ниже<br>2. Нажмите "Открыть Telegram"<br>3. Отправьте готовое сообщение нашему боту</p>
+                    </div>
+                    
                     <div id="errorMessage" class="error-message"></div>
                     
-                    <div id="orderFormContainer">
-                        <form id="orderForm">
-                            <div class="form-group">
-                                <label for="orderName" data-lang-ru="Ваше имя *" data-lang-en="Your Name *">Ваше имя *</label>
-                                <input type="text" id="orderName" name="name" required 
-                                       placeholder="" 
-                                       data-lang-ru-placeholder="Иван Иванов"
-                                       data-lang-en-placeholder="John Smith">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="orderPhone" data-lang-ru="Телефон *" data-lang-en="Phone *">Телефон *</label>
-                                <input type="tel" id="orderPhone" name="phone" required 
-                                       placeholder=""
-                                       data-lang-ru-placeholder="+7 999 123-45-67"
-                                       data-lang-en-placeholder="+7 999 123-45-67">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="orderEmail" data-lang-ru="Email" data-lang-en="Email">Email</label>
-                                <input type="email" id="orderEmail" name="email" 
-                                       placeholder=""
-                                       data-lang-ru-placeholder="example@mail.ru"
-                                       data-lang-en-placeholder="example@mail.ru">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="orderProduct" data-lang-ru="Интересующий продукт/услуга *" data-lang-en="Product/Service of Interest *">Интересующий продукт/услуга *</label>
-                                <select id="orderProduct" name="product" required size="1">
-                                    <option value="" data-lang-ru="Выберите продукт или услугу" data-lang-en="Select product or service">Выберите продукт или услугу</option>
-                                    <optgroup label="Продукты" data-lang-ru-label="Продукты" data-lang-en-label="Products">
-                                        <option value="Метеорологические станции" data-lang-ru="Метеорологические станции" data-lang-en="Meteorological Stations">Метеорологические станции</option>
-                                        <option value="Умные светофоры" data-lang-ru="Умные светофоры" data-lang-en="Smart Traffic Lights">Умные светофоры</option>
-                                        <option value="Радиолокационные детекторы" data-lang-ru="Радиолокационные детекторы" data-lang-en="Radar Detectors">Радиолокационные детекторы</option>
-                                        <option value="Проекционные переходы" data-lang-ru="Проекционные переходы" data-lang-en="Projection Crossings">Проекционные переходы</option>
-                                    </optgroup>
-                                    <optgroup label="Услуги" data-lang-ru-label="Услуги" data-lang-en-label="Services">
-                                        <option value="Электромонтажные работы" data-lang-ru="Электромонтажные работы" data-lang-en="Electrical Installation">Электромонтажные работы</option>
-                                        <option value="Пуско-наладочные работы" data-lang-ru="Пуско-наладочные работы" data-lang-en="Commissioning Works">Пуско-наладочные работы</option>
-                                        <option value="Техническое обслуживание" data-lang-ru="Техническое обслуживание" data-lang-en="Technical Maintenance">Техническое обслуживание</option>
-                                        <option value="Поставка оборудования" data-lang-ru="Поставка оборудования" data-lang-en="Equipment Supply">Поставка оборудования</option>
-                                        <option value="Консультация" data-lang-ru="Консультация" data-lang-en="Consultation">Консультация</option>
-                                    </optgroup>
-                                    <option value="Другое" data-lang-ru="Другое" data-lang-en="Other">Другое</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="orderMessage" data-lang-ru="Комментарий или вопрос" data-lang-en="Comment or Question">Комментарий или вопрос</label>
-                                <textarea id="orderMessage" name="message" rows="4" 
-                                          placeholder=""
-                                          data-lang-ru-placeholder="Дополнительная информация, вопросы, пожелания..."
-                                          data-lang-en-placeholder="Additional information, questions, wishes..."></textarea>
-                            </div>
-                            
-                            <!-- Скрытое поле для времени начала заполнения -->
-                            <input type="hidden" id="startTime" name="startTime">
-                            
-                            <div class="form-group">
-                                <button type="submit" class="btn" style="width: 100%;" id="submitBtn">
-                                    <i class="fas fa-paper-plane"></i> <span data-lang-ru="Отправить заявку" data-lang-en="Submit Request">Отправить заявку</span>
-                                </button>
-                            </div>
-                            
-                            <div class="form-info">
-                                <p><small data-lang-ru="* Поля обязательные для заполнения" data-lang-en="* Required fields">* Поля обязательные для заполнения</small></p>
-                                <p><small data-lang-ru="После отправки формы вы будете переадресованы в Telegram для подтверждения" data-lang-en="After submitting the form you will be redirected to Telegram for confirmation">После отправки формы вы будете переадресованы в Telegram для подтверждения</small></p>
-                            </div>
-                        </form>
-                        
-                        <div id="successMessage" class="success-message" style="display: none;">
-                            <i class="fas fa-check-circle"></i>
-                            <h3 data-lang-ru="Заявка успешно отправлена!" data-lang-en="Request Successfully Submitted!">Заявка успешно отправлена!</h3>
-                            <p data-lang-ru="Спасибо за вашу заявку. Мы свяжемся с вами в ближайшее время." data-lang-en="Thank you for your request. We will contact you shortly.">Спасибо за вашу заявку. Мы свяжемся с вами в ближайшее время.</p>
-                            <p data-lang-ru="Сейчас вы будете перенаправлены в Telegram для отправки подтверждения..." data-lang-en="You will now be redirected to Telegram to send confirmation...">Сейчас вы будете перенаправлены в Telegram для отправки подтверждения...</p>
-                            <div class="loader" style="margin: 20px auto;"></div>
+                    <form id="safeOrderForm">
+                        <div class="form-group">
+                            <label for="orderName" data-lang-ru="Ваше имя *" data-lang-en="Your Name *">Ваше имя *</label>
+                            <input type="text" id="orderName" name="name" required 
+                                   placeholder="Иван Иванов">
                         </div>
+                        
+                        <div class="form-group">
+                            <label for="orderPhone" data-lang-ru="Телефон *" data-lang-en="Phone *">Телефон *</label>
+                            <input type="tel" id="orderPhone" name="phone" required 
+                                   placeholder="+7 999 123-45-67">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="orderEmail" data-lang-ru="Email" data-lang-en="Email">Email</label>
+                            <input type="email" id="orderEmail" name="email" 
+                                   placeholder="example@mail.ru">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="orderProduct" data-lang-ru="Интересующий продукт/услуга *" data-lang-en="Product/Service of Interest *">Интересующий продукт/услуга *</label>
+                            <select id="orderProduct" name="product" required>
+                                <option value="">Выберите продукт или услугу</option>
+                                <optgroup label="Продукты">
+                                    <option value="Метеорологические станции">Метеорологические станции</option>
+                                    <option value="Умные светофоры">Умные светофоры</option>
+                                    <option value="Радиолокационные детекторы">Радиолокационные детекторы</option>
+                                    <option value="Проекционные переходы">Проекционные переходы</option>
+                                </optgroup>
+                                <optgroup label="Услуги">
+                                    <option value="Электромонтажные работы">Электромонтажные работы</option>
+                                    <option value="Пуско-наладочные работы">Пуско-наладочные работы</option>
+                                    <option value="Техническое обслуживание">Техническое обслуживание</option>
+                                    <option value="Поставка оборудования">Поставка оборудования</option>
+                                    <option value="Консультация">Консультация</option>
+                                </optgroup>
+                                <option value="Другое">Другое</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="orderMessage" data-lang-ru="Комментарий или вопрос" data-lang-en="Comment or Question">Комментарий или вопрос</label>
+                            <textarea id="orderMessage" name="message" rows="4" 
+                                      placeholder="Дополнительная информация, вопросы, пожелания..."></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <button type="button" class="btn" style="width: 100%;" id="telegramBtn" onclick="sendToTelegram()">
+                                <i class="fab fa-telegram"></i> <span data-lang-ru="Открыть Telegram с заявкой" data-lang-en="Open Telegram with Request">Открыть Telegram с заявкой</span>
+                            </button>
+                        </div>
+                        
+                        <div class="form-info">
+                            <p><small data-lang-ru="* Поля обязательные для заполнения" data-lang-en="* Required fields">* Поля обязательные для заполнения</small></p>
+                            <p><small data-lang-ru="После заполнения формы откроется Telegram с готовым сообщением. Просто нажмите 'Отправить'" data-lang-en="After filling out the form, Telegram will open with a ready-made message. Just click 'Send'">После заполнения формы откроется Telegram с готовым сообщением. Просто нажмите "Отправить"</small></p>
+                        </div>
+                    </form>
+                    
+                    <div id="successMessage" class="success-message" style="display: none;">
+                        <i class="fas fa-check-circle"></i>
+                        <h3 data-lang-ru="Готово!" data-lang-en="Done!">Готово!</h3>
+                        <p data-lang-ru="Телеграм открыт с готовым сообщением. Просто нажмите 'Отправить' в телеграме." data-lang-en="Telegram is open with a ready-made message. Just click 'Send' in Telegram.">Телеграм открыт с готовым сообщением. Просто нажмите "Отправить" в телеграме.</p>
+                        <p data-lang-ru="После отправки мы получим вашу заявку в канале." data-lang-en="After sending, we will receive your request in the channel.">После отправки мы получим вашу заявку в канале.</p>
                     </div>
                 </div>
             </div>
@@ -1719,23 +1709,14 @@
     </div>
 
     <script>
-        // КОНФИГУРАЦИЯ TELEGRAM
-        const TELEGRAM_CONFIG = {
-            BOT_TOKEN: '8429994991:AAFMGPusNB_TtClU3xVSwVV71rn3hJvv1v8',
-            CHAT_ID: '-1003541277334'  // ВАШ ID КАНАЛА
-        };
-
-        // Защита от быстрых ботов
-        const MIN_FORM_TIME = 5;
+        // ВАЖНО: НИКАКИХ ТОКЕНОВ В КОДЕ!
+        // Только безопасная форма
         
         // Устанавливаем текущий год
         document.getElementById('currentYear').textContent = new Date().getFullYear();
         
         // Текущий язык
         let currentLanguage = 'ru';
-        
-        // Время начала заполнения формы
-        let formStartTime = null;
         
         // Функция смены языка
         function changeLanguage(lang) {
@@ -1746,26 +1727,6 @@
                 if (element.hasAttribute(`data-lang-${lang}`)) {
                     const newText = element.getAttribute(`data-lang-${lang}`);
                     element.textContent = newText;
-                }
-                
-                if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-                    const placeholderAttr = `data-lang-${lang}-placeholder`;
-                    if (element.hasAttribute(placeholderAttr)) {
-                        element.placeholder = element.getAttribute(placeholderAttr);
-                    }
-                }
-                
-                if (element.tagName === 'OPTGROUP') {
-                    const labelAttr = `data-lang-${lang}-label`;
-                    if (element.hasAttribute(labelAttr)) {
-                        element.label = element.getAttribute(labelAttr);
-                    }
-                }
-                
-                if (element.tagName === 'OPTION' && element.hasAttribute(`data-lang-${lang}`)) {
-                    if (!element.selected) {
-                        element.textContent = element.getAttribute(`data-lang-${lang}`);
-                    }
                 }
             });
             
@@ -1794,22 +1755,6 @@
             
             document.getElementById('langOptions').classList.remove('active');
             localStorage.setItem('preferredLanguage', lang);
-            updateFilterButtons(lang);
-        }
-        
-        // Обновить кнопки фильтров
-        function updateFilterButtons(lang) {
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            filterButtons.forEach(btn => {
-                if (btn.hasAttribute(`data-lang-${lang}`)) {
-                    btn.textContent = btn.getAttribute(`data-lang-${lang}`);
-                }
-            });
-            
-            const searchInput = document.getElementById('productSearch');
-            if (searchInput) {
-                searchInput.placeholder = lang === 'ru' ? 'Поиск продуктов...' : 'Search products...';
-            }
         }
         
         // Установить продукт в форме
@@ -1818,9 +1763,7 @@
             if (productSelect) {
                 for (let i = 0; i < productSelect.options.length; i++) {
                     const option = productSelect.options[i];
-                    if (option.text === productName || 
-                        (option.hasAttribute(`data-lang-ru`) && option.getAttribute(`data-lang-ru`) === productName) ||
-                        (option.hasAttribute(`data-lang-en`) && option.getAttribute(`data-lang-en`) === productName)) {
+                    if (option.text === productName) {
                         productSelect.selectedIndex = i;
                         break;
                     }
@@ -1828,7 +1771,7 @@
             }
         }
         
-        // Улучшенная валидация телефона
+        // Валидация телефона
         function validatePhone(phone) {
             let cleaned = phone.replace(/[^\d+]/g, '');
             
@@ -1842,37 +1785,17 @@
             return false;
         }
         
-        // Форматирование телефона для отображения
-        function formatPhone(phone) {
-            let cleaned = phone.replace(/[^\d+]/g, '');
-            
-            if (cleaned.startsWith('+7')) {
-                return cleaned.replace(/(\+7)(\d{3})(\d{3})(\d{2})(\d{2})/, '$1 $2 $3-$4-$5');
-            } else if (cleaned.startsWith('7')) {
-                cleaned = '+7' + cleaned.substring(1);
-                return cleaned.replace(/(\+7)(\d{3})(\d{3})(\d{2})(\d{2})/, '$1 $2 $3-$4-$5');
-            } else if (cleaned.startsWith('8')) {
-                return cleaned.replace(/(8)(\d{3})(\d{3})(\d{2})(\d{2})/, '$1 $2 $3-$4-$5');
-            }
-            
-            return phone;
-        }
-        
         // Обработчик ввода телефона
         document.addEventListener('DOMContentLoaded', function() {
             const phoneInput = document.getElementById('orderPhone');
             if (phoneInput) {
                 phoneInput.addEventListener('input', function(e) {
                     let value = e.target.value;
-                    let cursorPos = e.target.selectionStart;
-                    
                     let cleaned = value.replace(/[^\d+]/g, '');
                     
                     if (cleaned.length === 1) {
                         if (cleaned === '7') {
                             cleaned = '+7';
-                        } else if (cleaned === '8') {
-                            cleaned = '8';
                         }
                     } else if (cleaned.length === 2 && cleaned.startsWith('7')) {
                         cleaned = '+7' + cleaned.substring(1);
@@ -1894,13 +1817,100 @@
                     }
                     
                     e.target.value = formatted;
-                    
-                    setTimeout(() => {
-                        e.target.setSelectionRange(cursorPos, cursorPos);
-                    }, 0);
                 });
             }
         });
+        
+        // Основная функция отправки в Telegram
+        function sendToTelegram() {
+            // Собираем данные
+            const name = document.getElementById('orderName').value.trim();
+            const phone = document.getElementById('orderPhone').value.trim();
+            const email = document.getElementById('orderEmail').value.trim();
+            const product = document.getElementById('orderProduct').value;
+            const message = document.getElementById('orderMessage').value.trim();
+            
+            // Валидация
+            if (!name || !phone || !product) {
+                showError(currentLanguage === 'ru' 
+                    ? 'Пожалуйста, заполните все обязательные поля'
+                    : 'Please fill in all required fields');
+                return;
+            }
+            
+            if (!validatePhone(phone)) {
+                showError(currentLanguage === 'ru' 
+                    ? 'Пожалуйста, введите корректный номер телефона'
+                    : 'Please enter a valid phone number');
+                return;
+            }
+            
+            // Форматируем телефон для отображения
+            let formattedPhone = phone;
+            if (phone.startsWith('+7')) {
+                formattedPhone = phone.replace(/(\+7)(\d{3})(\d{3})(\d{2})(\d{2})/, '$1 $2 $3-$4-$5');
+            } else if (phone.startsWith('8')) {
+                formattedPhone = phone.replace(/(8)(\d{3})(\d{3})(\d{2})(\d{2})/, '$1 $2 $3-$4-$5');
+            }
+            
+            // Создаем сообщение для Telegram
+            const telegramMessage = currentLanguage === 'ru' 
+                ? `📋 *НОВАЯ ЗАЯВКА RUS ITS*%0A%0A` +
+                  `👤 *Имя:* ${encodeURIComponent(name)}%0A` +
+                  `📞 *Телефон:* ${encodeURIComponent(formattedPhone)}%0A` +
+                  (email ? `📧 *Email:* ${encodeURIComponent(email)}%0A` : '') +
+                  `🛒 *Продукт/услуга:* ${encodeURIComponent(product)}%0A` +
+                  (message ? `💬 *Сообщение:* ${encodeURIComponent(message)}%0A` : '') +
+                  `⏰ *Время:* ${encodeURIComponent(new Date().toLocaleString('ru-RU'))}%0A` +
+                  `🌐 *Сайт:* rusits.ru`
+                : `📋 *NEW REQUEST RUS ITS*%0A%0A` +
+                  `👤 *Name:* ${encodeURIComponent(name)}%0A` +
+                  `📞 *Phone:* ${encodeURIComponent(formattedPhone)}%0A` +
+                  (email ? `📧 *Email:* ${encodeURIComponent(email)}%0A` : '') +
+                  `🛒 *Product/Service:* ${encodeURIComponent(product)}%0A` +
+                  (message ? `💬 *Message:* ${encodeURIComponent(message)}%0A` : '') +
+                  `⏰ *Time:* ${encodeURIComponent(new Date().toLocaleString('en-US'))}%0A` +
+                  `🌐 *Website:* rusits.ru`;
+            
+            // URL для открытия Telegram с готовым сообщением
+            // ВАЖНО: Замените @RUSITS_BOT на username вашего бота
+            const telegramBotUsername = '@rus_its_zayavki_bot'; // Укажите username вашего бота
+            const telegramUrl = `https://t.me/share/url?url=https://t.me/${telegramBotUsername}&text=${telegramMessage}`;
+            
+            // Альтернативный вариант (открывает прямо в приложении Telegram)
+            // const telegramUrl = `tg://msg?text=${telegramMessage}`;
+            
+            // Показываем сообщение о переходе
+            document.getElementById('safeOrderForm').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
+            
+            // Через секунду открываем Telegram
+            setTimeout(() => {
+                // Открываем в новом окне (лучше для пользователей)
+                window.open(telegramUrl, '_blank', 'width=600,height=700');
+                
+                // Или пытаемся открыть в приложении
+                // window.location.href = `tg://resolve?domain=${telegramBotUsername.replace('@', '')}&start=${encodeURIComponent(telegramMessage)}`;
+            }, 1000);
+            
+            // Очищаем форму через 10 секунд
+            setTimeout(() => {
+                document.getElementById('safeOrderForm').reset();
+                document.getElementById('safeOrderForm').style.display = 'block';
+                document.getElementById('successMessage').style.display = 'none';
+            }, 10000);
+        }
+        
+        // Показать ошибку
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.classList.add('show');
+            
+            setTimeout(() => {
+                errorDiv.classList.remove('show');
+            }, 5000);
+        }
         
         // Фильтрация продуктов
         function filterProducts(category) {
@@ -1972,12 +1982,6 @@
             } else {
                 backToTop.classList.remove('visible');
             }
-            
-            const scrollProgress = document.getElementById('scrollProgress');
-            const windowScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (windowScroll / height) * 100;
-            scrollProgress.style.width = scrolled + '%';
         }
         
         // Прокрутка наверх
@@ -2054,18 +2058,6 @@
                 navbar.classList.remove('hidden');
             }
             
-            if (pageId === 'contact') {
-                formStartTime = Date.now();
-                document.getElementById('startTime').value = formStartTime;
-                
-                setTimeout(() => {
-                    const form = document.getElementById('orderForm');
-                    if (form) {
-                        form.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    }
-                }, 300);
-            }
-            
             setTimeout(checkScroll, 100);
             
             return false;
@@ -2100,42 +2092,6 @@
             isMenuOpen = false;
         }
         
-        // Свайп для мобильных
-        let touchStartX = 0;
-        let touchEndX = 0;
-        
-        document.addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].screenX;
-        });
-        
-        document.addEventListener('touchend', e => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        });
-        
-        function handleSwipe() {
-            const swipeThreshold = 50;
-            const swipeDistance = touchEndX - touchStartX;
-            
-            if (Math.abs(swipeDistance) > swipeThreshold) {
-                const pages = ['home', 'about', 'catalog', 'services', 'contact'];
-                const currentPage = document.querySelector('.page.active').id;
-                const currentIndex = pages.indexOf(currentPage);
-                
-                if (swipeDistance > 0 && currentIndex > 0) {
-                    showPage(pages[currentIndex - 1]);
-                } else if (swipeDistance < 0 && currentIndex < pages.length - 1) {
-                    showPage(pages[currentIndex + 1]);
-                }
-                
-                const swipeHint = document.getElementById('swipeHint');
-                swipeHint.style.display = 'block';
-                setTimeout(() => {
-                    swipeHint.style.display = 'none';
-                }, 3000);
-            }
-        }
-        
         // Языковое меню
         document.getElementById('langBtn').addEventListener('click', function(e) {
             e.stopPropagation();
@@ -2146,172 +2102,6 @@
             document.getElementById('langOptions').classList.remove('active');
         });
         
-        // Обработка формы заявки - ИСПРАВЛЕННАЯ ВЕРСИЯ
-        document.addEventListener('DOMContentLoaded', function() {
-            const orderForm = document.getElementById('orderForm');
-            
-            if (orderForm) {
-                // Запоминаем время начала заполнения
-                orderForm.addEventListener('focusin', function(e) {
-                    if (!formStartTime && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT')) {
-                        formStartTime = Date.now();
-                        document.getElementById('startTime').value = formStartTime;
-                    }
-                });
-                
-                // Обработка отправки формы
-                orderForm.addEventListener('submit', async function(e) {
-                    e.preventDefault();
-                    
-                    // Проверка времени заполнения
-                    const endTime = Date.now();
-                    const formTime = (endTime - formStartTime) / 1000;
-                    
-                    if (formTime < MIN_FORM_TIME) {
-                        showError(currentLanguage === 'ru' 
-                            ? `Пожалуйста, заполняйте форму не менее ${MIN_FORM_TIME} секунд. Слишком быстро!`
-                            : `Please fill out the form for at least ${MIN_FORM_TIME} seconds. Too fast!`);
-                        return;
-                    }
-                    
-                    // Собираем данные формы
-                    const formData = {
-                        name: document.getElementById('orderName').value.trim(),
-                        phone: document.getElementById('orderPhone').value.trim(),
-                        email: document.getElementById('orderEmail').value.trim(),
-                        product: document.getElementById('orderProduct').value,
-                        message: document.getElementById('orderMessage').value.trim(),
-                        time: new Date().toLocaleString('ru-RU'),
-                        formTime: Math.round(formTime) + ' сек'
-                    };
-                    
-                    // Валидация
-                    if (!formData.name || !formData.phone || !formData.product) {
-                        showError(currentLanguage === 'ru' 
-                            ? 'Пожалуйста, заполните все обязательные поля'
-                            : 'Please fill in all required fields');
-                        return;
-                    }
-                    
-                    // Валидация телефона
-                    if (!validatePhone(formData.phone)) {
-                        showError(currentLanguage === 'ru' 
-                            ? 'Пожалуйста, введите корректный номер телефона. Формат: +7 XXX XXX-XX-XX или 8 XXX XXX-XX-XX'
-                            : 'Please enter a valid phone number. Format: +7 XXX XXX-XX-XX or 8 XXX XXX-XX-XX');
-                        return;
-                    }
-                    
-                    // Показываем загрузку
-                    const submitBtn = document.getElementById('submitBtn');
-                    const originalText = submitBtn.innerHTML;
-                    submitBtn.innerHTML = '<span class="loader"></span> ' + (currentLanguage === 'ru' ? 'Отправка...' : 'Sending...');
-                    submitBtn.disabled = true;
-                    
-                    try {
-                        // Форматируем телефон
-                        const formattedPhone = formatPhone(formData.phone);
-                        
-                        // Формируем сообщение для Telegram
-                        const telegramMessage = currentLanguage === 'ru' 
-                            ? `📋 <b>НОВАЯ ЗАЯВКА С САЙТА RUS ITS</b>
-        
-👤 <b>Имя:</b> ${formData.name}
-📞 <b>Телефон:</b> ${formattedPhone}
-📧 <b>Email:</b> ${formData.email || 'Не указан'}
-🛒 <b>Продукт/услуга:</b> ${formData.product}
-💬 <b>Комментарий:</b> ${formData.message || 'Нет комментария'}
-        
-⏰ <b>Время заявки:</b> ${formData.time}
-⏱ <b>Время заполнения:</b> ${formData.formTime}`
-                            : `📋 <b>NEW REQUEST FROM RUS ITS WEBSITE</b>
-        
-👤 <b>Name:</b> ${formData.name}
-📞 <b>Phone:</b> ${formattedPhone}
-📧 <b>Email:</b> ${formData.email || 'Not specified'}
-🛒 <b>Product/Service:</b> ${formData.product}
-💬 <b>Comment:</b> ${formData.message || 'No comment'}
-        
-⏰ <b>Request time:</b> ${formData.time}
-⏱ <b>Form filling time:</b> ${formData.formTime}`;
-                        
-                        // ОТПРАВЛЯЕМ НАПРЯМУЮ В КАНАЛ TELEGRAM
-                        const response = await fetch(
-                            `https://api.telegram.org/bot${TELEGRAM_CONFIG.BOT_TOKEN}/sendMessage`,
-                            {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                },
-                                body: JSON.stringify({
-                                    chat_id: TELEGRAM_CONFIG.CHAT_ID,
-                                    text: telegramMessage,
-                                    parse_mode: 'HTML'
-                                })
-                            }
-                        );
-                        
-                        const result = await response.json();
-                        
-                        if (result.ok) {
-                            // УСПЕХ - показываем сообщение об успешной отправке
-                            document.getElementById('orderForm').style.display = 'none';
-                            document.getElementById('successMessage').style.display = 'block';
-                            
-                            // Меняем текст успешного сообщения
-                            document.querySelector('#successMessage p:nth-child(3)').textContent = 
-                                currentLanguage === 'ru' 
-                                    ? 'Заявка отправлена в Telegram. Мы свяжемся с вами в ближайшее время.'
-                                    : 'Request sent to Telegram. We will contact you shortly.';
-                            
-                            // Убираем текст про перенаправление в Telegram
-                            document.querySelector('#successMessage p:nth-child(4)').style.display = 'none';
-                            
-                            // Очищаем форму через 5 секунд
-                            setTimeout(() => {
-                                document.getElementById('successMessage').style.display = 'none';
-                                document.getElementById('orderForm').style.display = 'block';
-                                document.getElementById('orderForm').reset();
-                                submitBtn.innerHTML = originalText;
-                                submitBtn.disabled = false;
-                                formStartTime = null;
-                            }, 5000);
-                        } else {
-                            throw new Error(result.description || 'Ошибка Telegram');
-                        }
-                        
-                    } catch (error) {
-                        console.error('Ошибка отправки:', error);
-                        
-                        // ЗАПАСНОЙ ВАРИАНТ - если API не работает
-                        const backupMessage = currentLanguage === 'ru'
-                            ? `Заявка от ${formData.name}\nТелефон: ${formData.phone}\nПродукт: ${formData.product}`
-                            : `Request from ${formData.name}\nPhone: ${formData.phone}\nProduct: ${formData.product}`;
-                        
-                        const telegramUrl = `https://t.me/share/url?text=${encodeURIComponent(backupMessage)}`;
-                        
-                        // Показываем альтернативный вариант
-                        showError(currentLanguage === 'ru'
-                            ? 'Автоматическая отправка не сработала. Нажмите на ссылку чтобы отправить вручную: <a href="' + telegramUrl + '" target="_blank" style="color: var(--primary); text-decoration: underline;">Открыть Telegram</a>'
-                            : 'Automatic sending failed. Click the link to send manually: <a href="' + telegramUrl + '" target="_blank" style="color: var(--primary); text-decoration: underline;">Open Telegram</a>');
-                        
-                        submitBtn.innerHTML = originalText;
-                        submitBtn.disabled = false;
-                    }
-                });
-            }
-        });
-        
-        // Показать ошибку
-        function showError(message) {
-            const errorDiv = document.getElementById('errorMessage');
-            errorDiv.innerHTML = message;
-            errorDiv.classList.add('show');
-            
-            setTimeout(() => {
-                errorDiv.classList.remove('show');
-            }, 5000);
-        }
-        
         // Инициализация при загрузке
         window.onload = function() {
             showPage('home');
@@ -2319,43 +2109,12 @@
             const savedLang = localStorage.getItem('preferredLanguage') || 'ru';
             changeLanguage(savedLang);
             
-            if (window.innerWidth > 768) {
-                setTimeout(() => {
-                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                    if (scrollTop < 100) {
-                        navbar.classList.add('hidden');
-                    }
-                }, 2000);
-            }
-            
-            checkImages();
             checkScroll();
             
             setTimeout(() => {
                 document.getElementById('swipeHint').style.display = 'none';
             }, 5000);
         };
-        
-        // Проверяем наличие картинок
-        function checkImages() {
-            const images = [
-                {name: 'hometitleimg.jpg', type: 'desktop'},
-                {name: 'hometitleimgmobile.jpg', type: 'mobile'},
-                {name: 'meteo.jpg', type: 'product'},
-                {name: 'svetofor.jpg', type: 'product'},
-                {name: 'immitator.jpg', type: 'product'},
-                {name: 'proeckt.jpg', type: 'product'},
-                {name: 'logo_navbar.png', type: 'favicon'}
-            ];
-            
-            images.forEach(img => {
-                const image = new Image();
-                image.src = img.name;
-                image.onerror = function() {
-                    console.log(`Картинка ${img.name} не найдена`);
-                };
-            });
-        }
         
         // Закрытие меню при клике на ссылку
         document.querySelectorAll('.nav-link').forEach(link => {
