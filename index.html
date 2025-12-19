@@ -1297,6 +1297,22 @@
                 flex-direction: column;
             }
         }
+
+        /* Инструкция для мобильных */
+        .mobile-instruction {
+            display: none;
+            background: rgba(0, 136, 204, 0.1);
+            border: 1px solid var(--telegram);
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-instruction {
+                display: block;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1612,7 +1628,7 @@
         </div>
     </section>
 
-    <!-- Контакты с УЛУЧШЕННОЙ ФОРМОЙ -->
+    <!-- Контакты с ИСПРАВЛЕННОЙ ФОРМОЙ -->
     <section id="contact" class="page">
         <!-- Хлебные крошки -->
         <div class="breadcrumbs">
@@ -1659,19 +1675,35 @@
                     </div>
                 </div>
                 
-                <!-- Правая колонка - УЛУЧШЕННАЯ форма -->
+                <!-- Правая колонка - ИСПРАВЛЕННАЯ форма -->
                 <div class="contact-form-container animate-on-scroll">
                     <h3 style="margin-bottom: 1.5rem; color: var(--primary);" data-lang-ru="Отправить заявку через Telegram" data-lang-en="Submit Request via Telegram">Отправить заявку через Telegram</h3>
                     
-                    <div style="background: rgba(0, 136, 204, 0.1); border-left: 4px solid var(--telegram); padding: 1rem; margin-bottom: 1.5rem; border-radius: 5px;">
+                    <!-- Инструкция для мобильных -->
+                    <div class="mobile-instruction" id="mobileInstruction">
                         <p style="color: var(--light); margin-bottom: 0.5rem;">
                             <i class="fab fa-telegram"></i> 
-                            <strong data-lang-ru="Простой способ отправить заявку:" data-lang-en="Easy way to submit request:">Простой способ отправить заявку:</strong>
+                            <strong data-lang-ru="На мобильном устройстве:" data-lang-en="On mobile device:">На мобильном устройстве:</strong>
                         </p>
                         <p style="font-size: 0.9rem; margin-bottom: 0;">
                             1. <span data-lang-ru="Заполните форму" data-lang-en="Fill out the form">Заполните форму</span><br>
-                            2. <span data-lang-ru="Нажмите 'Открыть в Telegram'" data-lang-en="Click 'Open in Telegram'">Нажмите "Открыть в Telegram"</span><br>
-                            3. <span data-lang-ru="Отправьте готовое сообщение боту" data-lang-en="Send the ready message to the bot">Отправьте готовое сообщение боту</span>
+                            2. <span data-lang-ru="Нажмите 'Отправить в Telegram'" data-lang-en="Click 'Send to Telegram'">Нажмите "Отправить в Telegram"</span><br>
+                            3. <span data-lang-ru="Откроется приложение Telegram" data-lang-en="Telegram app will open">Откроется приложение Telegram</span><br>
+                            4. <span data-lang-ru="Нажмите 'Отправить'" data-lang-en="Click 'Send'">Нажмите "Отправить"</span>
+                        </p>
+                    </div>
+                    
+                    <!-- Инструкция для ПК -->
+                    <div style="background: rgba(0, 136, 204, 0.1); border-left: 4px solid var(--telegram); padding: 1rem; margin-bottom: 1.5rem; border-radius: 5px; display: none;" id="desktopInstruction">
+                        <p style="color: var(--light); margin-bottom: 0.5rem;">
+                            <i class="fab fa-telegram"></i> 
+                            <strong data-lang-ru="На компьютере:" data-lang-en="On computer:">На компьютере:</strong>
+                        </p>
+                        <p style="font-size: 0.9rem; margin-bottom: 0;">
+                            1. <span data-lang-ru="Заполните форму" data-lang-en="Fill out the form">Заполните форму</span><br>
+                            2. <span data-lang-ru="Нажмите 'Отправить в Telegram'" data-lang-en="Click 'Send to Telegram'">Нажмите "Отправить в Telegram"</span><br>
+                            3. <span data-lang-ru="Откроется Telegram Web" data-lang-en="Telegram Web will open">Откроется Telegram Web</span><br>
+                            4. <span data-lang-ru="Нажмите 'Отправить'" data-lang-en="Click 'Send'">Нажмите "Отправить"</span>
                         </p>
                     </div>
                     
@@ -1724,14 +1756,14 @@
                         </div>
                         
                         <div class="button-group">
-                            <button type="button" class="btn btn-telegram" onclick="openTelegramWithMessage()">
+                            <button type="button" class="btn btn-telegram" onclick="sendToTelegram()">
                                 <i class="fab fa-telegram"></i> 
-                                <span data-lang-ru="Открыть в Telegram" data-lang-en="Open in Telegram">Открыть в Telegram</span>
+                                <span data-lang-ru="Отправить в Telegram" data-lang-en="Send to Telegram">Отправить в Telegram</span>
                             </button>
                             
-                            <button type="button" class="btn btn-outline" onclick="copyMessageToClipboard()">
+                            <button type="button" class="btn btn-outline" onclick="copyAndOpenTelegram()">
                                 <i class="fas fa-copy"></i> 
-                                <span data-lang-ru="Скопировать текст" data-lang-en="Copy text">Скопировать текст</span>
+                                <span data-lang-ru="Скопировать и открыть" data-lang-en="Copy and Open">Скопировать и открыть</span>
                             </button>
                         </div>
                     </form>
@@ -1740,21 +1772,24 @@
                         <div class="success-message">
                             <i class="fas fa-check-circle"></i>
                             <h3 id="successTitle" data-lang-ru="Готово!" data-lang-en="Done!">Готово!</h3>
-                            <p id="successText" data-lang-ru="Сообщение подготовлено. Теперь отправьте его боту @rus_its_zayavki_bot" data-lang-en="Message prepared. Now send it to bot @rus_its_zayavki_bot">Сообщение подготовлено. Теперь отправьте его боту @rus_its_zayavki_bot</p>
+                            <p id="successText"></p>
                             
                             <div id="messagePreview" class="copy-text-area" style="display: none; text-align: left;"></div>
                             
                             <div style="margin-top: 2rem;">
-                                <p><small data-lang-ru="Не открылся Telegram?" data-lang-en="Telegram didn't open?">Не открылся Telegram?</small></p>
-                                <button class="btn btn-telegram" onclick="openTelegramWeb()" style="margin: 0.5rem;">
-                                    <i class="fab fa-telegram"></i> 
-                                    <span data-lang-ru="Открыть Telegram Web" data-lang-en="Open Telegram Web">Открыть Telegram Web</span>
-                                </button>
+                                <p><small id="instructionText"></small></p>
                                 
-                                <button class="btn btn-outline" onclick="copyMessageToClipboard()" style="margin: 0.5rem;">
-                                    <i class="fas fa-copy"></i> 
-                                    <span data-lang-ru="Скопировать еще раз" data-lang-en="Copy again">Скопировать еще раз</span>
-                                </button>
+                                <div class="button-group">
+                                    <button class="btn btn-telegram" onclick="openTelegramDirect()" id="openTelegramBtn">
+                                        <i class="fab fa-telegram"></i> 
+                                        <span data-lang-ru="Открыть Telegram" data-lang-en="Open Telegram">Открыть Telegram</span>
+                                    </button>
+                                    
+                                    <button class="btn btn-outline" onclick="copyMessageAgain()" id="copyAgainBtn">
+                                        <i class="fas fa-copy"></i> 
+                                        <span data-lang-ru="Скопировать еще раз" data-lang-en="Copy again">Скопировать еще раз</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1795,6 +1830,16 @@
         
         // Текущий язык
         let currentLanguage = 'ru';
+        
+        // Проверяем устройство
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        
+        // Показываем правильную инструкцию
+        if (isMobile) {
+            document.getElementById('mobileInstruction').style.display = 'block';
+        } else {
+            document.getElementById('desktopInstruction').style.display = 'block';
+        }
         
         // Функция смены языка
         function changeLanguage(lang) {
@@ -1981,8 +2026,19 @@
             return message;
         }
         
-        // Открыть Telegram с сообщением
-        function openTelegramWithMessage() {
+        // Получить plain text сообщения
+        function getPlainTextMessage(formData) {
+            const telegramMessage = createTelegramMessage(formData);
+            return decodeURIComponent(
+                telegramMessage
+                    .replace(/%0A/g, '\n')
+                    .replace(/\*/g, '')
+                    .replace(/_/g, '')
+            );
+        }
+        
+        // Отправить в Telegram (ОСНОВНАЯ ФУНКЦИЯ)
+        function sendToTelegram() {
             const formData = getFormData();
             
             if (!validateFormData(formData)) {
@@ -1990,6 +2046,7 @@
             }
             
             const telegramMessage = createTelegramMessage(formData);
+            const plainText = getPlainTextMessage(formData);
             
             // Показываем успешное сообщение
             document.getElementById('telegramOrderForm').style.display = 'none';
@@ -1997,51 +2054,63 @@
             
             // Показываем предпросмотр сообщения
             const messagePreview = document.getElementById('messagePreview');
-            const plainText = decodeURIComponent(
-                telegramMessage
-                    .replace(/%0A/g, '\n')
-                    .replace(/\*/g, '')
-                    .replace(/_/g, '')
-            );
             messagePreview.textContent = plainText;
             messagePreview.style.display = 'block';
             
-            // Пытаемся открыть Telegram App
-            const telegramAppUrl = `tg://resolve?domain=rus_its_zayavki_bot&start=${encodeURIComponent(telegramMessage)}`;
+            // Устанавливаем текст в зависимости от устройства и языка
+            if (isMobile) {
+                if (currentLanguage === 'ru') {
+                    document.getElementById('successTitle').textContent = 'Сообщение готово!';
+                    document.getElementById('successText').textContent = 'Текст заявки скопирован в буфер обмена. Сейчас откроется Telegram.';
+                    document.getElementById('instructionText').textContent = 'Нажмите "Открыть Telegram", затем вставьте текст в чат с ботом @rus_its_zayavki_bot и отправьте.';
+                    document.getElementById('openTelegramBtn').innerHTML = '<i class="fab fa-telegram"></i> Открыть приложение Telegram';
+                } else {
+                    document.getElementById('successTitle').textContent = 'Message ready!';
+                    document.getElementById('successText').textContent = 'Request text copied to clipboard. Telegram will open now.';
+                    document.getElementById('instructionText').textContent = 'Click "Open Telegram", then paste text in chat with bot @rus_its_zayavki_bot and send.';
+                    document.getElementById('openTelegramBtn').innerHTML = '<i class="fab fa-telegram"></i> Open Telegram App';
+                }
+            } else {
+                if (currentLanguage === 'ru') {
+                    document.getElementById('successTitle').textContent = 'Сообщение готово!';
+                    document.getElementById('successText').textContent = 'Текст заявки скопирован в буфер обмена.';
+                    document.getElementById('instructionText').textContent = 'Нажмите "Открыть Telegram", затем вставьте текст в чат с ботом @rus_its_zayavki_bot и отправьте.';
+                    document.getElementById('openTelegramBtn').innerHTML = '<i class="fab fa-telegram"></i> Открыть Telegram Web';
+                } else {
+                    document.getElementById('successTitle').textContent = 'Message ready!';
+                    document.getElementById('successText').textContent = 'Request text copied to clipboard.';
+                    document.getElementById('instructionText').textContent = 'Click "Open Telegram", then paste text in chat with bot @rus_its_zayavki_bot and send.';
+                    document.getElementById('openTelegramBtn').innerHTML = '<i class="fab fa-telegram"></i> Open Telegram Web';
+                }
+            }
             
-            // Создаем iframe для открытия в приложении
-            const iframe = document.createElement('iframe');
-            iframe.style.display = 'none';
-            iframe.src = telegramAppUrl;
-            document.body.appendChild(iframe);
+            // Копируем текст в буфер обмена
+            navigator.clipboard.writeText(plainText).then(() => {
+                console.log('Текст скопирован в буфер обмена');
+            }).catch(err => {
+                console.error('Ошибка копирования:', err);
+            });
             
-            // Через 500мс открываем в браузере (на случай если приложение не открылось)
+            // Автоматически открываем Telegram через 1 секунду
             setTimeout(() => {
-                iframe.remove();
-                window.open(`https://t.me/rus_its_zayavki_bot?start=${encodeURIComponent(telegramMessage)}`, '_blank');
-            }, 500);
+                openTelegramDirect();
+            }, 1000);
         }
         
-        // Копировать сообщение в буфер обмена
-        function copyMessageToClipboard() {
+        // Копировать и открыть Telegram
+        function copyAndOpenTelegram() {
             const formData = getFormData();
             
             if (!validateFormData(formData)) {
                 return;
             }
             
-            const telegramMessage = createTelegramMessage(formData);
-            const plainText = decodeURIComponent(
-                telegramMessage
-                    .replace(/%0A/g, '\n')
-                    .replace(/\*/g, '')
-                    .replace(/_/g, '')
-            );
+            const plainText = getPlainTextMessage(formData);
             
             // Копируем в буфер обмена
             navigator.clipboard.writeText(plainText).then(() => {
-                // Показываем уведомление
-                const button = event?.target || document.querySelector('.btn-outline');
+                // Меняем текст кнопки
+                const button = event.target;
                 const originalText = button.innerHTML;
                 
                 if (currentLanguage === 'ru') {
@@ -2057,32 +2126,17 @@
                     button.style.background = '';
                 }, 2000);
                 
-                // Показываем успешное сообщение если еще не показано
-                if (document.getElementById('telegramOrderForm').style.display !== 'none') {
-                    document.getElementById('telegramOrderForm').style.display = 'none';
-                    document.getElementById('successMessage').style.display = 'block';
-                    
-                    const messagePreview = document.getElementById('messagePreview');
-                    messagePreview.textContent = plainText;
-                    messagePreview.style.display = 'block';
-                    
-                    if (currentLanguage === 'ru') {
-                        document.getElementById('successTitle').textContent = 'Текст скопирован!';
-                        document.getElementById('successText').textContent = 'Теперь откройте Telegram, найдите бота @rus_its_zayavki_bot и отправьте ему скопированный текст';
-                    } else {
-                        document.getElementById('successTitle').textContent = 'Text copied!';
-                        document.getElementById('successText').textContent = 'Now open Telegram, find bot @rus_its_zayavki_bot and send him the copied text';
-                    }
-                }
+                // Открываем Telegram
+                openTelegramDirect();
             }).catch(err => {
                 showError(currentLanguage === 'ru' 
-                    ? 'Не удалось скопировать текст. Пожалуйста, скопируйте вручную.'
-                    : 'Failed to copy text. Please copy manually.');
+                    ? 'Не удалось скопировать текст'
+                    : 'Failed to copy text');
             });
         }
         
-        // Открыть Telegram Web
-        function openTelegramWeb() {
+        // Открыть Telegram напрямую
+        function openTelegramDirect() {
             const formData = getFormData();
             
             if (!validateFormData(formData)) {
@@ -2090,7 +2144,59 @@
             }
             
             const telegramMessage = createTelegramMessage(formData);
-            window.open(`https://web.telegram.org/k/#@rus_its_zayavki_bot`, '_blank');
+            
+            if (isMobile) {
+                // Для мобильных: открываем в приложении Telegram
+                const mobileUrl = `tg://resolve?domain=rus_its_zayavki_bot&start=${encodeURIComponent(telegramMessage)}`;
+                
+                // Пытаемся открыть в приложении
+                window.location.href = mobileUrl;
+                
+                // Если через 500мс не открылось, открываем в браузере
+                setTimeout(() => {
+                    if (document.hasFocus()) {
+                        window.open(`https://t.me/rus_its_zayavki_bot?start=${encodeURIComponent(telegramMessage)}`, '_blank');
+                    }
+                }, 500);
+            } else {
+                // Для ПК: открываем Telegram Web
+                window.open(`https://web.telegram.org/k/#@rus_its_zayavki_bot`, '_blank');
+            }
+        }
+        
+        // Копировать сообщение еще раз
+        function copyMessageAgain() {
+            const formData = getFormData();
+            
+            if (!validateFormData(formData)) {
+                return;
+            }
+            
+            const plainText = getPlainTextMessage(formData);
+            
+            // Копируем в буфер обмена
+            navigator.clipboard.writeText(plainText).then(() => {
+                // Меняем текст кнопки
+                const button = document.getElementById('copyAgainBtn');
+                const originalText = button.innerHTML;
+                
+                if (currentLanguage === 'ru') {
+                    button.innerHTML = '<i class="fas fa-check"></i> Скопировано!';
+                } else {
+                    button.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                }
+                
+                button.style.background = 'var(--success)';
+                
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.style.background = '';
+                }, 2000);
+            }).catch(err => {
+                showError(currentLanguage === 'ru' 
+                    ? 'Не удалось скопировать текст'
+                    : 'Failed to copy text');
+            });
         }
         
         // Показать ошибку
