@@ -34,6 +34,7 @@
             --gradient: linear-gradient(135deg, #00D4AA 0%, #2D5BFF 100%);
             --success: #10b981;
             --error: #ef4444;
+            --telegram: #0088cc;
         }
 
         html {
@@ -701,7 +702,7 @@
             }
         }
 
-        /* Контакты страница - БЕЗОПАСНАЯ ФОРМА */
+        /* Контакты страница */
         .contact-section {
             padding: 4rem 5%;
         }
@@ -771,7 +772,7 @@
             margin-bottom: 1rem;
         }
 
-        /* Форма заявки - БЕЗОПАСНАЯ */
+        /* Форма заявки */
         .form-group {
             margin-bottom: 1.5rem;
         }
@@ -1166,6 +1167,17 @@
             color: white;
         }
 
+        .btn-telegram {
+            background: var(--telegram);
+            color: white;
+        }
+
+        .btn-telegram:hover {
+            background: #0077b5;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 136, 204, 0.4);
+        }
+
         /* Футер */
         .footer {
             background: #0A0A0A;
@@ -1253,6 +1265,37 @@
         /* Убираем скролл при открытом меню на мобильных */
         body.menu-open {
             overflow: hidden;
+        }
+
+        /* Стили для копирования текста */
+        .copy-text-area {
+            background: rgba(0,0,0,0.1);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            font-size: 0.9em;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            word-break: break-all;
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .button-group .btn {
+            flex: 1;
+        }
+
+        @media (max-width: 768px) {
+            .button-group {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -1569,7 +1612,7 @@
         </div>
     </section>
 
-    <!-- Контакты с БЕЗОПАСНОЙ ФОРМОЙ -->
+    <!-- Контакты с УЛУЧШЕННОЙ ФОРМОЙ -->
     <section id="contact" class="page">
         <!-- Хлебные крошки -->
         <div class="breadcrumbs">
@@ -1605,20 +1648,36 @@
                         <h3 data-lang-ru="Телефон" data-lang-en="Phone">Телефон</h3>
                         <p>+7 985 412 32 34</p>
                     </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-telegram"></i>
+                        </div>
+                        <h3 data-lang-ru="Telegram бот для заявок" data-lang-en="Telegram bot for requests">Telegram бот для заявок</h3>
+                        <p>@rus_its_zayavki_bot</p>
+                        <p style="font-size: 0.9rem; color: var(--gray);" data-lang-ru="Нажмите на кнопку в форме чтобы открыть бота с готовой заявкой" data-lang-en="Click the button in the form to open the bot with a ready request">Нажмите на кнопку в форме чтобы открыть бота с готовой заявкой</p>
+                    </div>
                 </div>
                 
-                <!-- Правая колонка - БЕЗОПАСНАЯ форма -->
+                <!-- Правая колонка - УЛУЧШЕННАЯ форма -->
                 <div class="contact-form-container animate-on-scroll">
-                    <h3 style="margin-bottom: 1.5rem; color: var(--primary);" data-lang-ru="Отправить заявку" data-lang-en="Submit Request">Отправить заявку</h3>
+                    <h3 style="margin-bottom: 1.5rem; color: var(--primary);" data-lang-ru="Отправить заявку через Telegram" data-lang-en="Submit Request via Telegram">Отправить заявку через Telegram</h3>
                     
-                    <div id="formInstructions" style="background: rgba(0, 212, 170, 0.1); border-left: 4px solid var(--primary); padding: 1rem; margin-bottom: 1.5rem; border-radius: 5px;">
-                        <p style="color: var(--light); margin-bottom: 0.5rem;"><i class="fas fa-info-circle"></i> <strong>Как это работает:</strong></p>
-                        <p style="font-size: 0.9rem; margin-bottom: 0;">1. Заполните форму ниже<br>2. Нажмите "Открыть Telegram"<br>3. Отправьте готовое сообщение нашему боту</p>
+                    <div style="background: rgba(0, 136, 204, 0.1); border-left: 4px solid var(--telegram); padding: 1rem; margin-bottom: 1.5rem; border-radius: 5px;">
+                        <p style="color: var(--light); margin-bottom: 0.5rem;">
+                            <i class="fab fa-telegram"></i> 
+                            <strong data-lang-ru="Простой способ отправить заявку:" data-lang-en="Easy way to submit request:">Простой способ отправить заявку:</strong>
+                        </p>
+                        <p style="font-size: 0.9rem; margin-bottom: 0;">
+                            1. <span data-lang-ru="Заполните форму" data-lang-en="Fill out the form">Заполните форму</span><br>
+                            2. <span data-lang-ru="Нажмите 'Открыть в Telegram'" data-lang-en="Click 'Open in Telegram'">Нажмите "Открыть в Telegram"</span><br>
+                            3. <span data-lang-ru="Отправьте готовое сообщение боту" data-lang-en="Send the ready message to the bot">Отправьте готовое сообщение боту</span>
+                        </p>
                     </div>
                     
                     <div id="errorMessage" class="error-message"></div>
                     
-                    <form id="safeOrderForm">
+                    <form id="telegramOrderForm">
                         <div class="form-group">
                             <label for="orderName" data-lang-ru="Ваше имя *" data-lang-en="Your Name *">Ваше имя *</label>
                             <input type="text" id="orderName" name="name" required 
@@ -1640,21 +1699,21 @@
                         <div class="form-group">
                             <label for="orderProduct" data-lang-ru="Интересующий продукт/услуга *" data-lang-en="Product/Service of Interest *">Интересующий продукт/услуга *</label>
                             <select id="orderProduct" name="product" required>
-                                <option value="">Выберите продукт или услугу</option>
-                                <optgroup label="Продукты">
-                                    <option value="Метеорологические станции">Метеорологические станции</option>
-                                    <option value="Умные светофоры">Умные светофоры</option>
-                                    <option value="Радиолокационные детекторы">Радиолокационные детекторы</option>
-                                    <option value="Проекционные переходы">Проекционные переходы</option>
+                                <option value="" data-lang-ru="Выберите продукт или услугу" data-lang-en="Select product or service">Выберите продукт или услугу</option>
+                                <optgroup label="Продукты" data-lang-ru-label="Продукты" data-lang-en-label="Products">
+                                    <option value="Метеорологические станции" data-lang-ru="Метеорологические станции" data-lang-en="Meteorological Stations">Метеорологические станции</option>
+                                    <option value="Умные светофоры" data-lang-ru="Умные светофоры" data-lang-en="Smart Traffic Lights">Умные светофоры</option>
+                                    <option value="Радиолокационные детекторы" data-lang-ru="Радиолокационные детекторы" data-lang-en="Radar Detectors">Радиолокационные детекторы</option>
+                                    <option value="Проекционные переходы" data-lang-ru="Проекционные переходы" data-lang-en="Projection Crossings">Проекционные переходы</option>
                                 </optgroup>
-                                <optgroup label="Услуги">
-                                    <option value="Электромонтажные работы">Электромонтажные работы</option>
-                                    <option value="Пуско-наладочные работы">Пуско-наладочные работы</option>
-                                    <option value="Техническое обслуживание">Техническое обслуживание</option>
-                                    <option value="Поставка оборудования">Поставка оборудования</option>
-                                    <option value="Консультация">Консультация</option>
+                                <optgroup label="Услуги" data-lang-ru-label="Услуги" data-lang-en-label="Services">
+                                    <option value="Электромонтажные работы" data-lang-ru="Электромонтажные работы" data-lang-en="Electrical Installation">Электромонтажные работы</option>
+                                    <option value="Пуско-наладочные работы" data-lang-ru="Пуско-наладочные работы" data-lang-en="Commissioning Works">Пуско-наладочные работы</option>
+                                    <option value="Техническое обслуживание" data-lang-ru="Техническое обслуживание" data-lang-en="Technical Maintenance">Техническое обслуживание</option>
+                                    <option value="Поставка оборудования" data-lang-ru="Поставка оборудования" data-lang-en="Equipment Supply">Поставка оборудования</option>
+                                    <option value="Консультация" data-lang-ru="Консультация" data-lang-en="Consultation">Консультация</option>
                                 </optgroup>
-                                <option value="Другое">Другое</option>
+                                <option value="Другое" data-lang-ru="Другое" data-lang-en="Other">Другое</option>
                             </select>
                         </div>
                         
@@ -1664,23 +1723,45 @@
                                       placeholder="Дополнительная информация, вопросы, пожелания..."></textarea>
                         </div>
                         
-                        <div class="form-group">
-                            <button type="button" class="btn" style="width: 100%;" id="telegramBtn" onclick="sendToTelegram()">
-                                <i class="fab fa-telegram"></i> <span data-lang-ru="Открыть Telegram с заявкой" data-lang-en="Open Telegram with Request">Открыть Telegram с заявкой</span>
+                        <div class="button-group">
+                            <button type="button" class="btn btn-telegram" onclick="openTelegramWithMessage()">
+                                <i class="fab fa-telegram"></i> 
+                                <span data-lang-ru="Открыть в Telegram" data-lang-en="Open in Telegram">Открыть в Telegram</span>
                             </button>
-                        </div>
-                        
-                        <div class="form-info">
-                            <p><small data-lang-ru="* Поля обязательные для заполнения" data-lang-en="* Required fields">* Поля обязательные для заполнения</small></p>
-                            <p><small data-lang-ru="После заполнения формы откроется Telegram с готовым сообщением. Просто нажмите 'Отправить'" data-lang-en="After filling out the form, Telegram will open with a ready-made message. Just click 'Send'">После заполнения формы откроется Telegram с готовым сообщением. Просто нажмите "Отправить"</small></p>
+                            
+                            <button type="button" class="btn btn-outline" onclick="copyMessageToClipboard()">
+                                <i class="fas fa-copy"></i> 
+                                <span data-lang-ru="Скопировать текст" data-lang-en="Copy text">Скопировать текст</span>
+                            </button>
                         </div>
                     </form>
                     
-                    <div id="successMessage" class="success-message" style="display: none;">
-                        <i class="fas fa-check-circle"></i>
-                        <h3 data-lang-ru="Готово!" data-lang-en="Done!">Готово!</h3>
-                        <p data-lang-ru="Телеграм открыт с готовым сообщением. Просто нажмите 'Отправить' в телеграме." data-lang-en="Telegram is open with a ready-made message. Just click 'Send' in Telegram.">Телеграм открыт с готовым сообщением. Просто нажмите "Отправить" в телеграме.</p>
-                        <p data-lang-ru="После отправки мы получим вашу заявку в канале." data-lang-en="After sending, we will receive your request in the channel.">После отправки мы получим вашу заявку в канале.</p>
+                    <div id="successMessage" style="display: none;">
+                        <div class="success-message">
+                            <i class="fas fa-check-circle"></i>
+                            <h3 id="successTitle" data-lang-ru="Готово!" data-lang-en="Done!">Готово!</h3>
+                            <p id="successText" data-lang-ru="Сообщение подготовлено. Теперь отправьте его боту @rus_its_zayavki_bot" data-lang-en="Message prepared. Now send it to bot @rus_its_zayavki_bot">Сообщение подготовлено. Теперь отправьте его боту @rus_its_zayavki_bot</p>
+                            
+                            <div id="messagePreview" class="copy-text-area" style="display: none; text-align: left;"></div>
+                            
+                            <div style="margin-top: 2rem;">
+                                <p><small data-lang-ru="Не открылся Telegram?" data-lang-en="Telegram didn't open?">Не открылся Telegram?</small></p>
+                                <button class="btn btn-telegram" onclick="openTelegramWeb()" style="margin: 0.5rem;">
+                                    <i class="fab fa-telegram"></i> 
+                                    <span data-lang-ru="Открыть Telegram Web" data-lang-en="Open Telegram Web">Открыть Telegram Web</span>
+                                </button>
+                                
+                                <button class="btn btn-outline" onclick="copyMessageToClipboard()" style="margin: 0.5rem;">
+                                    <i class="fas fa-copy"></i> 
+                                    <span data-lang-ru="Скопировать еще раз" data-lang-en="Copy again">Скопировать еще раз</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-info">
+                        <p><small data-lang-ru="* Поля обязательные для заполнения" data-lang-en="* Required fields">* Поля обязательные для заполнения</small></p>
+                        <p><small data-lang-ru="Ваша заявка будет отправлена в наш Telegram канал для обработки" data-lang-en="Your request will be sent to our Telegram channel for processing">Ваша заявка будет отправлена в наш Telegram канал для обработки</small></p>
                     </div>
                 </div>
             </div>
@@ -1709,9 +1790,6 @@
     </div>
 
     <script>
-        // ВАЖНО: НИКАКИХ ТОКЕНОВ В КОДЕ!
-        // Только безопасная форма
-        
         // Устанавливаем текущий год
         document.getElementById('currentYear').textContent = new Date().getFullYear();
         
@@ -1727,6 +1805,26 @@
                 if (element.hasAttribute(`data-lang-${lang}`)) {
                     const newText = element.getAttribute(`data-lang-${lang}`);
                     element.textContent = newText;
+                }
+                
+                if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                    const placeholderAttr = `data-lang-${lang}-placeholder`;
+                    if (element.hasAttribute(placeholderAttr)) {
+                        element.placeholder = element.getAttribute(placeholderAttr);
+                    }
+                }
+                
+                if (element.tagName === 'OPTGROUP') {
+                    const labelAttr = `data-lang-${lang}-label`;
+                    if (element.hasAttribute(labelAttr)) {
+                        element.label = element.getAttribute(labelAttr);
+                    }
+                }
+                
+                if (element.tagName === 'OPTION' && element.hasAttribute(`data-lang-${lang}`)) {
+                    if (!element.selected) {
+                        element.textContent = element.getAttribute(`data-lang-${lang}`);
+                    }
                 }
             });
             
@@ -1821,84 +1919,178 @@
             }
         });
         
-        // Основная функция отправки в Telegram
-        function sendToTelegram() {
-            // Собираем данные
-            const name = document.getElementById('orderName').value.trim();
-            const phone = document.getElementById('orderPhone').value.trim();
-            const email = document.getElementById('orderEmail').value.trim();
-            const product = document.getElementById('orderProduct').value;
-            const message = document.getElementById('orderMessage').value.trim();
-            
-            // Валидация
-            if (!name || !phone || !product) {
+        // Получить данные из формы
+        function getFormData() {
+            return {
+                name: document.getElementById('orderName').value.trim(),
+                phone: document.getElementById('orderPhone').value.trim(),
+                email: document.getElementById('orderEmail').value.trim(),
+                product: document.getElementById('orderProduct').value,
+                message: document.getElementById('orderMessage').value.trim()
+            };
+        }
+        
+        // Проверить данные формы
+        function validateFormData(formData) {
+            if (!formData.name || !formData.phone || !formData.product) {
                 showError(currentLanguage === 'ru' 
                     ? 'Пожалуйста, заполните все обязательные поля'
                     : 'Please fill in all required fields');
-                return;
+                return false;
             }
             
-            if (!validatePhone(phone)) {
+            if (!validatePhone(formData.phone)) {
                 showError(currentLanguage === 'ru' 
                     ? 'Пожалуйста, введите корректный номер телефона'
                     : 'Please enter a valid phone number');
-                return;
+                return false;
             }
             
-            // Форматируем телефон для отображения
-            let formattedPhone = phone;
-            if (phone.startsWith('+7')) {
-                formattedPhone = phone.replace(/(\+7)(\d{3})(\d{3})(\d{2})(\d{2})/, '$1 $2 $3-$4-$5');
-            } else if (phone.startsWith('8')) {
-                formattedPhone = phone.replace(/(8)(\d{3})(\d{3})(\d{2})(\d{2})/, '$1 $2 $3-$4-$5');
+            return true;
+        }
+        
+        // Создать сообщение для Telegram
+        function createTelegramMessage(formData) {
+            // Форматируем телефон
+            let formattedPhone = formData.phone;
+            if (formData.phone.startsWith('+7')) {
+                formattedPhone = formData.phone.replace(/(\+7)(\d{3})(\d{3})(\d{2})(\d{2})/, '$1 $2 $3-$4-$5');
+            } else if (formData.phone.startsWith('8')) {
+                formattedPhone = formData.phone.replace(/(8)(\d{3})(\d{3})(\d{2})(\d{2})/, '$1 $2 $3-$4-$5');
             }
             
-            // Создаем сообщение для Telegram
-            const telegramMessage = currentLanguage === 'ru' 
+            // Создаем сообщение
+            const message = currentLanguage === 'ru' 
                 ? `📋 *НОВАЯ ЗАЯВКА RUS ITS*%0A%0A` +
-                  `👤 *Имя:* ${encodeURIComponent(name)}%0A` +
+                  `👤 *Имя:* ${encodeURIComponent(formData.name)}%0A` +
                   `📞 *Телефон:* ${encodeURIComponent(formattedPhone)}%0A` +
-                  (email ? `📧 *Email:* ${encodeURIComponent(email)}%0A` : '') +
-                  `🛒 *Продукт/услуга:* ${encodeURIComponent(product)}%0A` +
-                  (message ? `💬 *Сообщение:* ${encodeURIComponent(message)}%0A` : '') +
+                  (formData.email ? `📧 *Email:* ${encodeURIComponent(formData.email)}%0A` : '') +
+                  `🛒 *Продукт/услуга:* ${encodeURIComponent(formData.product)}%0A` +
+                  (formData.message ? `💬 *Сообщение:* ${encodeURIComponent(formData.message)}%0A` : '') +
                   `⏰ *Время:* ${encodeURIComponent(new Date().toLocaleString('ru-RU'))}%0A` +
                   `🌐 *Сайт:* rusits.ru`
                 : `📋 *NEW REQUEST RUS ITS*%0A%0A` +
-                  `👤 *Name:* ${encodeURIComponent(name)}%0A` +
+                  `👤 *Name:* ${encodeURIComponent(formData.name)}%0A` +
                   `📞 *Phone:* ${encodeURIComponent(formattedPhone)}%0A` +
-                  (email ? `📧 *Email:* ${encodeURIComponent(email)}%0A` : '') +
-                  `🛒 *Product/Service:* ${encodeURIComponent(product)}%0A` +
-                  (message ? `💬 *Message:* ${encodeURIComponent(message)}%0A` : '') +
+                  (formData.email ? `📧 *Email:* ${encodeURIComponent(formData.email)}%0A` : '') +
+                  `🛒 *Product/Service:* ${encodeURIComponent(formData.product)}%0A` +
+                  (formData.message ? `💬 *Message:* ${encodeURIComponent(formData.message)}%0A` : '') +
                   `⏰ *Time:* ${encodeURIComponent(new Date().toLocaleString('en-US'))}%0A` +
                   `🌐 *Website:* rusits.ru`;
             
-            // URL для открытия Telegram с готовым сообщением
-            // ВАЖНО: Замените @RUSITS_BOT на username вашего бота
-            const telegramBotUsername = '@rus_its_zayavki_bot'; // Укажите username вашего бота
-            const telegramUrl = `https://t.me/share/url?url=https://t.me/${telegramBotUsername}&text=${telegramMessage}`;
+            return message;
+        }
+        
+        // Открыть Telegram с сообщением
+        function openTelegramWithMessage() {
+            const formData = getFormData();
             
-            // Альтернативный вариант (открывает прямо в приложении Telegram)
-            // const telegramUrl = `tg://msg?text=${telegramMessage}`;
+            if (!validateFormData(formData)) {
+                return;
+            }
             
-            // Показываем сообщение о переходе
-            document.getElementById('safeOrderForm').style.display = 'none';
+            const telegramMessage = createTelegramMessage(formData);
+            
+            // Показываем успешное сообщение
+            document.getElementById('telegramOrderForm').style.display = 'none';
             document.getElementById('successMessage').style.display = 'block';
             
-            // Через секунду открываем Telegram
-            setTimeout(() => {
-                // Открываем в новом окне (лучше для пользователей)
-                window.open(telegramUrl, '_blank', 'width=600,height=700');
-                
-                // Или пытаемся открыть в приложении
-                // window.location.href = `tg://resolve?domain=${telegramBotUsername.replace('@', '')}&start=${encodeURIComponent(telegramMessage)}`;
-            }, 1000);
+            // Показываем предпросмотр сообщения
+            const messagePreview = document.getElementById('messagePreview');
+            const plainText = decodeURIComponent(
+                telegramMessage
+                    .replace(/%0A/g, '\n')
+                    .replace(/\*/g, '')
+                    .replace(/_/g, '')
+            );
+            messagePreview.textContent = plainText;
+            messagePreview.style.display = 'block';
             
-            // Очищаем форму через 10 секунд
+            // Пытаемся открыть Telegram App
+            const telegramAppUrl = `tg://resolve?domain=rus_its_zayavki_bot&start=${encodeURIComponent(telegramMessage)}`;
+            
+            // Создаем iframe для открытия в приложении
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = telegramAppUrl;
+            document.body.appendChild(iframe);
+            
+            // Через 500мс открываем в браузере (на случай если приложение не открылось)
             setTimeout(() => {
-                document.getElementById('safeOrderForm').reset();
-                document.getElementById('safeOrderForm').style.display = 'block';
-                document.getElementById('successMessage').style.display = 'none';
-            }, 10000);
+                iframe.remove();
+                window.open(`https://t.me/rus_its_zayavki_bot?start=${encodeURIComponent(telegramMessage)}`, '_blank');
+            }, 500);
+        }
+        
+        // Копировать сообщение в буфер обмена
+        function copyMessageToClipboard() {
+            const formData = getFormData();
+            
+            if (!validateFormData(formData)) {
+                return;
+            }
+            
+            const telegramMessage = createTelegramMessage(formData);
+            const plainText = decodeURIComponent(
+                telegramMessage
+                    .replace(/%0A/g, '\n')
+                    .replace(/\*/g, '')
+                    .replace(/_/g, '')
+            );
+            
+            // Копируем в буфер обмена
+            navigator.clipboard.writeText(plainText).then(() => {
+                // Показываем уведомление
+                const button = event?.target || document.querySelector('.btn-outline');
+                const originalText = button.innerHTML;
+                
+                if (currentLanguage === 'ru') {
+                    button.innerHTML = '<i class="fas fa-check"></i> Скопировано!';
+                } else {
+                    button.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                }
+                
+                button.style.background = 'var(--success)';
+                
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.style.background = '';
+                }, 2000);
+                
+                // Показываем успешное сообщение если еще не показано
+                if (document.getElementById('telegramOrderForm').style.display !== 'none') {
+                    document.getElementById('telegramOrderForm').style.display = 'none';
+                    document.getElementById('successMessage').style.display = 'block';
+                    
+                    const messagePreview = document.getElementById('messagePreview');
+                    messagePreview.textContent = plainText;
+                    messagePreview.style.display = 'block';
+                    
+                    if (currentLanguage === 'ru') {
+                        document.getElementById('successTitle').textContent = 'Текст скопирован!';
+                        document.getElementById('successText').textContent = 'Теперь откройте Telegram, найдите бота @rus_its_zayavki_bot и отправьте ему скопированный текст';
+                    } else {
+                        document.getElementById('successTitle').textContent = 'Text copied!';
+                        document.getElementById('successText').textContent = 'Now open Telegram, find bot @rus_its_zayavki_bot and send him the copied text';
+                    }
+                }
+            }).catch(err => {
+                showError(currentLanguage === 'ru' 
+                    ? 'Не удалось скопировать текст. Пожалуйста, скопируйте вручную.'
+                    : 'Failed to copy text. Please copy manually.');
+            });
+        }
+        
+        // Открыть Telegram Web
+        function openTelegramWeb() {
+            const formData = getFormData();
+            
+            if (!validateFormData(formData)) {
+                return;
+            }
+            
+            const telegramMessage = createTelegramMessage(formData);
+            window.open(`https://web.telegram.org/k/#@rus_its_zayavki_bot`, '_blank');
         }
         
         // Показать ошибку
@@ -2056,6 +2248,15 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             } else {
                 navbar.classList.remove('hidden');
+            }
+            
+            // Если переходим на страницу контактов, сбрасываем форму
+            if (pageId === 'contact') {
+                setTimeout(() => {
+                    document.getElementById('telegramOrderForm').style.display = 'block';
+                    document.getElementById('successMessage').style.display = 'none';
+                    document.getElementById('errorMessage').classList.remove('show');
+                }, 100);
             }
             
             setTimeout(checkScroll, 100);
