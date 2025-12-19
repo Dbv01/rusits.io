@@ -807,25 +807,22 @@
             background-position: right 1rem center;
             background-size: 1em;
             padding-right: 2.5rem;
-            color: var(--dark) !important; /* ТЕМНЫЙ ТЕКСТ! */
-            background-color: white !important; /* БЕЛЫЙ ФОН! */
+            color: var(--dark) !important;
+            background-color: white !important;
         }
 
-        /* Для опций внутри select */
         .form-group select option {
             color: var(--dark) !important;
             background-color: white !important;
             padding: 10px;
         }
 
-        /* Для optgroup */
         .form-group select optgroup {
             color: var(--gray);
             font-weight: 600;
             background-color: #f0f0f0;
         }
 
-        /* Для опций при наведении */
         .form-group select option:hover,
         .form-group select option:focus,
         .form-group select option:checked {
@@ -1724,7 +1721,8 @@
     <script>
         // КОНФИГУРАЦИЯ TELEGRAM
         const TELEGRAM_CONFIG = {
-            CHAT_ID: '-1003541277334'  
+            BOT_TOKEN: '8429994991:AAFMGPusNB_TtClU3xVSwVV71rn3hJvv1v8',
+            CHAT_ID: '-1003541277334'  // ВАШ ID КАНАЛА
         };
 
         // Защита от быстрых ботов
@@ -1739,20 +1737,17 @@
         // Время начала заполнения формы
         let formStartTime = null;
         
-        // Функция смены языка (УЛУЧШЕННАЯ)
+        // Функция смены языка
         function changeLanguage(lang) {
             currentLanguage = lang;
             document.getElementById('currentLang').textContent = lang.toUpperCase();
             
-            // Обновляем все элементы с переводами
             document.querySelectorAll('[data-lang-ru], [data-lang-en]').forEach(element => {
-                // Для обычных элементов
                 if (element.hasAttribute(`data-lang-${lang}`)) {
                     const newText = element.getAttribute(`data-lang-${lang}`);
                     element.textContent = newText;
                 }
                 
-                // Для input/textarea placeholder
                 if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
                     const placeholderAttr = `data-lang-${lang}-placeholder`;
                     if (element.hasAttribute(placeholderAttr)) {
@@ -1760,7 +1755,6 @@
                     }
                 }
                 
-                // Для optgroup label
                 if (element.tagName === 'OPTGROUP') {
                     const labelAttr = `data-lang-${lang}-label`;
                     if (element.hasAttribute(labelAttr)) {
@@ -1768,26 +1762,21 @@
                     }
                 }
                 
-                // Для option в select
                 if (element.tagName === 'OPTION' && element.hasAttribute(`data-lang-${lang}`)) {
-                    // Не меняем выбранное значение, только если не выбран
                     if (!element.selected) {
                         element.textContent = element.getAttribute(`data-lang-${lang}`);
                     }
                 }
             });
             
-            // Обновляем заголовок страницы
             document.title = lang === 'ru' 
                 ? 'RUS ITS | Интеллектуальные Транспортные Системы' 
                 : 'RUS ITS | Intelligent Transport Systems';
             
-            // Обновляем навигационные кнопки (добавляем класс active правильной кнопке)
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.remove('active');
             });
             
-            // Находим активную страницу и активируем соответствующую ссылку
             const activePage = document.querySelector('.page.active').id;
             const pageNames = {
                 'home': lang === 'ru' ? 'Главная' : 'Home',
@@ -1803,13 +1792,8 @@
                 }
             });
             
-            // Закрываем меню языков
             document.getElementById('langOptions').classList.remove('active');
-            
-            // Сохраняем выбор языка
             localStorage.setItem('preferredLanguage', lang);
-            
-            // Обновляем фильтры в каталоге
             updateFilterButtons(lang);
         }
         
@@ -1822,7 +1806,6 @@
                 }
             });
             
-            // Обновляем placeholder поиска
             const searchInput = document.getElementById('productSearch');
             if (searchInput) {
                 searchInput.placeholder = lang === 'ru' ? 'Поиск продуктов...' : 'Search products...';
@@ -1833,7 +1816,6 @@
         function setProduct(productName) {
             const productSelect = document.getElementById('orderProduct');
             if (productSelect) {
-                // Ищем на текущем языке
                 for (let i = 0; i < productSelect.options.length; i++) {
                     const option = productSelect.options[i];
                     if (option.text === productName || 
@@ -2049,7 +2031,6 @@
             
             document.getElementById(pageId).classList.add('active');
             
-            // Обновляем активную ссылку на текущем языке
             const currentLang = currentLanguage;
             const pageNames = {
                 'home': currentLang === 'ru' ? 'Главная' : 'Home',
@@ -2073,12 +2054,10 @@
                 navbar.classList.remove('hidden');
             }
             
-            // Если открываем контакты с формой, запоминаем время начала
             if (pageId === 'contact') {
                 formStartTime = Date.now();
                 document.getElementById('startTime').value = formStartTime;
                 
-                // Прокручиваем к форме если нужно
                 setTimeout(() => {
                     const form = document.getElementById('orderForm');
                     if (form) {
@@ -2167,7 +2146,7 @@
             document.getElementById('langOptions').classList.remove('active');
         });
         
-        // Обработка формы заявки
+        // Обработка формы заявки - ИСПРАВЛЕННАЯ ВЕРСИЯ
         document.addEventListener('DOMContentLoaded', function() {
             const orderForm = document.getElementById('orderForm');
             
@@ -2229,47 +2208,65 @@
                     submitBtn.disabled = true;
                     
                     try {
-                        // Форматируем телефон для отображения
+                        // Форматируем телефон
                         const formattedPhone = formatPhone(formData.phone);
                         
                         // Формируем сообщение для Telegram
                         const telegramMessage = currentLanguage === 'ru' 
-                            ? `📋 *НОВАЯ ЗАЯВКА С САЙТА RUS ITS*
+                            ? `📋 <b>НОВАЯ ЗАЯВКА С САЙТА RUS ITS</b>
+        
+👤 <b>Имя:</b> ${formData.name}
+📞 <b>Телефон:</b> ${formattedPhone}
+📧 <b>Email:</b> ${formData.email || 'Не указан'}
+🛒 <b>Продукт/услуга:</b> ${formData.product}
+💬 <b>Комментарий:</b> ${formData.message || 'Нет комментария'}
+        
+⏰ <b>Время заявки:</b> ${formData.time}
+⏱ <b>Время заполнения:</b> ${formData.formTime}`
+                            : `📋 <b>NEW REQUEST FROM RUS ITS WEBSITE</b>
+        
+👤 <b>Name:</b> ${formData.name}
+📞 <b>Phone:</b> ${formattedPhone}
+📧 <b>Email:</b> ${formData.email || 'Not specified'}
+🛒 <b>Product/Service:</b> ${formData.product}
+💬 <b>Comment:</b> ${formData.message || 'No comment'}
+        
+⏰ <b>Request time:</b> ${formData.time}
+⏱ <b>Form filling time:</b> ${formData.formTime}`;
                         
-👤 *Имя:* ${formData.name}
-📞 *Телефон:* ${formattedPhone}
-📧 *Email:* ${formData.email || 'Не указан'}
-🛒 *Продукт/услуга:* ${formData.product}
-💬 *Комментарий:* ${formData.message || 'Нет комментария'}
+                        // ОТПРАВЛЯЕМ НАПРЯМУЮ В КАНАЛ TELEGRAM
+                        const response = await fetch(
+                            `https://api.telegram.org/bot${TELEGRAM_CONFIG.BOT_TOKEN}/sendMessage`,
+                            {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify({
+                                    chat_id: TELEGRAM_CONFIG.CHAT_ID,
+                                    text: telegramMessage,
+                                    parse_mode: 'HTML'
+                                })
+                            }
+                        );
                         
-⏰ *Время заявки:* ${formData.time}
-⏱ *Время заполнения:* ${formData.formTime}
-🌐 *Страница:* ${window.location.href}`
-                            : `📋 *NEW REQUEST FROM RUS ITS WEBSITE*
+                        const result = await response.json();
                         
-👤 *Name:* ${formData.name}
-📞 *Phone:* ${formattedPhone}
-📧 *Email:* ${formData.email || 'Not specified'}
-🛒 *Product/Service:* ${formData.product}
-💬 *Comment:* ${formData.message || 'No comment'}
-                        
-⏰ *Request time:* ${formData.time}
-⏱ *Form filling time:* ${formData.formTime}
-🌐 *Page:* ${window.location.href}`;
-                        
-                        // Создаем Telegram ссылку
-                        const encodedMessage = encodeURIComponent(telegramMessage);
-                        const telegramUrl = `https://t.me/share/url?url=${encodedMessage}&text=${encodedMessage}`;
-                        
-                        // Показываем успех
-                        document.getElementById('orderForm').style.display = 'none';
-                        document.getElementById('successMessage').style.display = 'block';
-                        
-                        // Открываем Telegram через 2 секунды
-                        setTimeout(() => {
-                            window.open(telegramUrl, '_blank');
+                        if (result.ok) {
+                            // УСПЕХ - показываем сообщение об успешной отправке
+                            document.getElementById('orderForm').style.display = 'none';
+                            document.getElementById('successMessage').style.display = 'block';
                             
-                            // Через 5 секунд возвращаем форму
+                            // Меняем текст успешного сообщения
+                            document.querySelector('#successMessage p:nth-child(3)').textContent = 
+                                currentLanguage === 'ru' 
+                                    ? 'Заявка отправлена в Telegram. Мы свяжемся с вами в ближайшее время.'
+                                    : 'Request sent to Telegram. We will contact you shortly.';
+                            
+                            // Убираем текст про перенаправление в Telegram
+                            document.querySelector('#successMessage p:nth-child(4)').style.display = 'none';
+                            
+                            // Очищаем форму через 5 секунд
                             setTimeout(() => {
                                 document.getElementById('successMessage').style.display = 'none';
                                 document.getElementById('orderForm').style.display = 'block';
@@ -2278,14 +2275,25 @@
                                 submitBtn.disabled = false;
                                 formStartTime = null;
                             }, 5000);
-                            
-                        }, 2000);
+                        } else {
+                            throw new Error(result.description || 'Ошибка Telegram');
+                        }
                         
                     } catch (error) {
-                        console.error('Ошибка:', error);
-                        showError(currentLanguage === 'ru' 
-                            ? 'Ошибка отправки заявки. Пожалуйста, попробуйте еще раз или свяжитесь с нами по телефону.'
-                            : 'Error submitting request. Please try again or contact us by phone.');
+                        console.error('Ошибка отправки:', error);
+                        
+                        // ЗАПАСНОЙ ВАРИАНТ - если API не работает
+                        const backupMessage = currentLanguage === 'ru'
+                            ? `Заявка от ${formData.name}\nТелефон: ${formData.phone}\nПродукт: ${formData.product}`
+                            : `Request from ${formData.name}\nPhone: ${formData.phone}\nProduct: ${formData.product}`;
+                        
+                        const telegramUrl = `https://t.me/share/url?text=${encodeURIComponent(backupMessage)}`;
+                        
+                        // Показываем альтернативный вариант
+                        showError(currentLanguage === 'ru'
+                            ? 'Автоматическая отправка не сработала. Нажмите на ссылку чтобы отправить вручную: <a href="' + telegramUrl + '" target="_blank" style="color: var(--primary); text-decoration: underline;">Открыть Telegram</a>'
+                            : 'Automatic sending failed. Click the link to send manually: <a href="' + telegramUrl + '" target="_blank" style="color: var(--primary); text-decoration: underline;">Open Telegram</a>');
+                        
                         submitBtn.innerHTML = originalText;
                         submitBtn.disabled = false;
                     }
@@ -2296,7 +2304,7 @@
         // Показать ошибку
         function showError(message) {
             const errorDiv = document.getElementById('errorMessage');
-            errorDiv.textContent = message;
+            errorDiv.innerHTML = message;
             errorDiv.classList.add('show');
             
             setTimeout(() => {
