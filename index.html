@@ -4060,7 +4060,7 @@
         }
     }
     
-    window.saveProduct = async function(productId) {
+        window.saveProduct = async function(productId) {
         const name = document.getElementById('m-name').value.trim();
         const price = parseFloat(document.getElementById('m-price').value);
         if (!name || isNaN(price)) { toast('Заполните обязательные поля'); return; }
@@ -4082,9 +4082,17 @@
             await addDoc(collection(db, 'products'), data);
         }
         closeModal();
-        loadProducts();
-        if (userProfile?.role === 'admin') loadAdminData();
+        
+        // Дожидаемся обновления данных
+        await loadProducts();
+        if (userProfile?.role === 'admin') await loadAdminData();
+        
         toast(productId ? 'Товар обновлён' : 'Товар добавлен');
+        
+        // Принудительно показываем каталог если мы на странице товара
+        if (document.getElementById('catalogPage').classList.contains('active')) {
+            renderCatalog();
+        }
     };
     
     window.deleteProduct = async function(id) {
