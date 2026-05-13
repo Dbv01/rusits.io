@@ -4154,11 +4154,20 @@
         if (params.has('inStock')) document.getElementById('inStockOnly').checked = true;
     }
     
-    // Автоматическое наполнение Firebase при первом запуске
+       // Автоматическое наполнение Firebase при первом запуске
     async function seedData() {
-        if (!db) return;
+        console.log('=== ЗАПУСК SEEDDATA ===');
+        if (!db) {
+            console.log('❌ База данных не подключена');
+            return;
+        }
+        
+        console.log('📡 Проверяю категории...');
         const catSnap = await getDocs(collection(db, 'categories'));
+        console.log('Категорий в базе:', catSnap.size);
+        
         if (catSnap.empty) {
+            console.log('📝 Создаю 4 категории...');
             await addDoc(collection(db, 'categories'), {
                 name: 'Метеостанции',
                 description: 'Автоматические дорожные метеостанции для мониторинга погодных условий'
@@ -4175,16 +4184,23 @@
                 name: 'Пешеходные переходы',
                 description: 'Инновационные системы безопасности пешеходов'
             });
-            console.log('Категории созданы');
+            console.log('✅ Категории созданы');
+        } else {
+            console.log('✅ Категории уже есть');
         }
         
+        console.log('📡 Проверяю товары...');
         const prodSnap = await getDocs(collection(db, 'products'));
+        console.log('Товаров в базе:', prodSnap.size);
+        
         if (prodSnap.empty) {
+            console.log('📝 Создаю 4 товара...');
             const updatedCats = await getDocs(collection(db, 'categories'));
             const catMap = {};
             updatedCats.docs.forEach(d => {
                 catMap[d.data().name] = d.id;
             });
+            console.log('ID категорий:', catMap);
             
             await addDoc(collection(db, 'products'), {
                 name: 'Дорожная метеостанция ДМ-01',
@@ -4230,18 +4246,31 @@
                 createdAt: serverTimestamp()
             });
             
-            console.log('Товары созданы');
+            console.log('✅ Товары созданы');
+        } else {
+            console.log('✅ Товары уже есть');
         }
+        
+        console.log('=== SEEDDATA ЗАВЕРШЁН ===');
     }
 
-        // Инициализация
+    // Инициализация
+    console.log('🚀 САЙТ ЗАПУЩЕН');
+    console.log('Firebase проект:', FIREBASE_CONFIG.projectId);
+    
     loadURLParams();
     
     // Ждём seedData, потом загружаем категории, и только потом товары
     seedData().then(() => {
+        console.log('📦 Загружаю категории и товары...');
         loadCategories().then(() => {
-            loadProducts();
+            console.log('Категории загружены, загружаю товары...');
+            loadProducts().then(() => {
+                console.log('✅ Товары загружены, рендерю каталог...');
+            });
         });
+    }).catch(error => {
+        console.error('❌ Ошибка в seedData:', error);
     });
     
     updateCartBadge();
@@ -4250,7 +4279,8 @@
     setTimeout(() => {
         const loading = document.getElementById('loadingScreen');
         if (loading) loading.style.display = 'none';
-    }, 1500);
+        console.log('✅ Экран загрузки скрыт');
+    }, 2000);
 </script>
 
 </body>
