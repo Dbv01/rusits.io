@@ -4234,19 +4234,23 @@
         }
     }
 
-    // Инициализация
+        // Инициализация
     loadURLParams();
+    
+    // Ждём seedData, потом загружаем категории, и только потом товары
     seedData().then(() => {
-        loadCategories();
-        loadProducts();
+        loadCategories().then(() => {
+            loadProducts();
+        });
     });
+    
     updateCartBadge();
     loadSiteContent();
     
     setTimeout(() => {
         const loading = document.getElementById('loadingScreen');
         if (loading) loading.style.display = 'none';
-    }, 1000);
+    }, 1500);
 </script>
 
 </body>
