@@ -3090,25 +3090,30 @@
     };
     
     async function loadSiteContent() {
-        if (!db) return;
-        try {
-            const snap = await getDoc(doc(db, 'siteContent', 'pagesText'));
-            if (snap.exists()) {
-                const data = snap.data();
-                for (const [key, value] of Object.entries(data)) {
-                    if (!value) continue;
-                    const parts = key.split('_');
-                    if (parts.length >= 2) {
-                        const page = parts[0];
-                        const field = parts.slice(1).join('_');
-                        const element = document.querySelector(`.editable-text[data-page="${page}"][data-field="${field}"]`);
-                        if (element) element.innerText = value;
+    if (!db) return;
+    try {
+        const snap = await getDoc(doc(db, 'siteContent', 'pagesText'));
+        if (snap.exists()) {
+            const data = snap.data();
+            for (const [key, value] of Object.entries(data)) {
+                // ПРОПУСКАЕМ пустые значения
+                if (!value || value.trim() === '') continue;
+                
+                const parts = key.split('_');
+                if (parts.length >= 2) {
+                    const page = parts[0];
+                    const field = parts.slice(1).join('_');
+                    const element = document.querySelector(`.editable-text[data-page="${page}"][data-field="${field}"]`);
+                    if (element && value.trim() !== '') {
+                        element.innerText = value;
                     }
                 }
             }
-        } catch(e) {}
+        }
+    } catch(e) {
+        console.log('Ошибка загрузки контента:', e);
     }
-
+}
     async function loadCategories() {
         try {
             const snap = await getDocs(collection(db, 'categories'));
